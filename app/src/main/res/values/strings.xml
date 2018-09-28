@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Dr Essam Daher</string>
+    <string name="Sign_in">تسجيل الدخول</string>
+    <string name="Sign_up">الإشتراك</string>
+    <string name="s_in_up">
+        يرجي تسجيل الدخول
+      \n  او الإشتراك
+      \n  اذا لم يكن لديك حساب
+</string>
+
+</resources>
