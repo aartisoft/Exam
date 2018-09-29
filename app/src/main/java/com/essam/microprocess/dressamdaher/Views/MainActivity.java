@@ -1,7 +1,9 @@
-package com.essam.microprocess.dressamdaher;
+package com.essam.microprocess.dressamdaher.Views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.essam.microprocess.dressamdaher.R;
 
 public class MainActivity extends AppCompatActivity {
 
