@@ -16,14 +16,11 @@ import com.essam.microprocess.dressamdaher.R;
 
 public class MainActivity extends AppCompatActivity implements MainActivityContract.View{
 
-    LinearLayout frameLayout;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        frameLayout = findViewById(R.id.Main_fragment);
+
 
 
 
