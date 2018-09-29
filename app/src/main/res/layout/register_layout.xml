@@ -61,6 +61,7 @@
                 android:layout_marginStart="40dp"
                 android:background="@drawable/shape_layout"
                 android:layout_marginEnd="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content">
 
 
@@ -231,7 +232,7 @@
             <Button
                 android:id="@+id/registeringToData"
                 android:layout_below="@+id/linearLayout"
-                android:background="@drawable/shape_layout"
+                android:background="@drawable/button_background"
                 android:layout_marginTop="30dp"
                 android:text="@string/Sign_up"
                 android:fontFamily="@font/cairo"
@@ -240,16 +241,19 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_width="match_parent"
-                android:layout_height="59dp" />
+                android:layout_height="59dp"
+                android:textStyle="bold"
+                />
 
 
 
 
             <LinearLayout
                 android:layout_below="@+id/registeringToData"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layoutDirection="rtl"
+                android:layout_centerHorizontal="true"
                 android:layout_marginEnd="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_height="50dp"
@@ -259,10 +263,9 @@
                     android:layout_width="wrap_content"
                     android:text="@string/ihaveacount"
                     android:fontFamily="@font/cairo"
-                    android:textSize="12sp"
+                    android:textSize="15sp"
                     android:textStyle="normal"
                     android:textColor="@color/registercolor"
-                    android:layout_marginStart="60dp"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/gotoLogin"
@@ -270,7 +273,7 @@
                     android:text="@string/login"
                     android:fontFamily="@font/cairo"
                     android:textColor="@color/registercolor"
-                    android:textSize="12sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginStart="10sp"
                     android:layout_height="wrap_content" />
