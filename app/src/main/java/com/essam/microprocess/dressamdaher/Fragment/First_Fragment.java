@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
+import com.essam.microprocess.dressamdaher.Contracts.MainActivityContract;
 import com.essam.microprocess.dressamdaher.R;
 
 import butterknife.BindView;
@@ -52,10 +52,19 @@ Button Sign_up;
          Sign_up.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
+
+                 // we will listen in activity to update fragment .....//
+
+                 MainActivityContract.View view1 = (MainActivityContract.View) getActivity();
+                 if (view1!=null){
+
+                     view1.showFragmentRegister();
+
+                 }
+
+
+
                  // add fragment (sign up )
-
-
-                 
 
 
              }
@@ -68,7 +77,4 @@ Button Sign_up;
         return v;
     }
 
-
 }
-
-
