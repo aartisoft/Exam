@@ -1,13 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/gradiantcolor"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
 
     <TextView
-        android:layout_width="24sp"
-        android:layout_height="45sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:gravity="center_horizontal"
         android:layout_alignParentTop="true"
+        android:text="@string/register"
+        android:fontFamily="@font/cairo"
+        android:textSize="24sp"
+        android:textColor="@color/registercolor"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="87dp" />
+        android:layout_marginTop="83dp" />
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="136dp"
+        android:text="@string/register1"
+        android:fontFamily="@font/cairo"
+        android:textSize="16sp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/registercolor" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/details"
+        android:padding="10sp"
+        android:elevation="10dp"
+        android:layout_marginStart="40dp"
+        android:background="@color/registercolor"
+        android:layout_marginEnd="40dp"
+        android:layout_height="wrap_content">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:layoutDirection="rtl"
+            android:layout_height="wrap_content">
+
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/name_of_admin"
+                android:layout_width="match_parent"
+                android:textDirection="ltr"
+                android:paddingStart="5sp"
+                android:paddingEnd="5sp"
+                android:paddingTop="10sp"
+                android:inputType="textEmailAddress"
+                android:paddingBottom="15dp"
+                android:layout_height="wrap_content" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+
+    </LinearLayout>
+    
 
 </RelativeLayout>
