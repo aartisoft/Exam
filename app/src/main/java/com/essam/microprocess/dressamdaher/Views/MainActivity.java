@@ -15,14 +15,14 @@ import com.essam.microprocess.dressamdaher.R;
 
 public class MainActivity extends AppCompatActivity implements MainActivityContract.View{
 
-    LinearLayout frameLayout;
+
     Animation openFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        frameLayout = findViewById(R.id.Main_fragment);
+
         openFrag    = AnimationUtils.loadAnimation(this,R.anim.toright);
 
 
@@ -37,13 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     @Override
     public void showFragmentRegister() {
         // showing register fragment from Firt Fragment ..............//
-        frameLayout.startAnimation(openFrag);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out)
-                .replace(R.id.Main_fragment,new Register_Fragment(),"registerFrag")
-                .addToBackStack(null)
-                .commit();
+
     }
 
     @Override

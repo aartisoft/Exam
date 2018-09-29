@@ -119,14 +119,15 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="62dp"
                 android:text="@string/Sign_in"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:fontFamily="@font/cairo"
                 android:background="@drawable/button_background2"
                 android:textColor="@color/color1"
                 android:elevation="8dp"
                 android:shadowDx="3"
                 android:shadowDy="3"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
