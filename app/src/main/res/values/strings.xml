@@ -18,5 +18,7 @@
     <string name="ihaveacount"> لديك حساب بالفعل ؟ </string>
     <string name="login"> تسجيل الدخول </string>
 
+    <string name="no_account">ليس لديك حساب ؟ </string>
+
 
 </resources>

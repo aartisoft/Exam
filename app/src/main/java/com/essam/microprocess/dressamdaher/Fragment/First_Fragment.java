@@ -53,6 +53,7 @@ Button Sign_up;
              public void onClick(View view) {
                  // add fragment (sign up )
 
+
              }
          });
 
