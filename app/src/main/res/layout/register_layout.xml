@@ -230,6 +230,7 @@
                 android:layout_marginStart="40dp"
                 android:layoutDirection="rtl"
                 android:layout_marginEnd="40dp"
+
                 android:layout_marginTop="20dp"
                 android:layout_height="50dp"
                 android:orientation="horizontal">
@@ -237,10 +238,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:text="@string/ihaveacount"
+                    android:fontFamily="@font/cairo"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/registercolor"
+                    android:layout_marginStart="60dp"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:text="@string/login"
+                    android:fontFamily="@font/cairo"
+                    android:textColor="@color/registercolor"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10sp"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
