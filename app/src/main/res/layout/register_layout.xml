@@ -6,6 +6,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
+        android:isScrollContainer="false"
+        android:scrollbars="none"
+        android:fillViewport="true"
         android:layout_height="match_parent">
 
 
@@ -14,6 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
             <TextView
                 android:id="@+id/tvregister"
                 android:layout_width="match_parent"
@@ -209,10 +216,10 @@
                     android:id="@+id/spinnerCountry"
                     android:layout_width="match_parent"
                     android:textDirection="ltr"
-                    android:paddingStart="10sp"
+                    android:paddingStart="5sp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    android:paddingEnd="10sp"
+                    android:paddingEnd="5sp"
                     android:background="@drawable/spinnershape"
                     android:layout_height="60dp" />
 

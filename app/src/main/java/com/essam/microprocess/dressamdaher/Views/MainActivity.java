@@ -1,10 +1,12 @@
 package com.essam.microprocess.dressamdaher.Views;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.essam.microprocess.dressamdaher.Contracts.MainActivityContract;
 import com.essam.microprocess.dressamdaher.Fragment.First_Fragment;
@@ -13,7 +15,7 @@ import com.essam.microprocess.dressamdaher.R;
 
 public class MainActivity extends AppCompatActivity implements MainActivityContract.View{
 
-    FrameLayout frameLayout;
+    LinearLayout frameLayout;
     Animation openFrag;
 
     @Override
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
         getSupportFragmentManager().
                 beginTransaction().
-                replace(R.id.Main_fragment,new First_Fragment())
+                replace(R.id.Main_fragment,new First_Fragment(),"firestFrag")
                 .commit();
 
     }
@@ -40,7 +42,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
                 .beginTransaction()
                 .setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out)
                 .replace(R.id.Main_fragment,new Register_Fragment(),"registerFrag")
+                .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+
+            super.onBackPressed();
+
 
 
     }
