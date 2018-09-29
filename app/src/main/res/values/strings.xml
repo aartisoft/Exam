@@ -10,5 +10,13 @@
 
     <string name="register"> التسجيل </string>
     <string name="register1">يرجي ملئ جميع البيانات </string>
+    <string name="third_name"> الاسم الثلاثي </string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="pass"> الرقم السري </string>
+    <string name="Make_sure_From_Pass"> تاكيد الرقم السري </string>
+    <string name="phone"> رقم الهاتف </string>
+    <string name="ihaveacount"> لديك حساب بالفعل ? </string>
+    <string name="login"> تسجيل الدخول </string>
+
 
 </resources>
