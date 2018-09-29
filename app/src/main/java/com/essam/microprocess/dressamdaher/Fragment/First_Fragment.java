@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.R;
 
 import butterknife.BindView;
@@ -54,6 +55,9 @@ Button Sign_up;
                  // add fragment (sign up )
 
 
+                 
+
+
              }
          });
 
@@ -64,4 +68,7 @@ Button Sign_up;
         return v;
     }
 
+
 }
+
+
