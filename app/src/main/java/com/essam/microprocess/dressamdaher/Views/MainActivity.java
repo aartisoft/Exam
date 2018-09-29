@@ -11,19 +11,20 @@ import android.widget.LinearLayout;
 import com.essam.microprocess.dressamdaher.Contracts.MainActivityContract;
 import com.essam.microprocess.dressamdaher.Fragment.First_Fragment;
 import com.essam.microprocess.dressamdaher.Fragment.Register_Fragment;
+import com.essam.microprocess.dressamdaher.Fragment.Signin_Fragment;
 import com.essam.microprocess.dressamdaher.R;
 
 public class MainActivity extends AppCompatActivity implements MainActivityContract.View{
 
+    LinearLayout frameLayout;
 
-    Animation openFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        frameLayout = findViewById(R.id.Main_fragment);
 
-        openFrag    = AnimationUtils.loadAnimation(this,R.anim.toright);
 
 
 
@@ -37,6 +38,25 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     @Override
     public void showFragmentRegister() {
         // showing register fragment from Firt Fragment ..............//
+
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Main_fragment,new Register_Fragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void showLoginFragment() {
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Main_fragment,new Signin_Fragment())
+                .addToBackStack(null)
+                .commit();
 
     }
 

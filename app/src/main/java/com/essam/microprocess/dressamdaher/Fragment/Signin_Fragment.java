@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.essam.microprocess.dressamdaher.Contracts.MainActivityContract;
 import com.essam.microprocess.dressamdaher.R;
 
 import butterknife.BindView;
@@ -43,16 +44,12 @@ public class Signin_Fragment extends Fragment {
     void Goto_Register_fragment (View view){
 
         //add fragment
-        try {
-            getActivity().getSupportFragmentManager().beginTransaction()
-              .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,
-                      R.anim.slide_in_right, R.anim.slide_out_left)
-                    .replace(R.id.Main_fragment,new Register_Fragment())
-                    .addToBackStack(null).commit();
+        MainActivityContract.View view1 = (MainActivityContract.View) getActivity();
+        if (view1!=null){
 
-        }catch (Exception e){
-            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+            view1.showFragmentRegister();
         }
+
 
 
     }

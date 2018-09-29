@@ -4,6 +4,7 @@ public interface MainActivityContract {
 
     interface View{
         void showFragmentRegister();
+        void showLoginFragment();
     }
 
 
