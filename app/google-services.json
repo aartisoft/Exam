@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "940661661741",
+    "firebase_url": "https://dr-essamdaher.firebaseio.com",
+    "project_id": "dr-essamdaher",
+    "storage_bucket": "dr-essamdaher.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940661661741:android:ca7cff083e3b9c8b",
+        "android_client_info": {
+          "package_name": "com.essam.microprocess.dressamdaher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940661661741-puh0u8ch0s0oedare8r7f811n0n4jsh3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.essam.microprocess.dressamdaher",
+            "certificate_hash": "65e5aae573f22313709f4745a95094e337013e37"
+          }
+        },
+        {
+          "client_id": "940661661741-dfreldcj8n8an286dpr91m3nen5meahs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzVha5Q-tjrqM_7nrHZtMwzzfGPuM0yHg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940661661741-dfreldcj8n8an286dpr91m3nen5meahs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
