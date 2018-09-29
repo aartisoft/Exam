@@ -85,7 +85,9 @@
                         android:paddingTop="10sp"
                         android:inputType="textEmailAddress"
                         android:paddingBottom="15dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+
+                        />
 
 
                 </android.support.design.widget.TextInputLayout>

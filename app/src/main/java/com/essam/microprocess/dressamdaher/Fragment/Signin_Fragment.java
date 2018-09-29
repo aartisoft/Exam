@@ -43,7 +43,17 @@ public class Signin_Fragment extends Fragment {
     void Goto_Register_fragment (View view){
 
         //add fragment
-        Toast.makeText(getActivity(), "working", Toast.LENGTH_SHORT).show();
+        try {
+            getActivity().getSupportFragmentManager().beginTransaction()
+              .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,
+                      R.anim.slide_in_right, R.anim.slide_out_left)
+                    .replace(R.id.Main_fragment,new Register_Fragment())
+                    .addToBackStack(null).commit();
+
+        }catch (Exception e){
+            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
