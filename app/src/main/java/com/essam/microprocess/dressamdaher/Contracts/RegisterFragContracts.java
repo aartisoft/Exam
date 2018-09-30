@@ -15,7 +15,7 @@ public interface RegisterFragContracts {
 
     interface ModelRegister{
 
-        void signUP();
+        void signUP(RegisterFragContracts.PresnterRegister presnterRegister);
 
     }
 

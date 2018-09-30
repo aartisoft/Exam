@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Register_Fragment extends Fragment implements View.OnClickListener {
+public class Register_Fragment extends Fragment implements View.OnClickListener , RegisterFragContracts.ViewRegister{
 
     EditText NameStudent,Email,Password,makeSureFromPass,phoneme;
     TextView gotoLogin;
