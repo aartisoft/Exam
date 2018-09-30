@@ -246,6 +246,7 @@
                     android:background="@drawable/spinnershape"
                     android:layout_height="60dp" />
 
+
             </LinearLayout>
             <Button
                 android:id="@+id/registeringToData"
@@ -305,12 +306,5 @@
 
     </ScrollView>
 
-
-    <ProgressBar
-        android:id="@+id/loadtoregister"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

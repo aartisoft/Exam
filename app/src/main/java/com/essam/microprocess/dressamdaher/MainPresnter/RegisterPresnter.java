@@ -19,8 +19,8 @@ public class RegisterPresnter implements RegisterFragContracts.PresnterRegister 
     }
 
     @Override
-    public void authProblem() {
-        view.updateUiAboutProblemAUTH();
+    public void authProblem(String E) {
+        view.updateUiAboutProblemAUTH(E);
     }
 
     @Override

@@ -40,7 +40,6 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     TextView gotoLogin;
     Spinner spinnerCountry;
     Button registeringToData;
-    ProgressBar loadtoregister;
     String [] country;
     AnimatedDialog animatedDialog;
     private FirebaseDatabase firebaseDatabase;
@@ -67,8 +66,8 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
         Password          = v.findViewById(R.id.Password);
         makeSureFromPass  = v.findViewById(R.id.makeSureFromPass);
         phoneme           = v.findViewById(R.id.phoneme);
+
         spinnerCountry    = v.findViewById(R.id.spinnerCountry);
-        loadtoregister    = v.findViewById(R.id.loadtoregister);
         registeringToData = v.findViewById(R.id.registeringToData);
         gotoLogin         = v.findViewById(R.id.gotoLogin);
 
@@ -121,7 +120,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
                 if (Email.getText().toString().isEmpty()){
                     Email.setError(getResources().getString(R.string.empty_field));
                 }
-                if (!Email.getText().toString().isEmpty() &&!Email.getText().toString().endsWith("@yahoo.com")){
+                if (!Email.getText().toString().isEmpty() && !Email.getText().toString().endsWith("@yahoo.com")){
                     Email.setError(getResources().getString(R.string.notLookedLikeYahoo));
                 }
                 if (Password.getText().toString().isEmpty()){
@@ -149,7 +148,9 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
                 // if all things are true //
             if (!NameStudent.getText().toString().isEmpty()&& !Email.getText().toString().isEmpty()
                     && !Password.getText().toString().isEmpty()&&Password.getText().toString().length()>=12
-                    && !makeSureFromPass.getText().toString().isEmpty() && makeSureFromPass.getText().toString().equals(Password.getText().toString())
+                    && !makeSureFromPass.getText().toString().isEmpty()
+                    && Email.getText().toString().endsWith("@yahoo.com")
+                    && makeSureFromPass.getText().toString().equals(Password.getText().toString())
                     && !phoneme.getText().toString().isEmpty() && !selectedCountry.equals("")){
 
                 animatedDialog.ShowDialog();
@@ -174,14 +175,31 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void failedDataNotSaved() {
+
         Toast.makeText(getActivity(),getResources().getString(R.string.problem_register) , Toast.LENGTH_LONG).show();
         animatedDialog.Close_Dialog();
 
     }
 
     @Override
-    public void updateUiAboutProblemAUTH() {
-        Toast.makeText(getActivity(),getResources().getString(R.string.problem_register) , Toast.LENGTH_LONG).show();
-        animatedDialog.Close_Dialog();
+    public void updateUiAboutProblemAUTH(String E) {
+
+        if (E.equals(getResources().getString(R.string.sameEmailProblem))){
+
+           Email.setError(getResources().getString(R.string.email_exist));
+           animatedDialog.Close_Dialog();
+
+        }
+
+        else if (E.equals(getResources().getString(R.string.netword_error))){
+            Toast.makeText(getActivity(), getResources().getString(R.string.makesure_fromNetword), Toast.LENGTH_LONG).show();
+            animatedDialog.Close_Dialog();
+        }
+
+        else {
+            Toast.makeText(getActivity(),getResources().getString(R.string.problem_register) , Toast.LENGTH_LONG).show();
+            animatedDialog.Close_Dialog();
+        }
+
     }
 }

@@ -11,13 +11,13 @@ public interface RegisterFragContracts {
 
         void successDataSaved();
         void failedDataNotSaved();
-        void updateUiAboutProblemAUTH();
+        void updateUiAboutProblemAUTH(String E);
     }
 
 
 
     interface PresnterRegister{
-        void authProblem();
+        void authProblem(String E);
         void updatUISuccessfull();
         void updateUIFailed();
         void detailsForuserFromUI(String email , String password, DatabaseReference reference, Resister_form resister_form);
