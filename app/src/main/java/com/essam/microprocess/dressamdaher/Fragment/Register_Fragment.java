@@ -22,8 +22,13 @@ import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Contracts.MainActivityContract;
 import com.essam.microprocess.dressamdaher.Contracts.RegisterFragContracts;
+import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
+import com.essam.microprocess.dressamdaher.JsonModel.Resister_form;
+import com.essam.microprocess.dressamdaher.MainPresnter.RegisterPresnter;
 import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.Utils.ViewsEmpty;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,12 +42,17 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     Button registeringToData;
     ProgressBar loadtoregister;
     String [] country;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference reference;
     String selectedCountry = "";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        country  = getResources().getStringArray(R.array.country);  // country array in spinner //
+        country          = getResources().getStringArray(R.array.country);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference        = firebaseDatabase.getReference("Users");
+        // country array in spinner //
     }
 
 
@@ -141,12 +151,37 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
                     && !phoneme.getText().toString().isEmpty() && !selectedCountry.equals("")){
 
                 loadtoregister.setVisibility(View.VISIBLE);
-
+                Resister_form resister_form = new Resister_form(NameStudent.getText().toString(),Email.getText().toString(),phoneme.getText().toString(),selectedCountry);
+                RegisterPresnter registerPresnter = new RegisterPresnter(Register_Fragment.this);
+                registerPresnter.detailsForuserFromUI(Email.getText().toString(),Password.getText().toString(),reference,resister_form,loadtoregister);
 
 
 
             }
 
         }
+    }
+
+    @Override
+    public void successDataSaved(ProgressBar progressBar) {
+        //   الداتا اتخزنت تماااااااااااااااامنخفي ال progress ونظهر dialog
+        Toast.makeText(getActivity(), "تماااااااااااااااام", Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void failedDataNotSaved(ProgressBar progressBar) {
+        Toast.makeText(getActivity(), "حصل مشكله راجه تاني ", Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.GONE);
+        //  العكس
+
+    }
+
+    @Override
+    public void updateUiAboutProblemAUTH(ProgressBar progressBar) {
+        //  مشكله في  Authentication
+        Toast.makeText(getActivity(), "شكله في Authentication ", Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.GONE);
     }
 }
