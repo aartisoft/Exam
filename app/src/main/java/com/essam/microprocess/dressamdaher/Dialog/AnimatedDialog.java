@@ -43,7 +43,7 @@ public class AnimatedDialog  {
         public void onAnimationEnd(Animator animator) {
 
             image_Dialog.setRotation(0);
-            image_Dialog.animate().rotation(1800f).setDuration(animator.getDuration());
+            image_Dialog.animate().rotation(1800f).setDuration(4000);
 
         }
 

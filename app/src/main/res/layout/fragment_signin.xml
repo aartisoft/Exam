@@ -1,5 +1,4 @@
-<LinearLayout
-    android:id="@+id/signin_Linearlayout"
+<LinearLayout android:id="@+id/signin_Linearlayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +8,8 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:layoutDirection="ltr"
-    android:background="@drawable/gradiantcolor">
+    android:background="@drawable/gradiantcolor"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:id="@+id/login_form"
@@ -72,9 +72,10 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_marginTop="2dp"
-                android:fontFamily="@font/cairo"
-                android:gravity="right|center_vertical"
                 android:background="@android:color/white"
+                android:layoutDirection="rtl"
+                android:gravity="right|center_vertical"
+                android:fontFamily="@font/cairo"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -84,8 +85,8 @@
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:textSize="15sp"
                     android:gravity="right|center_vertical"
+                    android:textSize="15sp"
                     android:background="@android:color/white"
                     android:paddingStart="15dp"
                     android:fontFamily="@font/cairo"
@@ -99,13 +100,20 @@
                     android:layout_height="1dp"
                     android:background="@android:color/darker_gray" />
 
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:background="@android:color/white"
+                    android:layoutDirection="rtl"
+                    android:gravity="right|center_vertical"
+                    app:passwordToggleEnabled="true"
+                    android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="75dp"
                     android:hint="@string/pass"
                     android:gravity="right|center_vertical"
-                    android:inputType="textPassword"
                     android:fontFamily="@font/cairo"
                     android:paddingEnd="15dp"
                     android:textSize="15sp"
@@ -113,6 +121,7 @@
                     android:layout_marginTop="5dp"
                     android:background="@android:color/white"
                     />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
 
