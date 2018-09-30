@@ -82,6 +82,7 @@
                         android:background="@color/registercolor"
                         android:fontFamily="@font/cairo"
                         android:paddingEnd="5sp"
+                        android:textDirection="rtl"
                         android:textSize="13sp"
                         android:paddingTop="10sp"
                         android:inputType="textEmailAddress"
