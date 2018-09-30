@@ -64,6 +64,14 @@ public class Register_Fragment extends Fragment implements View.OnClickListener{
         if (view==registeringToData){
 
                 ViewsEmpty.isEmpty(NameStudent,"قم بملئ الحقل من فضلك");
+                if (Email.getText().toString().isEmpty()){
+                    Email.setError("قم بملئ الحقل من فضلك");
+                }
+
+                if (!Email.getText().toString().endsWith("@yahoo.com")){
+
+                    Email.setError("لابد ان يكون علي الشكل  example@yahoo.com ");
+                }
 
         }
     }
