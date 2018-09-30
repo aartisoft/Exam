@@ -42,6 +42,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     Button registeringToData;
     ProgressBar loadtoregister;
     String [] country;
+    AnimatedDialog animatedDialog;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference reference;
     String selectedCountry = "";
@@ -51,6 +52,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         country          = getResources().getStringArray(R.array.country);
         firebaseDatabase = FirebaseDatabase.getInstance();
+        animatedDialog   = new AnimatedDialog(getActivity());
         reference        = firebaseDatabase.getReference("Users");
         // country array in spinner //
     }
@@ -150,10 +152,10 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
                     && !makeSureFromPass.getText().toString().isEmpty() && makeSureFromPass.getText().toString().equals(Password.getText().toString())
                     && !phoneme.getText().toString().isEmpty() && !selectedCountry.equals("")){
 
-                loadtoregister.setVisibility(View.VISIBLE);
+                animatedDialog.ShowDialog();
                 Resister_form resister_form = new Resister_form(NameStudent.getText().toString(),Email.getText().toString(),phoneme.getText().toString(),selectedCountry);
                 RegisterPresnter registerPresnter = new RegisterPresnter(Register_Fragment.this);
-                registerPresnter.detailsForuserFromUI(Email.getText().toString(),Password.getText().toString(),reference,resister_form,loadtoregister);
+                registerPresnter.detailsForuserFromUI(Email.getText().toString(),Password.getText().toString(),reference,resister_form);
 
 
 
@@ -163,25 +165,23 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     }
 
     @Override
-    public void successDataSaved(ProgressBar progressBar) {
-        //   الداتا اتخزنت تماااااااااااااااامنخفي ال progress ونظهر dialog
-        Toast.makeText(getActivity(), "تماااااااااااااااام", Toast.LENGTH_SHORT).show();
-        progressBar.setVisibility(View.GONE);
+    public void successDataSaved() {
+
+        animatedDialog.Close_Dialog();
+        // حنروح للاكتفتي
 
     }
 
     @Override
-    public void failedDataNotSaved(ProgressBar progressBar) {
-        Toast.makeText(getActivity(), "حصل مشكله راجه تاني ", Toast.LENGTH_SHORT).show();
-        progressBar.setVisibility(View.GONE);
-        //  العكس
+    public void failedDataNotSaved() {
+        Toast.makeText(getActivity(),getResources().getString(R.string.problem_register) , Toast.LENGTH_LONG).show();
+        animatedDialog.Close_Dialog();
 
     }
 
     @Override
-    public void updateUiAboutProblemAUTH(ProgressBar progressBar) {
-        //  مشكله في  Authentication
-        Toast.makeText(getActivity(), "شكله في Authentication ", Toast.LENGTH_SHORT).show();
-        progressBar.setVisibility(View.GONE);
+    public void updateUiAboutProblemAUTH() {
+        Toast.makeText(getActivity(),getResources().getString(R.string.problem_register) , Toast.LENGTH_LONG).show();
+        animatedDialog.Close_Dialog();
     }
 }

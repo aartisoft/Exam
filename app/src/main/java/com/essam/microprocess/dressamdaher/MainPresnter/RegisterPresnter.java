@@ -19,23 +19,23 @@ public class RegisterPresnter implements RegisterFragContracts.PresnterRegister 
     }
 
     @Override
-    public void authProblem(ProgressBar progressBar) {
-        view.updateUiAboutProblemAUTH(progressBar);
+    public void authProblem() {
+        view.updateUiAboutProblemAUTH();
     }
 
     @Override
-    public void updatUISuccessfull(ProgressBar progressBar) {
-        view.successDataSaved(progressBar);
+    public void updatUISuccessfull() {
+        view.successDataSaved();
     }
 
     @Override
-    public void updateUIFailed(ProgressBar progressBar) {
-        view.failedDataNotSaved(progressBar);
+    public void updateUIFailed() {
+        view.failedDataNotSaved();
     }
 
     @Override
-    public void detailsForuserFromUI(String email, String password, DatabaseReference reference, Resister_form resister_form, ProgressBar progressBar) {
+    public void detailsForuserFromUI(String email, String password, DatabaseReference reference, Resister_form resister_form) {
 
-        registerMode.signUP(this,email,password,reference,resister_form,progressBar);
+        registerMode.signUP(this,email,password,reference,resister_form);
     }
 }

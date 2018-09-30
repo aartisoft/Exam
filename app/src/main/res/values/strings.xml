@@ -29,6 +29,7 @@
     <string name="edit1_notLoke_edit2">قم بالتاكد من صحه الباسورد الذي ادخلته</string>
     <string name="enter_phone">من فضلك قم بادخال رقم الهاتف الخاص بك</string>
     <string name="select_country">قم باختيار دوله من فضلك</string>
+    <string name="problem_register"> لقد حدثت مشكله اثناء الاتصال </string>
     <string-array name="country">
 
         <item>الدوله</item>
