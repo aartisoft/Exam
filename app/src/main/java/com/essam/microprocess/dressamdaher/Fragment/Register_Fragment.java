@@ -38,7 +38,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if (view==gotoLogin){
-
+            
             // go to loginFrag ,....  //
             MainActivityContract.View view1 = (MainActivityContract.View) getActivity();
             if (view1!=null){
