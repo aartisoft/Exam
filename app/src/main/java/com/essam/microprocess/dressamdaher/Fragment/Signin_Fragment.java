@@ -1,6 +1,7 @@
 package com.essam.microprocess.dressamdaher.Fragment;
 
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import com.essam.microprocess.dressamdaher.Contracts.SigninContract;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.MainPresnter.SigninPresenter;
 import com.essam.microprocess.dressamdaher.R;
+import com.essam.microprocess.dressamdaher.Views.ControlPanel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,13 +105,20 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
         if (Result.equals("Successful")){
             //Successful Login .
             dialog.Close_Dialog();
-            Toast.makeText(getActivity(), Result, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), Result, Toast.LENGTH_SHORT).show();
+
+            getActivity().finish();
+
+            //Start Activity ControlPanel
+            Intent intent = new Intent(getActivity(),ControlPanel.class);
+            startActivity(intent);
+
 
         }
         else {
             //Failure Login .
             dialog.Close_Dialog();
-            Toast.makeText(getActivity(), Result, Toast.LENGTH_SHORT).show();
+            et_password.setError("يرجي التأكد من البريد الالكتروني والرقم السري");
         }
 
     }
