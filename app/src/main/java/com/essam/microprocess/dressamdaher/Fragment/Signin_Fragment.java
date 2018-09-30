@@ -118,7 +118,7 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
         else {
             //Failure Login .
             dialog.Close_Dialog();
-            et_password.setError("يرجي التأكد من البريد الالكتروني والرقم السري");
+            et_password.setError(getString(R.string.PleaseMakesure));
         }
 
     }

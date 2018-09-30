@@ -120,14 +120,15 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
                 if (Email.getText().toString().isEmpty()){
                     Email.setError(getResources().getString(R.string.empty_field));
                 }
-                if (!Email.getText().toString().isEmpty() && !Email.getText().toString().endsWith("@yahoo.com")){
+                if (!Email.getText().toString().isEmpty() && !isEmailValid(Email.getText().toString().trim())){
                     Email.setError(getResources().getString(R.string.notLookedLikeYahoo));
                 }
                 if (Password.getText().toString().isEmpty()){
                     Password.setError(getResources().getString(R.string.enterPass),null);
                 }
-                if (!Password.getText().toString().isEmpty() && Password.getText().toString().length()<12){
+                if (!Password.getText().toString().isEmpty() && Password.getText().toString().length()<8){
                     Password.setError(getResources().getString(R.string.less12char),null);
+                    Password.requestFocus(); // edit by alaa .
                 }
                 if (makeSureFromPass.getText().toString().isEmpty()){
                     makeSureFromPass.setError(getResources().getString(R.string.should_like_pass),null);
@@ -136,7 +137,8 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
                         && !makeSureFromPass.getText().toString().isEmpty()
                         && !makeSureFromPass.getText().toString().equals(Password.getText().toString())){
 
-                    makeSureFromPass.setError( getResources().getString(R.string.edit1_notLoke_edit2),null);
+                    makeSureFromPass.setError( getResources().getString(R.string.should_like_pass),null);
+                    makeSureFromPass.requestFocus(); // edit by alaa .
                 }
                 ViewsEmpty.isEmpty(phoneme,getResources().getString(R.string.enter_phone));
                 if (selectedCountry.equals("")){
@@ -147,9 +149,9 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
 
                 // if all things are true //
             if (!NameStudent.getText().toString().isEmpty()&& !Email.getText().toString().isEmpty()
-                    && !Password.getText().toString().isEmpty()&&Password.getText().toString().length()>=12
+                    && !Password.getText().toString().isEmpty()&&Password.getText().toString().length()>8
                     && !makeSureFromPass.getText().toString().isEmpty()
-                    && Email.getText().toString().endsWith("@yahoo.com")
+                    && isEmailValid(Email.getText().toString().trim())
                     && makeSureFromPass.getText().toString().equals(Password.getText().toString())
                     && !phoneme.getText().toString().isEmpty() && !selectedCountry.equals("")){
 
@@ -171,6 +173,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
         animatedDialog.Close_Dialog();
         // حنروح للاكتفتي
 
+
     }
 
     @Override
@@ -187,6 +190,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
         if (E.equals(getResources().getString(R.string.sameEmailProblem))){
 
            Email.setError(getResources().getString(R.string.email_exist));
+           Email.requestFocus();
            animatedDialog.Close_Dialog();
 
         }
@@ -201,5 +205,14 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
             animatedDialog.Close_Dialog();
         }
 
+
+
     }
+
+
+    public boolean isEmailValid(CharSequence email) {
+
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches(); //return false if not ok //return true if ok
+    }
+
 }

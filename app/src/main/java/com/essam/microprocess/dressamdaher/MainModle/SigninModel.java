@@ -31,12 +31,12 @@ public class SigninModel implements SigninContract.model {
         String password = et_password.getText().toString();
 
         if (email.isEmpty()){
-            et_email.setError("الرجاء كتابة الاميل");
-            return "الرجاء كتابة الاميل";
+            et_email.setError("الرجاء كتابة البريد الإلكتروني");
+            return "الرجاء كتابة البريد الإلكتروني";
         }
         else if (!isEmailValid(et_email.getText().toString())){
-            et_email.setError("الرجاء كتابة الاميل بطريقة صحيحة");
-            return "الرجاء كتابة الاميل بطريقة صحيحة";
+            et_email.setError("الرجاء كتابة البريد الإلكتروني بطريقة صحيحة");
+            return "الرجاء كتابة البريد الإلكتروني بطريقة صحيحة";
         }
         else if (password.isEmpty()|| password.length() < 8 ) {
             if (password.isEmpty()) {

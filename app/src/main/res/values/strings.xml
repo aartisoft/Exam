@@ -22,11 +22,11 @@
 
     // registration //
     <string name="empty_field"> قم بملئ الحقل من فضلك</string>
-    <string name="notLookedLikeYahoo"> لابد ان يكون علي الشكل  example@yahoo.com او example@gmail.com  </string>
-    <string name="enterPass">قم بادخال باسورد من فضلك </string>
-    <string name="less12char"> لابد ان يكون اكثر من 12 حرف للامان  </string>
-    <string name="should_like_pass">لابد ان يكون مشابها للباسورد الذي ادخلته</string>
-    <string name="edit1_notLoke_edit2">قم بالتاكد من صحه الباسورد الذي ادخلته</string>
+    <string name="notLookedLikeYahoo"> لابد ان يكون علي الشكل  email@example.com   </string>
+    <string name="enterPass">قم بادخال الرقم السري من فضلك </string>
+    <string name="less12char"> لابد ان يكون اكثر من 8 حرف للامان  </string>
+    <string name="should_like_pass"> الرقم السري لابد ان يكون مشابها للذي ادخلته</string>
+    <string name="edit1_notLoke_edit2">قم بالتاكد من صحه الرقم السري الذي ادخلته</string>
     <string name="enter_phone">من فضلك قم بادخال رقم الهاتف الخاص بك</string>
     <string name="select_country">قم باختيار دوله من فضلك</string>
     <string name="problem_register"> لقد حدثت مشكله اثناء الاتصال </string>
@@ -60,9 +60,9 @@
 
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <string name="examList">قائمة الاختبارات</string>
+    <string name="PleaseMakesure"> يرجي التأكد من البريد الالكتروني والرقم السري </string>
 
 </resources>

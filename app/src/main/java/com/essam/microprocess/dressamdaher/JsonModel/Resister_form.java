@@ -3,7 +3,7 @@ package com.essam.microprocess.dressamdaher.JsonModel;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Resister_form  implements Parcelable{
+public class Resister_form  implements Parcelable {
 
     private String nameStudent;
     private String email;
