@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradiantcolor"
     android:layout_width="match_parent"
     android:layoutDirection="ltr"
@@ -115,6 +116,8 @@
                         android:gravity="start|center_vertical"
                         android:background="@color/registercolor"
                         android:fontFamily="@font/cairo"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
                         android:textSize="13sp"
                         android:textDirection="rtl"
                         android:paddingTop="10sp"
@@ -134,7 +137,10 @@
                     android:layout_width="match_parent"
                     android:paddingStart="10sp"
                     android:paddingEnd="10sp"
+                    android:gravity="end"
                     android:layoutDirection="rtl"
+                    android:fontFamily="@font/cairo"
+                    app:passwordToggleEnabled="true"
                     android:layout_height="wrap_content">
 
 
@@ -143,12 +149,13 @@
                         android:layout_width="match_parent"
                         android:hint="@string/pass"
                         android:paddingTop="10sp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
                         android:background="@color/registercolor"
                         android:gravity="start|center_vertical"
                         android:textSize="13sp"
                         android:textDirection="rtl"
                         android:fontFamily="@font/cairo"
-                        android:inputType="textPassword"
                         android:paddingBottom="15dp"
                         android:layout_height="wrap_content" />
 
@@ -163,8 +170,10 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:paddingStart="10sp"
+                    android:gravity="end"
                     android:paddingEnd="10sp"
                     android:layoutDirection="rtl"
+                    app:passwordToggleEnabled="true"
                     android:layout_height="wrap_content">
 
 
@@ -174,11 +183,12 @@
                         android:hint="@string/Make_sure_From_Pass"
                         android:gravity="start|center_vertical"
                         android:paddingTop="10sp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
                         android:textDirection="rtl"
                         android:background="@color/registercolor"
                         android:textSize="13sp"
                         android:fontFamily="@font/cairo"
-                        android:inputType="textPassword"
                         android:paddingBottom="15dp"
                         android:layout_height="wrap_content" />
 
@@ -203,6 +213,8 @@
                         android:layout_width="match_parent"
                         android:hint="@string/phone"
                         android:gravity="start|center_vertical"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
                         android:textSize="13sp"
                         android:textDirection="rtl"
                         android:fontFamily="@font/cairo"
@@ -224,7 +236,7 @@
                 <Spinner
                     android:id="@+id/spinnerCountry"
                     android:layout_width="match_parent"
-                    android:textDirection="ltr"
+                    android:textDirection="rtl"
                     android:paddingStart="5sp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"

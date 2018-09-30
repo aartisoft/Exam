@@ -20,4 +20,41 @@
     <string name="no_account">ليس لديك حساب ؟ </string>
 
 
+
+    //   registration //
+    <string name="empty_field"> قم بملئ الحقل من فضلك</string>
+    <string name="notLookedLikeYahoo"> لابد ان يكون علي الشكل  example@yahoo.com  </string>
+    <string name="enterPass">قم بادخال باسورد من فضلك </string>
+    <string name="less12char"> لابد ان يكون اكثر من 12 حرف للامان  </string>
+    <string name="should_like_pass">لابد ان يكون مشابها للباسورد الذي ادخلته</string>
+    <string name="edit1_notLoke_edit2">قم بالتاكد من صحه الباسورد الذي ادخلته</string>
+    <string name="enter_phone">من فضلك قم بادخال رقم الهاتف الخاص بك</string>
+    <string name="select_country">قم باختيار دوله من فضلك</string>
+    <string-array name="country">
+
+        <item>الدوله</item>
+        <item>مصر</item>
+        <item>السودان</item>
+        <item>السعوديه</item>
+        <item>الامارات</item>
+        <item>الكويت</item>
+        <item>قطر</item>
+        <item>الصومال</item>
+        <item>ليبيا</item>
+        <item>الاردن</item>
+        <item>لبنان</item>
+        <item>مالطا</item>
+        <item>المغرب</item>
+        <item>فلسطين</item>
+        <item>تونس</item>
+        <item>اليمن</item>
+        <item>الجزائر</item>
+        <item>جيبوتي</item>
+        <item>العراق</item>
+        <item>موريتانيا</item>
+        <item>عمان</item>
+
+    </string-array>
+
+
 </resources>
