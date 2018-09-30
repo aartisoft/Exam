@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Contracts.MainActivityContract;
+import com.essam.microprocess.dressamdaher.Contracts.RegisterFragContracts;
 import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.Utils.ViewsEmpty;
 
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Register_Fragment extends Fragment implements View.OnClickListener{
+public class Register_Fragment extends Fragment implements View.OnClickListener {
 
     EditText NameStudent,Email,Password,makeSureFromPass,phoneme;
     TextView gotoLogin;
@@ -139,8 +140,10 @@ public class Register_Fragment extends Fragment implements View.OnClickListener{
                     && !makeSureFromPass.getText().toString().isEmpty() && makeSureFromPass.getText().toString().equals(Password.getText().toString())
                     && !phoneme.getText().toString().isEmpty() && !selectedCountry.equals("")){
 
+                loadtoregister.setVisibility(View.VISIBLE);
 
-                Toast.makeText(getActivity(), "كل شي تماااااااااااااااااااام ", Toast.LENGTH_SHORT).show();
+
+
 
             }
 
