@@ -29,9 +29,7 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center_vertical|end"
                 android:layout_margin="15dp"
-                android:src="@drawable/ic_student_1"
-                app:civ_border_width="2dp"
-                app:civ_border_color="#45000000"
+                android:background="@drawable/ic_student_1"
                 />
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -67,7 +65,7 @@
 
             <ImageView
                 android:id="@+id/image_dropdown"
-                android:layout_width="20dp"
+                android:layout_width="30dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="20dp"
@@ -84,7 +82,7 @@
     <RelativeLayout
         android:id="@+id/Details_layout"
         android:background="@drawable/toolbar_background"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"

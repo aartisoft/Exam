@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,6 +89,9 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
         @BindView(R.id.Press_on_CardView)
         CardView Press_on_CardView;
+
+        @BindView(R.id.Details_layout)
+        RelativeLayout CardDownlayout;
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -85,7 +85,7 @@ public class ControlPanel extends AppCompatActivity
             case R.id.studentManger:
 
                 //  اداره الطلاب
-                Title.setText(R.string.StudentManagement);
+                Title.setText(R.string.mangeStudent);
                 getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
