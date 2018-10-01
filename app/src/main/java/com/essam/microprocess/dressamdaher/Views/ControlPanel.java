@@ -141,7 +141,11 @@ public class ControlPanel extends AppCompatActivity
 
                 // حنتشيك علي الي في الداتا ولو صح حنطلع بره
                 animatedDialog.ShowDialog();
-                controlpanelPresnter.checkModel(auth,myEmail,myPass);
+                auth.signOut();
+                startActivity(new Intent(this,MainActivity.class));
+                animatedDialog.Close_Dialog();
+                finish();
+//                controlpanelPresnter.checkModel(auth,myEmail,myPass);
 
                 break;
         }

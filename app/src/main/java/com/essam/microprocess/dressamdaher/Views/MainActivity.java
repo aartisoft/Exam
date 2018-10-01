@@ -14,18 +14,28 @@ import com.essam.microprocess.dressamdaher.Fragment.First_Fragment;
 import com.essam.microprocess.dressamdaher.Fragment.Register_Fragment;
 import com.essam.microprocess.dressamdaher.Fragment.Signin_Fragment;
 import com.essam.microprocess.dressamdaher.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements MainActivityContract.View{
+
+
+    FirebaseAuth auth;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (auth.getCurrentUser()!=null){
+
+            startActivity(new Intent(this,ControlPanel.class));
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
-
+        auth  = FirebaseAuth.getInstance();
         getSupportFragmentManager().
                 beginTransaction().
                 replace(R.id.Main_fragment,new First_Fragment(),"firestFrag")
