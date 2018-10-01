@@ -44,14 +44,40 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+
+            
 
             holder.Name.setText(items.get(position).getNameStudent());
             holder.Contry.setText(items.get(position).getCountry());
             holder.phone.setText(items.get(position).getPhone());
             holder.email.setText(items.get(position).getEmail());
 
+            //animation
+            holder.Press_on_CardView.setScaleX(.9f);
+            holder.Press_on_CardView.setScaleY(.9f);
+            holder.Press_on_CardView.animate().scaleX(1f).scaleY(1f).setDuration(1000);
 
+            // When press on card it should Display Card Down layout .
+            holder.Press_on_CardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(holder.CardDownlayout.isShown()){
+                        holder.dropDown.setImageResource(R.drawable.ic_dropdown);
+                        holder.CardDownlayout.setVisibility(View.GONE);
+
+                    }
+                    else {
+                        holder.dropDown.setImageResource(R.drawable.ic_dropup);
+                        holder.CardDownlayout.setVisibility(View.VISIBLE);
+                        holder.CardDownlayout.setScaleX(0.0f);
+                        holder.CardDownlayout.setScaleY(0.0f);
+                        holder.CardDownlayout.animate().scaleX(1f).scaleY(1f).setDuration(300);
+                    }
+
+                }
+            });
 
 
     }
