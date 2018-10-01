@@ -64,6 +64,9 @@
 
     <string name="addExam">أضافه أختبار</string>
     <string name="mangeStudent">أداره الطلاب</string>
+    <string name="results">نتائج الاختبارات</string>
+    <string name="questions">بنك الاسئله </string>
+    <string name="exit">خروج</string>
 
     <string name="examList">قائمة الاختبارات</string>
     <string name="PleaseMakesure"> يرجي التأكد من البريد الالكتروني والرقم السري </string>
