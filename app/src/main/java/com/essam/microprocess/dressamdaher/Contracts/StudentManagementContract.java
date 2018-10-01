@@ -17,8 +17,10 @@ public interface StudentManagementContract {
     interface presenter{
         void callStudentData();
         void SendListToView(List<FullRegisterForm> Result );
+        void problem(String problem);
     }
     interface view {
         void RecyclerConfig(List<FullRegisterForm> Result );
+        void problem(String problem);
     }
 }
