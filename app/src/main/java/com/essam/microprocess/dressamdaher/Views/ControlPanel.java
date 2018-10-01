@@ -1,7 +1,10 @@
 package com.essam.microprocess.dressamdaher.Views;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,10 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
+import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Fragment.Register_Fragment;
 import com.essam.microprocess.dressamdaher.Fragment.StudentManagement;
 import com.essam.microprocess.dressamdaher.MainPresnter.ControlpanelPresnter;
 import com.essam.microprocess.dressamdaher.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ControlPanel extends AppCompatActivity
                           implements ControlPanelContract.ControlUI
@@ -29,12 +34,31 @@ public class ControlPanel extends AppCompatActivity
     private DrawerLayout drawer;
     private NavigationView navigation;
     private TextView Title ;
+    SharedPreferences preferences;
+    private FirebaseAuth auth;
+    private String myEmail , myPass;
+    ControlpanelPresnter controlpanelPresnter;
+    AnimatedDialog animatedDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawaer);
-        ControlpanelPresnter controlpanelPresnter = new ControlpanelPresnter(this);
+        preferences = getSharedPreferences("user_details",MODE_PRIVATE);
+        if (getIntent().getStringExtra("email")==null && getIntent().getStringExtra("pass")==null ){
+
+            myEmail     = preferences.getString("email","");
+            myPass      = preferences.getString("pass","");
+
+        }else {
+
+            myEmail = getIntent().getStringExtra("email");
+            myPass  = getIntent().getStringExtra("pass");
+
+        }
+
+
+        controlpanelPresnter = new ControlpanelPresnter(this);
         controlpanelPresnter.updateUitoViews();
     }
 
@@ -45,11 +69,29 @@ public class ControlPanel extends AppCompatActivity
         drawer     = findViewById(R.id.drawer);
         navigation = findViewById(R.id.navigation);
         Title      = toolbar.findViewById(R.id.toolbar_title);
-
+        auth       = FirebaseAuth.getInstance();
+        animatedDialog = new AnimatedDialog(this);
         setSupportActionBar(toolbar);
         open_nav.setOnClickListener(this);
         navigation.setNavigationItemSelectedListener(this);
 
+
+    }
+
+    @Override
+    public void emailandpasstrueexit() {
+
+        animatedDialog.Close_Dialog();
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
+    @Override
+    public void emailandpassnottrue(String E) {
+
+        //  هنا بقا لسه حنشةف المشكله بتاعه لو الباسورد اتمسح من الداتا بيز ....
 
     }
 
@@ -95,9 +137,17 @@ public class ControlPanel extends AppCompatActivity
 
                 
                 break;
-        }
+            case R.id.exit:
 
-        return false;
+                // حنتشيك علي الي في الداتا ولو صح حنطلع بره
+                animatedDialog.ShowDialog();
+                controlpanelPresnter.checkModel(auth,myEmail,myPass);
+
+                break;
+        }
+        getSupportFragmentManager().popBackStack();   //finish
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     @Override

@@ -59,9 +59,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     }
 
     @Override
-    public void openControlPanel() {
+    public void openControlPanel(String email , String password) {
         //  لما المستخدم يسجل ويدخل علي الصفحه بتاعته
-        startActivity(new Intent(this,ControlPanel.class));
+        Intent intent = new Intent(this,ControlPanel.class);
+        intent.putExtra("email",email);
+        intent.putExtra("pass",password);
+        startActivity(intent);
         finish();
     }
 

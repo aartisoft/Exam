@@ -1,5 +1,7 @@
 package com.essam.microprocess.dressamdaher.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Register_Fragment extends Fragment implements View.OnClickListener , RegisterFragContracts.ViewRegister{
 
@@ -44,6 +47,8 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     AnimatedDialog animatedDialog;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference reference;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
     String selectedCountry = "";
 
     @Override
@@ -53,6 +58,8 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
         firebaseDatabase = FirebaseDatabase.getInstance();
         animatedDialog   = new AnimatedDialog(getActivity());
         reference        = firebaseDatabase.getReference("Users");
+        preferences      = Objects.requireNonNull(getActivity()).getSharedPreferences("user_details", Context.MODE_PRIVATE);
+        editor           = preferences.edit();
         // country array in spinner //
     }
 
@@ -66,11 +73,9 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
         Password          = v.findViewById(R.id.Password);
         makeSureFromPass  = v.findViewById(R.id.makeSureFromPass);
         phoneme           = v.findViewById(R.id.phoneme);
-
         spinnerCountry    = v.findViewById(R.id.spinnerCountry);
         registeringToData = v.findViewById(R.id.registeringToData);
         gotoLogin         = v.findViewById(R.id.gotoLogin);
-
         Password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         Password.setTypeface(Typeface.DEFAULT);
         makeSureFromPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -158,7 +163,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
                 animatedDialog.ShowDialog();
                 Resister_form resister_form = new Resister_form(NameStudent.getText().toString(),Email.getText().toString(),phoneme.getText().toString(),selectedCountry);
                 RegisterPresnter registerPresnter = new RegisterPresnter(Register_Fragment.this);
-                registerPresnter.detailsForuserFromUI(Email.getText().toString(),Password.getText().toString(),reference,resister_form);
+                registerPresnter.detailsForuserFromUI(editor,Email.getText().toString(),Password.getText().toString(),reference,resister_form);
 
 
 
@@ -168,14 +173,14 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     }
 
     @Override
-    public void successDataSaved() {
+    public void successDataSaved(String email , String password) {
 
         animatedDialog.Close_Dialog();
 
         MainActivityContract.View view1 = (MainActivityContract.View) getActivity();
         if (view1!=null){
 
-            view1.openControlPanel();
+            view1.openControlPanel(email,password);
 
         }
 

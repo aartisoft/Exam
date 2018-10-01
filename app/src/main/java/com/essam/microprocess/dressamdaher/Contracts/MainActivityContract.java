@@ -5,7 +5,7 @@ public interface MainActivityContract {
     interface View{
         void showFragmentRegister();
         void showLoginFragment();
-        void openControlPanel();
+        void openControlPanel(String email , String password);
     }
 
 

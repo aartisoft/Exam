@@ -1,5 +1,6 @@
 package com.essam.microprocess.dressamdaher.MainModle;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.widget.ProgressBar;
 
@@ -23,7 +24,7 @@ public class RegisterMode implements RegisterFragContracts.ModelRegister {
     private DatabaseReference referenceBlock;
 
     @Override
-    public void signUP(final RegisterFragContracts.PresnterRegister presnterRegister , String Email , String passord, final DatabaseReference reference, final Resister_form resister_form) {
+    public void signUP(final SharedPreferences.Editor editor, final RegisterFragContracts.PresnterRegister presnterRegister , final String Email , final String passord, final DatabaseReference reference, final Resister_form resister_form) {
 
         auth             = FirebaseAuth.getInstance();
         auth.createUserWithEmailAndPassword(Email,passord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -51,7 +52,10 @@ public class RegisterMode implements RegisterFragContracts.ModelRegister {
 
                                         if (task.isSuccessful()){
 
-                                            presnterRegister.updatUISuccessfull();
+                                            editor.putString("email",Email);
+                                            editor.putString("pass",passord);
+                                            editor.commit();
+                                            presnterRegister.updatUISuccessfull(Email,passord);
                                         }
 
                                     }

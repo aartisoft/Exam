@@ -1,5 +1,6 @@
 package com.essam.microprocess.dressamdaher.MainPresnter;
 
+import android.content.SharedPreferences;
 import android.widget.ProgressBar;
 
 import com.essam.microprocess.dressamdaher.Contracts.RegisterFragContracts;
@@ -24,8 +25,8 @@ public class RegisterPresnter implements RegisterFragContracts.PresnterRegister 
     }
 
     @Override
-    public void updatUISuccessfull() {
-        view.successDataSaved();
+    public void updatUISuccessfull(String email , String password) {
+        view.successDataSaved(email,password);
     }
 
     @Override
@@ -34,8 +35,8 @@ public class RegisterPresnter implements RegisterFragContracts.PresnterRegister 
     }
 
     @Override
-    public void detailsForuserFromUI(String email, String password, DatabaseReference reference, Resister_form resister_form) {
+    public void detailsForuserFromUI(SharedPreferences.Editor editor, String email, String password, DatabaseReference reference, Resister_form resister_form) {
 
-        registerMode.signUP(this,email,password,reference,resister_form);
+        registerMode.signUP(editor,this,email,password,reference,resister_form);
     }
 }
