@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         if (auth.getCurrentUser()!=null){
 
             startActivity(new Intent(this,ControlPanel.class));
+            finish();
 
         }
     }

@@ -127,6 +127,7 @@ public class ControlPanel extends AppCompatActivity
             case R.id.studentManger:
 
                 //  اداره الطلاب
+                getSupportFragmentManager().popBackStack();
                 Title.setText(R.string.mangeStudent);
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -149,7 +150,7 @@ public class ControlPanel extends AppCompatActivity
 
                 break;
         }
-        getSupportFragmentManager().popBackStack();   //finish
+//        getSupportFragmentManager().popBackStack();   //finish
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -159,7 +160,7 @@ public class ControlPanel extends AppCompatActivity
         if (drawer.isDrawerOpen(Gravity.START)){
             drawer.closeDrawer(Gravity.START);
         }else {
-            super.onBackPressed();
+           super.onBackPressed();
         }
 
     }
