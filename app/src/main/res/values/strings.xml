@@ -61,8 +61,9 @@
     </string-array>
 
 
-
     <string name="examList">قائمة الاختبارات</string>
     <string name="PleaseMakesure"> يرجي التأكد من البريد الالكتروني والرقم السري </string>
+    <string name="banned">حظر الطالب</string>
+    <string name="deletestudent"> حذف الطالب</string>
 
 </resources>
