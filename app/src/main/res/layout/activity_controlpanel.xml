@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:background="@color/color3"
     tools:context="com.essam.microprocess.dressamdaher.Views.ControlPanel">
+
+
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -16,6 +19,7 @@
         >
 
         <ImageView
+            android:id="@+id/open_nav"
             android:layout_width="30dp"
             android:layout_height="25dp"
             android:scaleType="fitXY"
@@ -49,5 +53,6 @@
         android:layout_centerHorizontal="true">
 
     </FrameLayout>
+
 
 </RelativeLayout>

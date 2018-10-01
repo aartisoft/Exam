@@ -171,6 +171,15 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     public void successDataSaved() {
 
         animatedDialog.Close_Dialog();
+
+        MainActivityContract.View view1 = (MainActivityContract.View) getActivity();
+        if (view1!=null){
+
+            view1.openControlPanel();
+
+        }
+
+
         // حنروح للاكتفتي
 
 

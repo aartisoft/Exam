@@ -1,5 +1,6 @@
 package com.essam.microprocess.dressamdaher.Views;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,6 +56,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
                 .addToBackStack(null)
                 .commit();
 
+    }
+
+    @Override
+    public void openControlPanel() {
+        //  لما المستخدم يسجل ويدخل علي الصفحه بتاعته
+        startActivity(new Intent(this,ControlPanel.class));
+        finish();
     }
 
     @Override
