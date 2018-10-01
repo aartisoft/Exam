@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.R;
@@ -25,9 +26,10 @@ import butterknife.ButterKnife;
 
 public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManagementAdapter.ViewHolder> {
 
-    List<FullRegisterForm> items;
+    List<FullRegisterForm> items = new ArrayList<>();
 
     public  StudentManagementAdapter (List<FullRegisterForm> items ){
+
         this.items = items ;
 
     }
@@ -42,6 +44,7 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
             holder.Name.setText(items.get(position).getNameStudent());
             holder.Contry.setText(items.get(position).getCountry());
             holder.phone.setText(items.get(position).getPhone());
@@ -55,7 +58,7 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public   class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txNameStudent)
         TextView Name ;
 

@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by microprocess on 2018-10-01.
@@ -21,12 +22,13 @@ import java.util.ArrayList;
 public class StudentManagementModel implements StudentManagementContract.model {
 
     private StudentManagementContract.presenter presenter;
-    private ArrayList<FullRegisterForm> StudentsDetails ;
+    private List<FullRegisterForm> StudentsDetails ;
 
 
     public StudentManagementModel(StudentMangementPresenter studentMangementPresenter) {
 
         this.presenter = studentMangementPresenter;
+        StudentsDetails = new ArrayList<>();
 
     }
 

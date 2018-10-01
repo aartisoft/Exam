@@ -23,8 +23,10 @@ import java.util.List;
  */
 
 public class StudentMangementPresenter implements StudentManagementContract.presenter {
+
     private StudentManagementContract.view view;
     private StudentManagementContract.model model;
+
     public StudentMangementPresenter(StudentManagement studentManagement) {
         this.view = studentManagement;
         model = new StudentManagementModel(this);

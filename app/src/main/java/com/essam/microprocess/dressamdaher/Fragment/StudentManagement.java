@@ -36,8 +36,10 @@ public class StudentManagement extends Fragment implements StudentManagementCont
          View v = inflater.inflate(R.layout.student_mangment, container, false);
         ButterKnife.bind(this,v);
         presenter = new StudentMangementPresenter(this);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        //call data from firebase .
+        presenter.callStudentData();
 
         return v ;
     }

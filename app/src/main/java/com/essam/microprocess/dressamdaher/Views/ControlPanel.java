@@ -10,9 +10,12 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
+import com.essam.microprocess.dressamdaher.Fragment.Register_Fragment;
+import com.essam.microprocess.dressamdaher.Fragment.StudentManagement;
 import com.essam.microprocess.dressamdaher.MainPresnter.ControlpanelPresnter;
 import com.essam.microprocess.dressamdaher.R;
 
@@ -25,6 +28,7 @@ public class ControlPanel extends AppCompatActivity
     private ImageView open_nav;
     private DrawerLayout drawer;
     private NavigationView navigation;
+    private TextView Title ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,8 @@ public class ControlPanel extends AppCompatActivity
         open_nav   = findViewById(R.id.open_nav);
         drawer     = findViewById(R.id.drawer);
         navigation = findViewById(R.id.navigation);
+        Title      = toolbar.findViewById(R.id.toolbar_title);
+
         setSupportActionBar(toolbar);
         open_nav.setOnClickListener(this);
         navigation.setNavigationItemSelectedListener(this);
@@ -79,7 +85,15 @@ public class ControlPanel extends AppCompatActivity
             case R.id.studentManger:
 
                 //  اداره الطلاب
+                Title.setText(R.string.StudentManagement);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                        .replace(R.id.Exam_Frame,new StudentManagement())
+                        .addToBackStack(null)
+                        .commit();
 
+                
                 break;
         }
 
