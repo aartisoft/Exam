@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:id="@+id/emams"
+        android:icon="@drawable/ic_home"
+        android:title="@string/examList"
+        />
+
+    <item android:id="@+id/addExam"
+        android:icon="@drawable/ic_addexamicon"
+        android:title="@string/addExam"/>
+
+
+    <item android:id="@+id/studentManger"
+        android:icon="@drawable/manger_icon"
+        android:title="@string/addExam"/>
+
+</menu>

@@ -1,10 +1,13 @@
 package com.essam.microprocess.dressamdaher.Views;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -14,11 +17,14 @@ import com.essam.microprocess.dressamdaher.MainPresnter.ControlpanelPresnter;
 import com.essam.microprocess.dressamdaher.R;
 
 public class ControlPanel extends AppCompatActivity
-                          implements ControlPanelContract.ControlUI , View.OnClickListener{
+                          implements ControlPanelContract.ControlUI
+                                   , View.OnClickListener
+                                   , NavigationView.OnNavigationItemSelectedListener{
 
     private Toolbar toolbar;
     private ImageView open_nav;
     private DrawerLayout drawer;
+    private NavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +36,13 @@ public class ControlPanel extends AppCompatActivity
 
     @Override
     public void initializeViews() {
-        toolbar  = findViewById(R.id.toolbar);
-        open_nav = findViewById(R.id.open_nav);
-        drawer   = findViewById(R.id.drawer);
+        toolbar    = findViewById(R.id.toolbar);
+        open_nav   = findViewById(R.id.open_nav);
+        drawer     = findViewById(R.id.drawer);
+        navigation = findViewById(R.id.navigation);
         setSupportActionBar(toolbar);
         open_nav.setOnClickListener(this);
+        navigation.setNavigationItemSelectedListener(this);
 
 
     }
@@ -52,6 +60,38 @@ public class ControlPanel extends AppCompatActivity
                 drawer.openDrawer(Gravity.START);
             }
 
+        }
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case R.id.emams:
+
+                Toast.makeText(this, "hhhhhhhhh", Toast.LENGTH_SHORT).show();
+                //  هنا اعمل الي انت عاوزه دي قائمه الاختبارات
+
+                break;
+
+            case R.id.studentManger:
+
+                //  اداره الطلاب
+                
+                break;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(Gravity.START)){
+            drawer.closeDrawer(Gravity.START);
+        }else {
+            super.onBackPressed();
         }
 
     }

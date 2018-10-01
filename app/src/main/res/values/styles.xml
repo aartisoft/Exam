@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+
+    <style name="NavigationText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/black1</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/cairo</item>
+    </style>
+
+
 </resources>

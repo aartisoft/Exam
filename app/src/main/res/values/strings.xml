@@ -60,6 +60,9 @@
 
     </string-array>
 
+//    menu  //
+
+    <string name="addExam">أضافه أختبار</string>
 
     <string name="examList">قائمة الاختبارات</string>
     <string name="PleaseMakesure"> يرجي التأكد من البريد الالكتروني والرقم السري </string>
