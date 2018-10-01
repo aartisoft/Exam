@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -46,7 +49,8 @@ public class StudentManagement extends Fragment implements StudentManagementCont
         //call data from firebase .
         presenter.callStudentData();
 
-
+        //for menu (Search icon)
+        setHasOptionsMenu(true);
 
         return v ;
     }
@@ -66,5 +70,27 @@ public class StudentManagement extends Fragment implements StudentManagementCont
         //close
         dialog.Close_Dialog();
         Toast.makeText(getActivity(), problem + "", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search, menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.Search:
+                Toast.makeText(getActivity(), "Search", Toast.LENGTH_SHORT).show();
+                // Do Fragment menu item stuff here
+                return true;
+
+            default:
+                break;
+        }
+
+        return false;
     }
 }

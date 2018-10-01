@@ -16,6 +16,7 @@
         android:layout_height="80dp"
         android:background="@drawable/toolbar_background"
         android:elevation="8dp"
+        android:minHeight="80dp"
         >
 
         <ImageView

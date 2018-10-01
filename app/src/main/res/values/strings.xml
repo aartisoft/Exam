@@ -72,5 +72,6 @@
     <string name="results">نتائج الاختبارات</string>
     <string name="questions">بنك الاسئله </string>
     <string name="exit">خروج</string>
+    <string name="Search">البحث</string>
 
 </resources>
