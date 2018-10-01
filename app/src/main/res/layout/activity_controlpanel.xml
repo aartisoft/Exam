@@ -26,6 +26,8 @@
             android:scaleType="fitXY"
             android:src="@drawable/ic_nav_icon"
             android:layout_gravity="center_vertical|start"
+            android:background="@drawable/ripple"
+            android:clickable="true"
 
             />
 
