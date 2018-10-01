@@ -26,18 +26,38 @@
             android:icon="@drawable/questionsicon"
             android:title="@string/questions"/>
 
-        <item android:title=""/>
-        <item android:title=""/>
-
-
-
-        <item android:title="@string/exit"
-            android:id="@+id/exit"
-            android:icon="@drawable/ic_exiticon"/>
-
-
-
     </group>
+
+
+    <item android:title="">
+
+
+        <item android:title=""/>
+        <item android:title=""/>
+
+    </item>
+
+
+
+    <item android:title="">
+
+        <menu>
+
+
+            <item android:title="@string/exit"
+                android:id="@+id/exit"
+                android:icon="@drawable/ic_exiticon"/>
+
+
+
+        </menu>
+
+    </item>
+
+
+
+
+
 
 
 </menu>
