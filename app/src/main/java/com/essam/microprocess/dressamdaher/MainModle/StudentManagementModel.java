@@ -1,6 +1,7 @@
 package com.essam.microprocess.dressamdaher.MainModle;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Contracts.StudentManagementContract;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
@@ -37,13 +38,12 @@ public class StudentManagementModel implements StudentManagementContract.model {
 
         DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child(DataBase_Refrences.USERREF.getRef());
 
-        myref.addValueEventListener(new ValueEventListener() {
+        myref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
                         FullRegisterForm g1 = data.getValue(FullRegisterForm.class);
-                        Log.d("tag2", g1.getPhone());
                         StudentsDetails.add(g1);
                         presenter.SendListToView(StudentsDetails);
                     }
@@ -60,6 +60,8 @@ public class StudentManagementModel implements StudentManagementContract.model {
 
                 //problem
                 presenter.problem(databaseError.getMessage());
+
+
             }
         });
 

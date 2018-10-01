@@ -41,10 +41,10 @@ public class SigninModel implements SigninContract.model {
         else if (password.isEmpty()|| password.length() < 8 ) {
             if (password.isEmpty()) {
 
-                et_password.setError("الرجاء كتابة كلمة السر");
+                et_password.setError("الرجاء كتابة كلمة السر",null);
                 return "الرجاء كتابة كلمة السر";
             } else {
-                et_password.setError("كلمة السر يجب ان يكون اكبر من 8 حروف ");
+                et_password.setError("كلمة السر يجب ان يكون اكبر من 8 حروف ",null);
                 return "كلمة السر يجب ان يكون اكبر من 8 حروف ";
             }
         }

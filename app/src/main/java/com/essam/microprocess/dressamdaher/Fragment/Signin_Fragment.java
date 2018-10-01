@@ -1,8 +1,10 @@
 package com.essam.microprocess.dressamdaher.Fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
@@ -118,8 +120,21 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
         else {
             //Failure Login .
             dialog.Close_Dialog();
-            et_password.setError(getString(R.string.PleaseMakesure));
+            if (isNetworkConnected()) {
+                et_password.setError(getString(R.string.PleaseMakesure),null);
+            }
+            else {
+                et_password.setError(getString(R.string.makesure_fromNetword),null);
+            }
         }
 
+
+
+
+    }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
     }
 }
