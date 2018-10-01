@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Adapter.StudentManagementAdapter;
 import com.essam.microprocess.dressamdaher.Contracts.StudentManagementContract;
+import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.MainPresnter.StudentMangementPresenter;
 import com.essam.microprocess.dressamdaher.R;
@@ -28,7 +29,7 @@ public class StudentManagement extends Fragment implements StudentManagementCont
     RecyclerView recyclerView;
 
     StudentManagementContract.presenter presenter ;
-
+    AnimatedDialog dialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,8 +39,14 @@ public class StudentManagement extends Fragment implements StudentManagementCont
         presenter = new StudentMangementPresenter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        //Dialog
+        dialog = new AnimatedDialog(getActivity());
+        dialog.ShowDialog();
+
         //call data from firebase .
         presenter.callStudentData();
+
+
 
         return v ;
     }
@@ -49,12 +56,15 @@ public class StudentManagement extends Fragment implements StudentManagementCont
 
         StudentManagementAdapter adapter = new StudentManagementAdapter(Result);
         recyclerView.setAdapter(adapter);
+        //close
+        dialog.Close_Dialog();
 
     }
 
     @Override
     public void problem(String problem) {
-
-        Toast.makeText(getActivity(), problem + "", Toast.LENGTH_SHORT).show();
+        //close
+        dialog.Close_Dialog();
+        Toast.makeText(getActivity(), problem + "", Toast.LENGTH_LONG).show();
     }
 }

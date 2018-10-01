@@ -52,6 +52,8 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
             holder.email.setText(items.get(position).getEmail());
 
 
+
+
     }
 
     @Override
