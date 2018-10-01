@@ -79,7 +79,7 @@ public class ControlPanel extends AppCompatActivity
             case R.id.studentManger:
 
                 //  اداره الطلاب
-                
+
                 break;
         }
 

@@ -13,7 +13,7 @@
 
 
     <item android:id="@+id/studentManger"
-        android:icon="@drawable/manger_icon"
-        android:title="@string/addExam"/>
+        android:icon="@drawable/person"
+        android:title="@string/mangeStudent"/>
 
 </menu>
