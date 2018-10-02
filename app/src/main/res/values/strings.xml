@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dr Essam Daher</string>
+    <string name="app_name">د.عصام ضاهر</string>
     <string name="Sign_in">تسجيل الدخول</string>
     <string name="Sign_up">الإشتراك</string>
     <string name="s_in_up">
@@ -80,4 +80,5 @@
     <string name="no">لا</string>
     <string name="title">تحذير</string>
     <string name="message">هل حقا تريد تسجيل الخروج ؟ </string>
+    <string name="Ok" > حسناً</string>
 </resources>

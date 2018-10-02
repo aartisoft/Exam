@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by microprocess on 2018-10-02.
  */
 
-public class AleartDialog  extends Dialog {
+public class AlertDialog extends Dialog {
 
     @BindView(R.id.title)
     TextView txTitle;
@@ -34,12 +34,24 @@ public class AleartDialog  extends Dialog {
     Context context ;
     String Title;
     String Message;
-
-    public AleartDialog(@NonNull Context context,String Title , String Message) {
+    boolean Ok = false;
+    public AlertDialog(@NonNull Context context, String Title , String Message) {
         super(context);
+
         this.context = context;
         this.Title = Title;
         this.Message = Message;
+
+        Ok = false ;
+    }
+
+    public AlertDialog(@NonNull Context context, String Message) {
+        super(context);
+
+        this.context = context;
+        this.Title = context.getString(R.string.app_name);
+        this.Message = Message;
+        Ok = true ;
     }
 
     @Override
@@ -49,9 +61,21 @@ public class AleartDialog  extends Dialog {
         getWindow().setBackgroundDrawable(
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
         setContentView(R.layout.aleartdialog);
+        
         ButterKnife.bind(this);
+
+
+
         txTitle.setText(Title);
         txMessage.setText(Message);
+
+
+        if (Ok){ // Alert Dialog (ok only) .
+            btnYes.setVisibility(View.GONE);
+            btnNo.setTextColor(context.getResources().getColor(R.color.color4));
+            btnNo.setText(R.string.Ok);
+        }
+
 
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override

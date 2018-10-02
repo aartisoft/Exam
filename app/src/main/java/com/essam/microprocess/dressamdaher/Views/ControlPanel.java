@@ -17,9 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
-import com.essam.microprocess.dressamdaher.Dialog.AleartDialog;
+import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
-import com.essam.microprocess.dressamdaher.Fragment.Register_Fragment;
 import com.essam.microprocess.dressamdaher.Fragment.StudentManagement;
 import com.essam.microprocess.dressamdaher.MainPresnter.ControlpanelPresnter;
 import com.essam.microprocess.dressamdaher.R;
@@ -57,7 +56,6 @@ public class ControlPanel extends AppCompatActivity
             myPass  = getIntent().getStringExtra("pass");
 
         }
-
 
         controlpanelPresnter = new ControlpanelPresnter(this);
         controlpanelPresnter.updateUitoViews();
@@ -120,6 +118,8 @@ public class ControlPanel extends AppCompatActivity
 
             case R.id.emams:
 
+                AlertDialog aleart_ok = new AlertDialog(this,getString(R.string.message));
+                aleart_ok.show();
                 Toast.makeText(this, "hhhhhhhhh", Toast.LENGTH_SHORT).show();
                 //  هنا اعمل الي انت عاوزه دي قائمه الاختبارات
 
@@ -139,20 +139,21 @@ public class ControlPanel extends AppCompatActivity
 
                 
                 break;
+
             case R.id.exit:
 
-                AleartDialog aleartDialog = new AleartDialog(this,getString(R.string.title),getString(R.string.message));
+                AlertDialog aleartDialog = new AlertDialog(this,getString(R.string.title),getString(R.string.message));
                 aleartDialog.show();
                 aleartDialog.btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
 //                         حنتشيك علي الي في الداتا ولو صح حنطلع بره
-                animatedDialog.ShowDialog();
-                auth.signOut();
-                startActivity(new Intent(ControlPanel.this,MainActivity.class));
-                animatedDialog.Close_Dialog();
-                finish();
+                            animatedDialog.ShowDialog();
+                            auth.signOut();
+                            startActivity(new Intent(ControlPanel.this,MainActivity.class));
+                            animatedDialog.Close_Dialog();
+                            finish();
 
                     }
                 });
