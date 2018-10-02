@@ -68,7 +68,7 @@
     <string name="examList">قائمة الاختبارات</string>
     <string name="PleaseMakesure"> يرجي التأكد من البريد الالكتروني والرقم السري </string>
     <string name="banned">حظر الطالب</string>
-    <string name="deletestudent"> حذف الطالب</string>
+    <string name="Rating"> تقييم الطالب </string>
     <string name="results">نتائج الاختبارات</string>
     <string name="questions">بنك الاسئله </string>
     <string name="exit">خروج</string>
@@ -81,4 +81,12 @@
     <string name="title">تحذير</string>
     <string name="message">هل حقا تريد تسجيل الخروج ؟ </string>
     <string name="Ok" > حسناً</string>
+    <string name="ask_banned">هل انت متأكد من حظر هذا الطالب ؟ </string>
+    <string name="successful_banned">تم الحظر بنجاح </string>
+    <string name="WrongTitle">حدث خطأ</string>
+    <string name="YouareBanned">عفوا لقد تم حظرك</string>
+    <string name="removeBan">فك الحظر</string>
+    <string name="RemoveAsk">هل حقا تريد فك حظر هذا الطالب ؟ </string>
+    <string name="RemoveDone">تم فك حظر الطالب بنجاح</string>
+
 </resources>

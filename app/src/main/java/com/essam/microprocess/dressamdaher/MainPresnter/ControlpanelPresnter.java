@@ -7,11 +7,11 @@ import com.google.firebase.auth.FirebaseAuth;
 public class ControlpanelPresnter implements ControlPanelContract.ControlPresnterUI {
 
     private ControlPanelContract.ControlUI view;
-    private ControlPanelModel controlPanelModel;
+    private ControlPanelContract.ControlModelUI controlPanelModel;
 
     public ControlpanelPresnter(ControlPanelContract.ControlUI view) {
         this.view = view;
-        controlPanelModel = new ControlPanelModel();
+        controlPanelModel = new ControlPanelModel(this);
     }
 
     @Override
@@ -32,5 +32,15 @@ public class ControlpanelPresnter implements ControlPanelContract.ControlPresnte
     @Override
     public void datanotTrue(String E) {
         view.emailandpassnottrue(E);
+    }
+
+    @Override
+    public void CheckifUserBanned(String Uid) {
+        controlPanelModel.CheckifUserBanned(Uid);
+    }
+
+    @Override
+    public void CheckifUserBannedResult(String Result) {
+        view.CheckifUserBannedResult(Result);
     }
 }

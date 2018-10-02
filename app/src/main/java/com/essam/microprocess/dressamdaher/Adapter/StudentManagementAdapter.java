@@ -13,9 +13,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.essam.microprocess.dressamdaher.Contracts.MainActivityContract;
+import com.essam.microprocess.dressamdaher.Contracts.StudentManagementContract;
+import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
+import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
+import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
+import com.essam.microprocess.dressamdaher.MainPresnter.StudentMangementPresenter;
 import com.essam.microprocess.dressamdaher.Permissions.Call_permission;
 import com.essam.microprocess.dressamdaher.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +43,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManagementAdapter.ViewHolder> {
-
     List<FullRegisterForm> items = new ArrayList<>();
     int photosCounter = 0 ;
     Context context;
+
     public  StudentManagementAdapter (Context context, List<FullRegisterForm> items ){
 
         this.items = items ;
         this.context = context;
+
     }
 
 
@@ -116,8 +131,27 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
                 }
             });
 
+            //rating Users .
+            holder.rating_linear.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                }
+            });
+
+            //Banned User .
+             Check_if_user_banned(items.get(position).getuID(), holder);
+
+
+
+
+
+
+
 
     }
+
 
     @Override
     public int getItemCount() {
@@ -152,8 +186,8 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
         @BindView(R.id.ban_linear)
         LinearLayout ban_linear;
 
-        @BindView(R.id.delete_linear)
-        LinearLayout delete_linear;
+        @BindView(R.id.rating_linear)
+        LinearLayout rating_linear;
 
         @BindView(R.id.Press_on_CardView)
         CardView Press_on_CardView;
@@ -161,9 +195,165 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
         @BindView(R.id.Details_layout)
         RelativeLayout CardDownlayout;
 
+        @BindView(R.id.txStudentban)
+        TextView txStudentban;
+
+        @BindView(R.id.banImag)
+        ImageView banImag ;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
     }
+
+    void Banned_User(final String BannedUser_ID){
+        //Show Alert ask user to ban .
+        final AnimatedDialog dialog = new AnimatedDialog(context);
+        final AlertDialog alert  = new AlertDialog(context,
+                context.getString(R.string.title),
+                context.getString(R.string.ask_banned));
+        alert.show();
+        alert.btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                dialog.ShowDialog();
+
+                DatabaseReference reference = FirebaseDatabase.getInstance()
+                        .getReference(DataBase_Refrences.BLOCKUSER.getRef())
+                        .child(BannedUser_ID);
+                reference.setValue("Yes").addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        //successful
+                        alert.dismiss();
+                        dialog.Close_Dialog();
+                        AlertDialog alert2  = new AlertDialog(context,context.getString(R.string.successful_banned));
+                        alert2.show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Failure
+                        alert.dismiss();
+                        dialog.Close_Dialog();
+                        AlertDialog alert2  = new AlertDialog(context,e.toString());
+                        alert2.show();
+
+                    }
+                });
+
+            }
+        });
+    }
+
+    void Check_if_user_banned(final String Uid, final ViewHolder holder){
+
+
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference(DataBase_Refrences.BLOCKUSER.getRef())
+                .child(Uid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+
+
+                    holder.txStudentban.setText(R.string.removeBan);
+                    holder.banImag.setImageResource(R.drawable.reverse_user);
+                    //remove user from ban list in firebase .
+                    holder.ban_linear.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+
+                            Remove_Banned_User(Uid);
+
+
+                        }
+                    });
+
+                }
+                else {
+
+                    holder.txStudentban.setText(R.string.banned);
+                    holder.banImag.setImageResource(R.drawable.ic_ban);
+                    holder.ban_linear.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //First put this Line in Firebase Database Rule ".write": "auth != null && !root.child('Blocked_User').hasChild(auth.uid)"
+                            //Ban user
+
+                            Banned_User(Uid);
+
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void Remove_Banned_User(String Uid) {
+
+        final DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference(DataBase_Refrences.BLOCKUSER.getRef())
+                .child(Uid);
+
+
+        //Show Alert ask user to remove ban  .
+        final AnimatedDialog dialog = new AnimatedDialog(context);
+        final AlertDialog alert  = new AlertDialog(context,
+                context.getString(R.string.title),
+                context.getString(R.string.RemoveAsk));
+        alert.show();
+        alert.btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                dialog.ShowDialog();
+
+
+                reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        //successful
+                        alert.dismiss();
+                        dialog.Close_Dialog();
+                        AlertDialog alert2  = new AlertDialog(context,context.getString(R.string.RemoveDone));
+                        alert2.show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Failure
+                        alert.dismiss();
+                        dialog.Close_Dialog();
+                        AlertDialog alert2  = new AlertDialog(context
+                                ,e.toString());
+                        alert2.show();
+
+                    }
+                });
+
+            }
+        });
+
+
+    }
+
+
 }

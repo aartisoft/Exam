@@ -29,7 +29,7 @@ public class AlertDialog extends Dialog {
     @BindView(R.id.yes)
     public Button btnYes;
     @BindView(R.id.no)
-    Button btnNo;
+    public Button btnNo;
 
     Context context ;
     String Title;

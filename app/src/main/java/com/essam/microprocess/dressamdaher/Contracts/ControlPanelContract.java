@@ -10,6 +10,8 @@ public interface ControlPanelContract {
         void emailandpasstrueexit();
         void emailandpassnottrue(String E);
 
+        void CheckifUserBannedResult(String Result);
+
 
     }
 
@@ -21,7 +23,8 @@ public interface ControlPanelContract {
         void checkModel(FirebaseAuth auth , String email , String password);
         void datatrue();
         void datanotTrue(String E);
-
+        void CheckifUserBanned(String Uid);
+        void CheckifUserBannedResult(String Result);
     }
 
 
@@ -29,7 +32,7 @@ public interface ControlPanelContract {
     interface ControlModelUI{
 
         void checking(ControlPanelContract.ControlPresnterUI controlPresnterUI,FirebaseAuth auth, String email , String password);
-
+        void CheckifUserBanned(String Uid);
     }
 
 }

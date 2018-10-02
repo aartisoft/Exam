@@ -23,6 +23,7 @@ import com.essam.microprocess.dressamdaher.Fragment.StudentManagement;
 import com.essam.microprocess.dressamdaher.MainPresnter.ControlpanelPresnter;
 import com.essam.microprocess.dressamdaher.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ControlPanel extends AppCompatActivity
                           implements ControlPanelContract.ControlUI
@@ -44,6 +45,9 @@ public class ControlPanel extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawaer);
+
+
+
         preferences = getSharedPreferences("user_details",MODE_PRIVATE);
         if (getIntent().getStringExtra("email")==null && getIntent().getStringExtra("pass")==null ){
 
@@ -59,6 +63,10 @@ public class ControlPanel extends AppCompatActivity
 
         controlpanelPresnter = new ControlpanelPresnter(this);
         controlpanelPresnter.updateUitoViews();
+
+        //Check if User Banned افحص المستخدم اذا كان محظور
+        controlpanelPresnter.CheckifUserBanned(auth.getCurrentUser().getUid());
+
     }
 
     @Override
@@ -95,6 +103,39 @@ public class ControlPanel extends AppCompatActivity
     }
 
     @Override
+    public void CheckifUserBannedResult(String Result) {
+
+        //اذا كان هذا الطالب محظور
+
+        if(Result.equals("Successful")) {
+
+            AlertDialog alertDialog = new AlertDialog(ControlPanel.this
+                    , getString(R.string.YouareBanned));
+            alertDialog.setCancelable(false);
+            alertDialog.show();
+            alertDialog.btnNo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                    Intent intent = new Intent(ControlPanel.this , MainActivity.class);
+                    startActivity(intent);
+
+                    finish();
+
+
+
+                    //لو عاوز المحظور ميعرش يعمل اي اكونت تاني علي البرنامج يبقه الغي السطر الجي
+                    auth.signOut();
+                }
+            });
+
+        }
+
+
+    }
+
+    @Override
     public void onClick(View view) {
 
         if (view == open_nav){
@@ -119,6 +160,7 @@ public class ControlPanel extends AppCompatActivity
             case R.id.emams:
 
                 AlertDialog aleart_ok = new AlertDialog(this,getString(R.string.message));
+                aleart_ok.setCancelable(false);
                 aleart_ok.show();
                 Toast.makeText(this, "hhhhhhhhh", Toast.LENGTH_SHORT).show();
                 //  هنا اعمل الي انت عاوزه دي قائمه الاختبارات
