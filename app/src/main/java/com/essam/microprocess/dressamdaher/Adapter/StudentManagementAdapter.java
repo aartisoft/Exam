@@ -73,7 +73,7 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
             //animation
             holder.Press_on_CardView.setScaleX(.9f);
             holder.Press_on_CardView.setScaleY(.9f);
-            holder.Press_on_CardView.animate().scaleX(1f).scaleY(1f).setDuration(1000);
+            holder.Press_on_CardView.animate().scaleX(1f).scaleY(1f).setDuration(500);
 
             // When press on card it should Display Card Down layout .
             holder.Press_on_CardView.setOnClickListener(new View.OnClickListener() {
