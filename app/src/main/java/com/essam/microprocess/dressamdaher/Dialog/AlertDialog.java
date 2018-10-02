@@ -61,7 +61,7 @@ public class AlertDialog extends Dialog {
         getWindow().setBackgroundDrawable(
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
         setContentView(R.layout.aleartdialog);
-        
+
         ButterKnife.bind(this);
 
 

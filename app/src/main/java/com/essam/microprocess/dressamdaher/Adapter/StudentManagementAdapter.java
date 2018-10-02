@@ -1,5 +1,6 @@
 package com.essam.microprocess.dressamdaher.Adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
+import com.essam.microprocess.dressamdaher.Permissions.Call_permission;
 import com.essam.microprocess.dressamdaher.R;
 
 import java.util.ArrayList;
@@ -30,11 +32,11 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
     List<FullRegisterForm> items = new ArrayList<>();
     int photosCounter = 0 ;
-
-    public  StudentManagementAdapter (List<FullRegisterForm> items ){
+    Context context;
+    public  StudentManagementAdapter (Context context, List<FullRegisterForm> items ){
 
         this.items = items ;
-
+        this.context = context;
     }
 
 
@@ -46,7 +48,7 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
 
 
@@ -92,6 +94,24 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
                         holder.CardDownlayout.setScaleY(0.0f);
                         holder.CardDownlayout.animate().scaleX(1f).scaleY(1f).setDuration(300);
                     }
+
+                }
+            });
+
+            //Call the Number
+            holder.phone_Linear.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Call_permission permission = new Call_permission(context);
+
+                    if (!permission.checkPermissionForCamera()) {
+                        permission.requestPermissionForCamera();
+                    } else {
+
+                        permission.openCaller(context,items.get(position).getPhone()); // Caller
+                    }
+
+
 
                 }
             });
