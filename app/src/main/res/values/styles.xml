@@ -27,6 +27,8 @@
         <item name="colorControlHighlight">@color/colorPrimary</item>
 
     </style>
+    <style name="flatbutton" parent="Widget.AppCompat.Button.Borderless">
 
+    </style>
 
 </resources>

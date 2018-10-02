@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
+import com.essam.microprocess.dressamdaher.Dialog.AleartDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Fragment.Register_Fragment;
 import com.essam.microprocess.dressamdaher.Fragment.StudentManagement;
@@ -140,12 +141,24 @@ public class ControlPanel extends AppCompatActivity
                 break;
             case R.id.exit:
 
-                // حنتشيك علي الي في الداتا ولو صح حنطلع بره
+                AleartDialog aleartDialog = new AleartDialog(this,getString(R.string.title),getString(R.string.message));
+                aleartDialog.show();
+                aleartDialog.btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+//                         حنتشيك علي الي في الداتا ولو صح حنطلع بره
                 animatedDialog.ShowDialog();
                 auth.signOut();
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(ControlPanel.this,MainActivity.class));
                 animatedDialog.Close_Dialog();
                 finish();
+
+                    }
+                });
+
+
+
 //                controlpanelPresnter.checkModel(auth,myEmail,myPass);
 
                 break;
