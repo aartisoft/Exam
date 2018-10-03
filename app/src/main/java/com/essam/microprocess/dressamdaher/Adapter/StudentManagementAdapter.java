@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -43,7 +44,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManagementAdapter.ViewHolder> {
-    List<FullRegisterForm> items = new ArrayList<>();
+    List<FullRegisterForm> items ;
+    List<FullRegisterForm>listnew;
     int photosCounter = 0 ;
     Context context;
 
@@ -354,6 +356,57 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
 
     }
+
+
+    public Filter getFilter() {
+
+
+
+
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                FilterResults results = new FilterResults();        // Holds the results of a filtering operation in values
+                ArrayList<FullRegisterForm> FilteredArrList = new ArrayList<>();
+                if (listnew == null) {
+
+                    listnew = new ArrayList<>(items); // saves the original data in mOriginalValues
+
+                }
+
+                if (constraint == null || constraint.length() == 0) {
+
+                    // set the Original result to return
+                    results.count = listnew.size();
+                    results.values = listnew;
+                } else {
+                    constraint = constraint.toString().toLowerCase();
+                    for (int i = 0; i < listnew.size(); i++) {
+                        String data = listnew.get(i).getNameStudent();
+                        if (data.toLowerCase().startsWith(constraint.toString())) {
+                            FilteredArrList.add(listnew.get(i));
+                        }
+                    }
+                    // set the Filtered result to return
+                    results.count = FilteredArrList.size();
+                    results.values = FilteredArrList;
+                }
+                return results;
+            }
+
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                items = (ArrayList<FullRegisterForm>) results.values; // has the filtered values
+                notifyDataSetChanged();
+
+            }
+        };
+        return filter;
+    }
+
 
 
 }

@@ -1,9 +1,13 @@
 package com.essam.microprocess.dressamdaher.MainModle;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.widget.EditText;
 
+import com.bumptech.glide.load.engine.Resource;
 import com.essam.microprocess.dressamdaher.Contracts.SigninContract;
+import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.Utils.ViewsEmpty;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,27 +29,27 @@ public class SigninModel implements SigninContract.model {
     }
 
     @Override
-    public String CheckisEmpty(EditText et_email, EditText et_password) {
+    public String CheckisEmpty(String email, String password) {
 
-        String email = et_email.getText().toString();
-        String password = et_password.getText().toString();
 
         if (email.isEmpty()){
-            et_email.setError("الرجاء كتابة البريد الإلكتروني");
+
             return "الرجاء كتابة البريد الإلكتروني";
         }
-        else if (!isEmailValid(et_email.getText().toString())){
-            et_email.setError("الرجاء كتابة البريد الإلكتروني بطريقة صحيحة");
+        else if (!isEmailValid(email)){
+
             return "الرجاء كتابة البريد الإلكتروني بطريقة صحيحة";
+
         }
         else if (password.isEmpty()|| password.length() < 8 ) {
             if (password.isEmpty()) {
 
-                et_password.setError("الرجاء كتابة كلمة السر",null);
-                return "الرجاء كتابة كلمة السر";
+
+                return "قم بادخال الرقم السري من فضلك";
+
             } else {
-                et_password.setError("كلمة السر يجب ان يكون اكبر من 8 حروف ",null);
-                return "كلمة السر يجب ان يكون اكبر من 8 حروف ";
+
+                return "لابد ان يكون اكثر من 8 حرف للامان";
             }
         }
         else {

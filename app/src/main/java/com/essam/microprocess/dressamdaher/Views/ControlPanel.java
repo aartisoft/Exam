@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
+import com.essam.microprocess.dressamdaher.Fragment.AddQ_frag;
+import com.essam.microprocess.dressamdaher.Fragment.Question_Bank_Frag;
 import com.essam.microprocess.dressamdaher.Fragment.StudentManagement;
 import com.essam.microprocess.dressamdaher.MainPresnter.ControlpanelPresnter;
 import com.essam.microprocess.dressamdaher.R;
@@ -35,9 +37,7 @@ public class ControlPanel extends AppCompatActivity
     private DrawerLayout drawer;
     private NavigationView navigation;
     private TextView Title ;
-    SharedPreferences preferences;
     private FirebaseAuth auth;
-    private String myEmail , myPass;
     ControlpanelPresnter controlpanelPresnter;
     AnimatedDialog animatedDialog;
 
@@ -46,20 +46,6 @@ public class ControlPanel extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawaer);
 
-
-
-        preferences = getSharedPreferences("user_details",MODE_PRIVATE);
-        if (getIntent().getStringExtra("email")==null && getIntent().getStringExtra("pass")==null ){
-
-            myEmail     = preferences.getString("email","");
-            myPass      = preferences.getString("pass","");
-
-        }else {
-
-            myEmail = getIntent().getStringExtra("email");
-            myPass  = getIntent().getStringExtra("pass");
-
-        }
 
         controlpanelPresnter = new ControlpanelPresnter(this);
         controlpanelPresnter.updateUitoViews();
@@ -100,6 +86,18 @@ public class ControlPanel extends AppCompatActivity
 
         //  هنا بقا لسه حنشةف المشكله بتاعه لو الباسورد اتمسح من الداتا بيز ....
 
+    }
+
+    @Override
+    public void whenClickFAB_showFrag() {
+        Title.setText(getResources().getString(R.string.addQ));
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,new AddQ_frag())
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
@@ -157,6 +155,7 @@ public class ControlPanel extends AppCompatActivity
 
         switch (item.getItemId()){
 
+
             case R.id.emams:
 
                 AlertDialog aleart_ok = new AlertDialog(this,getString(R.string.message));
@@ -202,7 +201,20 @@ public class ControlPanel extends AppCompatActivity
 
 
 
-//                controlpanelPresnter.checkModel(auth,myEmail,myPass);
+
+
+                break;
+            case R.id.questions:
+
+                Title.setText(R.string.questions);
+                getSupportFragmentManager().popBackStack();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                        .replace(R.id.Exam_Frame,new Question_Bank_Frag())
+                        .addToBackStack(null)
+                        .commit();
+
 
                 break;
         }

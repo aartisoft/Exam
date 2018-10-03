@@ -3,6 +3,7 @@ package com.essam.microprocess.dressamdaher.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +43,9 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
     @BindView(R.id.password)
     EditText et_password;
 
+    @BindView(R.id.email_sign_in_button)
+    Button SignIn;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,7 +65,19 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
         et_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         et_password.setTypeface(Typeface.DEFAULT);
 
-        return  v ;
+
+        ///
+        SignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //check first if some thing empty .
+
+               presenter.passtocheck(et_email.getText().toString(),et_password.getText().toString());
+
+            }
+        });
+
+         return  v ;
     }
 
 
@@ -77,14 +94,7 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
     }
 
 
-    @OnClick(R.id.email_sign_in_button)
-    void Singin (View view){
 
-        //check first if some thing empty .
-        presenter.passtocheck(et_email,et_password);
-
-
-    }
 
 
 
@@ -96,8 +106,28 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
            dialog.ShowDialog();
            presenter.passlogIn(et_email.getText().toString().trim() , et_password.getText().toString());
 
-
        }
+        else if (Result.equals(getString(R.string.write_email))){
+
+           et_email.setError(getString(R.string.write_email));
+           et_email.requestFocus();
+        }
+        else if (Result.equals(getString(R.string.write_email_in_correct_way))){
+
+           et_email.setError(getString(R.string.write_email_in_correct_way));
+           et_email.requestFocus();
+        }
+        else if (Result.equals(getString(R.string.enterPass))) {
+
+           et_password.setError(getString(R.string.enterPass),null);
+           et_password.requestFocus();
+        }
+        else if(Result.equals(getString(R.string.less12char))) {
+
+           et_password.setError(getString(R.string.less12char),null);
+           et_password.requestFocus();
+        }
+
 
     }
 

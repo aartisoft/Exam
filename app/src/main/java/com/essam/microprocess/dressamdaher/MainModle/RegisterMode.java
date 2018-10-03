@@ -43,23 +43,8 @@ public class RegisterMode implements RegisterFragContracts.ModelRegister {
                         public void onComplete(@NonNull Task<Void> task) {
 
                             if (task.isSuccessful()){
-                                firebaseDatabase = FirebaseDatabase.getInstance();
-                                referenceBlock   = firebaseDatabase.getReference("Blocked_User");
-                                Block_Model block_model = new Block_Model(fullRegisterForm.getEmail(),"No");
-                                referenceBlock.child(UID).setValue(block_model).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
 
-                                        if (task.isSuccessful()){
-
-                                            editor.putString("email",Email);
-                                            editor.putString("pass",passord);
-                                            editor.commit();
-                                            presnterRegister.updatUISuccessfull(Email,passord);
-                                        }
-
-                                    }
-                                });
+                                presnterRegister.updatUISuccessfull(Email,passord);
 
 
                             }

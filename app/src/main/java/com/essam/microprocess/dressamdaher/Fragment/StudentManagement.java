@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +31,8 @@ public class StudentManagement extends Fragment implements StudentManagementCont
 
     @BindView(R.id.Management_Recycler)
     RecyclerView recyclerView;
-
+    SearchView searchview;
+    StudentManagementAdapter adapter;
     StudentManagementContract.presenter presenter ;
     AnimatedDialog dialog;
     @Override
@@ -39,6 +41,24 @@ public class StudentManagement extends Fragment implements StudentManagementCont
         // Inflate the layout for this fragment
          View v = inflater.inflate(R.layout.student_mangment, container, false);
         ButterKnife.bind(this,v);
+        searchview = v.findViewById(R.id.search);
+
+        searchview.setQueryHint("قم بالبحث عن طريق الاسم ");
+
+        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         presenter = new StudentMangementPresenter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -58,7 +78,7 @@ public class StudentManagement extends Fragment implements StudentManagementCont
     @Override
     public void RecyclerConfig(List<FullRegisterForm> Result) {
 
-        StudentManagementAdapter adapter = new StudentManagementAdapter(getActivity(),Result);
+        adapter = new StudentManagementAdapter(getActivity(),Result);
         recyclerView.setAdapter(adapter);
         //close
         dialog.Close_Dialog();
@@ -83,7 +103,15 @@ public class StudentManagement extends Fragment implements StudentManagementCont
         switch (item.getItemId()) {
 
             case R.id.Search:
-                Toast.makeText(getActivity(), "Search", Toast.LENGTH_SHORT).show();
+
+                searchview.setIconified(false); //Expand the search view
+
+                if (searchview.isShown()){
+                    searchview.setVisibility(View.GONE);
+                }else {
+                    searchview.setVisibility(View.VISIBLE);
+                }
+
                 // Do Fragment menu item stuff here
                 return true;
 

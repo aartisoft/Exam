@@ -1,7 +1,5 @@
 package com.essam.microprocess.dressamdaher.MainPresnter;
 
-import android.widget.EditText;
-
 import com.essam.microprocess.dressamdaher.Contracts.SigninContract;
 import com.essam.microprocess.dressamdaher.MainModle.SigninModel;
 
@@ -21,8 +19,8 @@ public class SigninPresenter implements SigninContract.presenter {
 
 
     @Override
-    public void passtocheck(EditText et_email, EditText et_password) {
-      String result =  model.CheckisEmpty(et_email,et_password);
+    public void passtocheck(String email, String password) {
+      String result =  model.CheckisEmpty(email,password);
       view.checkResult(result);
     }
 

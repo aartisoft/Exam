@@ -18,13 +18,14 @@
     <string name="ihaveacount"> لديك حساب بالفعل ؟ </string>
     <string name="login"> تسجيل الدخول </string>
     <string name="no_account">ليس لديك حساب ؟ </string>
-
+    <string name="write_email">الرجاء كتابة البريد الإلكتروني</string>
+    <string name="write_email_in_correct_way">الرجاء كتابة البريد الإلكتروني بطريقة صحيحة</string>
 
     // registration //
     <string name="empty_field"> قم بملئ الحقل من فضلك</string>
     <string name="notLookedLikeYahoo"> لابد ان يكون علي الشكل  email@example.com   </string>
-    <string name="enterPass">قم بادخال الرقم السري من فضلك </string>
-    <string name="less12char"> لابد ان يكون اكثر من 8 حرف للامان  </string>
+    <string name="enterPass">قم بادخال الرقم السري من فضلك</string>
+    <string name="less12char">لابد ان يكون اكثر من 8 حرف للامان</string>
     <string name="should_like_pass"> الرقم السري لابد ان يكون مشابها للذي ادخلته</string>
     <string name="edit1_notLoke_edit2">قم بالتاكد من صحه الرقم السري الذي ادخلته</string>
     <string name="enter_phone">من فضلك قم بادخال رقم الهاتف الخاص بك</string>
@@ -74,6 +75,8 @@
     <string name="exit">خروج</string>
     <string name="Search">البحث</string>
 
+    <string name="Q_One"> كتابة السؤال هنا </string>
+    <string name="addQ">اضافه سؤال</string>
 
     //aleart dialog
     <string name="yes">نعم</string>
@@ -88,5 +91,7 @@
     <string name="removeBan">فك الحظر</string>
     <string name="RemoveAsk">هل حقا تريد فك حظر هذا الطالب ؟ </string>
     <string name="RemoveDone">تم فك حظر الطالب بنجاح</string>
+    
+    
 
 </resources>

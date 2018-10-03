@@ -9,12 +9,12 @@ import android.widget.EditText;
 public interface SigninContract {
 
     interface model {
-        String CheckisEmpty(EditText et_email, EditText et_password);
+        String CheckisEmpty(String email, String password);
         void logIn(String email, String password);
     }
     interface presenter{
 
-        void passtocheck(EditText et_email, EditText et_password);
+        void passtocheck(String et_email, String et_password);
         void passlogIn(String email, String password);
         void updatelogInResult(String Result);
     }

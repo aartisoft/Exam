@@ -9,7 +9,7 @@ public interface ControlPanelContract {
         void initializeViews();
         void emailandpasstrueexit();
         void emailandpassnottrue(String E);
-
+        void whenClickFAB_showFrag();
         void CheckifUserBannedResult(String Result);
 
 
