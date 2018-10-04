@@ -20,7 +20,7 @@
                 android:padding="10sp"
                 android:background="@drawable/styling_of_view"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="wrap_content">
 
 
 
@@ -68,21 +68,25 @@
 
                         android:layout_marginBottom="10sp"
                         android:paddingStart="10sp"
-                        android:padding="10sp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="10sp"
                         android:layout_marginTop="10sp"
                         android:layout_width="match_parent"
                         android:textSize="18sp"
                         android:textColor="@color/black1"
+                        android:textDirection="rtl"
                         android:hint="@string/Q_One"
                         android:background="@drawable/shape_layout"
                         android:fontFamily="@font/cairo"
                         android:layout_height="wrap_content"
 
-
-
                         />
+
+
+
 
 
                 </LinearLayout>
@@ -162,10 +166,9 @@
 
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:text="أ-"
                             android:padding="5dp"
-                            android:textDirection="rtl"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
                             android:textSize="20dp"
@@ -175,7 +178,7 @@
 
 
                         <EditText
-                            android:layout_marginStart="10dp"
+                            android:layout_marginStart="10sp"
                             android:background="@drawable/answercorner"
                             android:hint="الإجابة الاولي"
                             android:textDirection="rtl"
@@ -207,7 +210,7 @@
 
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:text="ب-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
@@ -249,7 +252,7 @@
                         android:layout_height="wrap_content">
 
                           <TextView
-                            android:layout_width="wrap_content"
+                              android:layout_width="40dp"
                             android:text="ج-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
@@ -294,7 +297,7 @@
 
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:text="د-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
