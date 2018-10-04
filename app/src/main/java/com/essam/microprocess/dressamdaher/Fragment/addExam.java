@@ -50,10 +50,10 @@ public class addExam extends Fragment {
     TextView txFinal_Degree;
 
     @BindView(R.id.Btn_addExam)
-    Button button;
+    Button Btn_addExam;
 
-    String hour , minute , second ;
     String final_degree;
+    String hour , minute , second ;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -138,7 +138,14 @@ public class addExam extends Fragment {
         });
 
 
+        Btn_addExam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+
+
+            }
+        });
 
         return v;
     }
@@ -155,11 +162,14 @@ public class addExam extends Fragment {
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                     et_hour.setText(String.valueOf(i));
                     et_minute.setText(String.valueOf(i1));
+
             }
         },hours,minute,true);
 
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
     }
+
+
 
 }

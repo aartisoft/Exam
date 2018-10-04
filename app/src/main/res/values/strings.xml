@@ -104,6 +104,7 @@
     <string name="answerTwo"> يرجي ادخال الاجابه الثانيه هنا </string>
     <string name="answerThre"> يرجي ادخال الاجابه الثالثه هنا </string>
     <string name="answerFour"> يرجي ادخال الاجابه الرابعه هنا </string>
+    <string name="ExamName">إسم الإختبار</string>
 
 
 </resources>

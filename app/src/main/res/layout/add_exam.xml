@@ -23,6 +23,7 @@
         android:padding="10dp"
         android:background="@drawable/styling_of_view"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
         >
         <ImageView
             android:layout_width="30dp"
@@ -331,6 +332,40 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layoutDirection="rtl"
+        android:padding="10dp"
+        android:background="@drawable/styling_of_view"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ExamName"
+            android:textColor="@android:color/black"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:fontFamily="@font/cairo"
+            android:layout_marginStart="5dp"
+            />
+    </LinearLayout>
+    <EditText
+        android:layout_marginTop="15dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal|center_vertical"
+        android:background="@drawable/roundcorner"
+        android:fontFamily="@font/cairo"
+        android:textSize="18sp"
+        android:padding="10dp"
+        />
     <Button
         android:id="@+id/Btn_addExam"
         android:text="@string/addExam"

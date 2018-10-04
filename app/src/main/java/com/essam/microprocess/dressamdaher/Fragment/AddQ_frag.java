@@ -22,6 +22,7 @@ import com.android.volley.toolbox.HttpResponse;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.essam.microprocess.dressamdaher.Contracts.AddQuestionContract;
+import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
@@ -102,7 +103,7 @@ public class AddQ_frag extends Fragment implements View.OnClickListener , AddQue
 
         if (view == buttonA){
             if (answerOne.getText().toString().isEmpty()){
-                Toast.makeText(getActivity(), "قم بملي الحقل اولا حتي نتمك من اخذ الاجابه", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "قم بملئ الحقل اولا حتي نتمكن من اخذ الإجابة", Toast.LENGTH_SHORT).show();
             }
             selectAnswer = answerOne.getText().toString();
             buttonA.setBackground(trueClick);
@@ -113,7 +114,7 @@ public class AddQ_frag extends Fragment implements View.OnClickListener , AddQue
 
         if (view == buttonB){
             if (answerTwo.getText().toString().isEmpty()){
-                Toast.makeText(getActivity(), "قم بملي الحقل اولا حتي نتمك من اخذ الاجابه", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "قم بملئ الحقل اولا حتي نتمكن من اخذ الإجابة", Toast.LENGTH_SHORT).show();
             }
             selectAnswer = answerTwo.getText().toString();
             buttonB.setBackground(trueClick);
@@ -124,7 +125,7 @@ public class AddQ_frag extends Fragment implements View.OnClickListener , AddQue
 
         if (view == buttonC){
             if (answerThree.getText().toString().isEmpty()){
-                Toast.makeText(getActivity(), "قم بملي الحقل اولا حتي نتمك من اخذ الاجابه ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "قم بملئ الحقل اولا حتي نتمكن من اخذ الإجابة ", Toast.LENGTH_SHORT).show();
             }
             selectAnswer = answerThree.getText().toString();
             buttonC.setBackground(trueClick);
@@ -137,7 +138,7 @@ public class AddQ_frag extends Fragment implements View.OnClickListener , AddQue
 
             if (answerFour.getText().toString().isEmpty()){
 
-                Toast.makeText(getActivity(), "قم بملي الحقل اولا حتي نتمك من اخذ الاجابه ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "قم بملئ الحقل اولا حتي نتمكن من اخذ الإجابة ", Toast.LENGTH_SHORT).show();
             }
             selectAnswer = answerFour.getText().toString();
             buttonD.setBackground(trueClick);
@@ -196,14 +197,17 @@ public class AddQ_frag extends Fragment implements View.OnClickListener , AddQue
         answerTwo.setText("");
         answerFour.setText("");
         answerThree.setText("");
-        Toast.makeText(getActivity(), "لقد تم اضافه السؤال بنجاح", Toast.LENGTH_LONG).show();
+
+        AlertDialog alertDialog = new AlertDialog(getActivity(),"لقد تم اضافه السؤال بنجاح");
+        alertDialog.show();
 
     }
 
     @Override
     public void problem(String E) {
         animatedDialog.Close_Dialog();
-        Toast.makeText(getActivity(), "لقد حدثت مشكله اثناء الاتصال ", Toast.LENGTH_LONG).show();
 
+        AlertDialog alertDialog = new AlertDialog(getActivity(),"لقد حدثت مشكله اثناء الاتصال");
+        alertDialog.show();
     }
 }
