@@ -48,14 +48,18 @@ public class StudentManagement extends Fragment implements StudentManagementCont
         searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if (adapter!=null){
+                    adapter.getFilter().filter(query);
+                }
 
-                adapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                if (adapter!=null){
+                    adapter.getFilter().filter(newText);
+                }
                 return false;
             }
         });

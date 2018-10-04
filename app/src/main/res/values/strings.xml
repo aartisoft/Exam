@@ -99,4 +99,11 @@
     <string name="DegreeDistribution">توزيع الدرجات</string>
 
 
+    <string name="writeQuestionempty"> يرجي ادخال السؤال هنا </string>
+    <string name="answerOne"> يرجي ادخال الاجابه الاولي هنا </string>
+    <string name="answerTwo"> يرجي ادخال الاجابه الثانيه هنا </string>
+    <string name="answerThre"> يرجي ادخال الاجابه الثالثه هنا </string>
+    <string name="answerFour"> يرجي ادخال الاجابه الرابعه هنا </string>
+
+
 </resources>

@@ -3,7 +3,7 @@ package com.essam.microprocess.dressamdaher.Enums;
 public enum DataBase_Refrences {
 
 
-    USERREF("Users"),BLOCKUSER("Blocked_User");
+    USERREF("Users"),BLOCKUSER("Blocked_User"),BANKQUESTIONS("Banck_Questions");
 
     private String val;
 

@@ -65,7 +65,7 @@
 
 
                     <EditText
-
+                        android:id="@+id/writeQuestion"
                         android:layout_marginBottom="10sp"
                         android:paddingStart="10sp"
                         android:paddingEnd="10dp"
@@ -178,6 +178,7 @@
 
 
                         <EditText
+                            android:id="@+id/answerOne"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
                             android:hint="الإجابة الاولي"
@@ -223,6 +224,7 @@
 
 
                         <EditText
+                            android:id="@+id/answerTwo"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
                             android:hint="الإجابة الثانية"
@@ -265,6 +267,7 @@
 
 
                         <EditText
+                            android:id="@+id/answerThree"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
                             android:hint="الإجابة الثالثة"
@@ -310,6 +313,7 @@
 
 
                         <EditText
+                            android:id="@+id/answerFour"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
                             android:hint="الإجابة الرابعة"
@@ -378,6 +382,7 @@
                         android:textSize="16sp"
                         android:textColor="@color/black1"
                         android:layout_height="wrap_content" />
+
 
 
 
@@ -453,6 +458,7 @@
 
 
                 <Button
+                    android:id="@+id/savingData"
                     android:text="حفظ"
                     android:padding="15sp"
                     android:elevation="8dp"
