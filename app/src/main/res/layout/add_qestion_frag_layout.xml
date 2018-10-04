@@ -167,7 +167,7 @@
 
                         <TextView
                             android:layout_width="40dp"
-                            android:text="أ-"
+                            android:text="أ -"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -179,16 +179,17 @@
 
                         <EditText
                             android:layout_marginStart="10sp"
-                            android:background="@drawable/answercorner"
+                            android:background="@drawable/radiobutton_check_false"
                             android:hint="الإجابة الاولي"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
                             android:paddingStart="20dp"
                             android:paddingEnd="20dp"
-                            android:paddingTop="2dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             android:layout_marginBottom="5dp"
-                            android:paddingBottom="3dp"
+
                             android:layout_height="wrap_content"/>
 
 
@@ -211,7 +212,7 @@
 
                         <TextView
                             android:layout_width="40dp"
-                            android:text="ب-"
+                            android:text="ب -"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -223,16 +224,16 @@
 
                         <EditText
                             android:layout_marginStart="10sp"
-                            android:background="@drawable/answercorner"
+                            android:background="@drawable/radiobutton_check_false"
                             android:hint="الإجابة الثانية"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
                             android:paddingStart="20dp"
                             android:paddingEnd="20dp"
-                            android:paddingTop="2dp"
+                            android:paddingTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:paddingBottom="3dp"
+                            android:paddingBottom="10dp"
                             android:layout_height="wrap_content"/>
 
 
@@ -253,7 +254,7 @@
 
                           <TextView
                               android:layout_width="40dp"
-                            android:text="ج-"
+                            android:text="ج -"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -265,16 +266,16 @@
 
                         <EditText
                             android:layout_marginStart="10sp"
-                            android:background="@drawable/answercorner"
+                            android:background="@drawable/radiobutton_check_false"
                             android:hint="الإجابة الثالثة"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
                             android:paddingStart="20dp"
                             android:paddingEnd="20dp"
-                            android:paddingTop="2dp"
+                            android:paddingTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:paddingBottom="3dp"
+                            android:paddingBottom="10dp"
                             android:layout_height="wrap_content"/>
 
 
@@ -298,7 +299,7 @@
 
                         <TextView
                             android:layout_width="40dp"
-                            android:text="د-"
+                            android:text="د -"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -310,16 +311,16 @@
 
                         <EditText
                             android:layout_marginStart="10sp"
-                            android:background="@drawable/answercorner"
+                            android:background="@drawable/radiobutton_check_false"
                             android:hint="الإجابة الرابعة"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
                             android:paddingStart="20dp"
                             android:paddingEnd="20dp"
-                            android:paddingTop="2dp"
+                            android:paddingTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:paddingBottom="3dp"
+                            android:paddingBottom="10dp"
                             android:layout_height="wrap_content"/>
 
 
