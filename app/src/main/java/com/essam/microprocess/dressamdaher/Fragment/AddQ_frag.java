@@ -196,7 +196,7 @@ public class AddQ_frag extends Fragment implements View.OnClickListener , AddQue
         answerTwo.setText("");
         answerFour.setText("");
         answerThree.setText("");
-        Toast.makeText(getActivity(), "لقد تم اضافه السوال", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "لقد تم اضافه السؤال بنجاح", Toast.LENGTH_LONG).show();
 
     }
 
