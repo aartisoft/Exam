@@ -22,6 +22,7 @@ import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Fragment.AddQ_frag;
 import com.essam.microprocess.dressamdaher.Fragment.Question_Bank_Frag;
 import com.essam.microprocess.dressamdaher.Fragment.StudentManagement;
+import com.essam.microprocess.dressamdaher.Fragment.addExam;
 import com.essam.microprocess.dressamdaher.MainPresnter.ControlpanelPresnter;
 import com.essam.microprocess.dressamdaher.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -216,6 +217,18 @@ public class ControlPanel extends AppCompatActivity
                         .commit();
 
 
+                break;
+
+            case R.id.addExam :
+
+                Title.setText(R.string.addExam);
+                getSupportFragmentManager().popBackStack();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                        .replace(R.id.Exam_Frame,new addExam())
+                        .addToBackStack(null)
+                        .commit();
                 break;
         }
 //        getSupportFragmentManager().popBackStack();   //finish
