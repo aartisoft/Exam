@@ -177,7 +177,7 @@
                         <EditText
                             android:layout_marginStart="10dp"
                             android:background="@drawable/answercorner"
-                            android:hint="الاجابة الاولي"
+                            android:hint="الإجابة الاولي"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
@@ -221,7 +221,7 @@
                         <EditText
                             android:layout_marginStart="10sp"
                             android:background="@drawable/answercorner"
-                            android:hint="الاجابة الثانية"
+                            android:hint="الإجابة الثانية"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
@@ -263,7 +263,7 @@
                         <EditText
                             android:layout_marginStart="10sp"
                             android:background="@drawable/answercorner"
-                            android:hint="الجابة الثالثة"
+                            android:hint="الإجابة الثالثة"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
@@ -308,7 +308,7 @@
                         <EditText
                             android:layout_marginStart="10sp"
                             android:background="@drawable/answercorner"
-                            android:hint="الاجابة الرابعة"
+                            android:hint="الإجابة الرابعة"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
@@ -451,7 +451,7 @@
                 <Button
                     android:text="حفظ"
                     android:padding="15sp"
-                    android:elevation="15dp"
+                    android:elevation="8dp"
                     android:textColor="@android:color/white"
                     android:textSize="20sp"
                     android:background="@drawable/button_background3"
