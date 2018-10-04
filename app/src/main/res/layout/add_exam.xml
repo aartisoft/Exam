@@ -12,66 +12,7 @@
     android:orientation="vertical"
     >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="end"
-        android:layoutDirection="rtl"
-        android:padding="10dp"
-        android:background="@drawable/styling_of_view"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="2dp"
-        >
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_choosen_questions"
-            />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/choosenQuestion"
-        android:textColor="@android:color/black"
-        android:gravity="center_vertical"
-        android:textSize="18sp"
-        android:fontFamily="@font/cairo"
-        android:layout_marginStart="5dp"
-        />
-    </LinearLayout>
 
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@drawable/recycler_background"
-        android:layout_margin="10dp"
-        android:elevation="8dp"
-        >
-
-    </android.support.v7.widget.RecyclerView>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="15dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/question"
-            android:fontFamily="@font/cairo"
-            />
-        <TextView
-            android:id="@+id/questionssize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:fontFamily="@font/cairo"
-            android:layout_marginStart="2dp"
-            />
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -136,6 +77,7 @@
                 android:textColor="@android:color/black"
                 android:textAlignment="center"
                 android:inputType="number"
+                android:hint="00"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -157,6 +99,7 @@
                 android:textColor="@android:color/black"
                 android:textAlignment="center"
                 android:inputType="number"
+                android:hint="00"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -177,6 +120,7 @@
                 android:textColor="@android:color/black"
                 android:textAlignment="center"
                 android:inputType="number"
+                android:hint="00"
                 />
 
         </LinearLayout>
@@ -246,6 +190,7 @@
                 android:textColor="@android:color/black"
                 android:textAlignment="center"
                 android:inputType="number"
+                android:hint="0"
                 />
 
             <TextView
@@ -284,6 +229,7 @@
                 android:textColor="@android:color/black"
                 android:textAlignment="center"
                 android:inputType="number"
+                android:hint="0"
                 />
 
         </LinearLayout>
@@ -322,7 +268,71 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:layoutDirection="rtl"
+        android:padding="10dp"
+        android:background="@drawable/styling_of_view"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_choosen_questions"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choosenQuestion"
+            android:textColor="@android:color/black"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:fontFamily="@font/cairo"
+            android:layout_marginStart="5dp"
+            />
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/chosen_Qestions_Rec"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/recycler_background"
+        android:layout_margin="10dp"
+        android:elevation="8dp"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="15dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo"
+            android:text="@string/question"
+            android:textStyle="italic" />
+        <TextView
+            android:id="@+id/questionssize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:fontFamily="@font/cairo"
+            android:layout_marginStart="2dp"
+            />
+
+    </LinearLayout>
+
     <Button
+        android:id="@+id/Btn_addExam"
         android:text="@string/addExam"
         android:padding="15sp"
         android:elevation="8dp"
