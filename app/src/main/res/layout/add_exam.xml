@@ -1,0 +1,153 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:background="@color/color3"
+    tools:context="com.essam.microprocess.dressamdaher.Fragment.addExam">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:layoutDirection="rtl"
+        android:padding="10dp"
+        android:background="@drawable/styling_of_view"
+        android:layout_marginStart="5dp"
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_choosen_questions"
+            />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choosenQuestion"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:fontFamily="@font/cairo"
+        android:layout_marginStart="5dp"
+        />
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/recycler_background"
+        android:layout_margin="10dp"
+        android:elevation="8dp"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="15dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/question"
+            android:fontFamily="@font/cairo"
+            />
+        <TextView
+            android:id="@+id/questionssize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:fontFamily="@font/cairo"
+            android:layout_marginStart="2dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:layoutDirection="rtl"
+        android:padding="10dp"
+        android:background="@drawable/styling_of_view"
+        android:layout_marginStart="5dp"
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_clock"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/examTime"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:fontFamily="@font/cairo"
+            android:layout_marginStart="5dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/styling_of_view"
+        android:orientation="vertical"
+        android:elevation="8dp"
+        android:layout_margin="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/s_m_h"
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:fontFamily="@font/cairo"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            >
+            <EditText
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/recycler_background"
+                android:layout_margin="5dp"
+                />
+            <EditText
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/recycler_background"
+                android:layout_margin="5dp"
+                />
+            <EditText
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/recycler_background"
+                android:layout_margin="5dp"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
+
+
+
+</android.support.v4.widget.NestedScrollView>
+
+

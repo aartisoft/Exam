@@ -61,7 +61,7 @@
 
     </string-array>
 
-//    menu  //
+    // menu //
 
     <string name="addExam">إضافه إختبار</string>
     <string name="mangeStudent">إدارة الطلاب</string>
@@ -83,7 +83,7 @@
     <string name="no">لا</string>
     <string name="title">تحذير</string>
     <string name="message">هل حقا تريد تسجيل الخروج ؟ </string>
-    <string name="Ok" > حسناً</string>
+    <string name="Ok"> حسناً</string>
     <string name="ask_banned">هل انت متأكد من حظر هذا الطالب ؟ </string>
     <string name="successful_banned">تم الحظر بنجاح </string>
     <string name="WrongTitle">حدث خطأ</string>
@@ -91,7 +91,11 @@
     <string name="removeBan">فك الحظر</string>
     <string name="RemoveAsk">هل حقا تريد فك حظر هذا الطالب ؟ </string>
     <string name="RemoveDone">تم فك حظر الطالب بنجاح</string>
-    
-    
+
+   <string name="choosenQuestion">الأسئلة المختارة</string>
+    <string name="question">اسئلة</string>
+    <string name="examTime">وقت الإختبار</string>
+    <string name="s_m_h">ثانية : دقيقة : ساعة</string>
+
 
 </resources>
