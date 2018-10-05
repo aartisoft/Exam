@@ -7,12 +7,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Adapter.QuestionBankAdapter;
+import com.essam.microprocess.dressamdaher.Adapter.RecyclerItemTouchHelper;
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
@@ -22,17 +25,22 @@ import com.essam.microprocess.dressamdaher.R;
 
 import java.util.List;
 
+import static android.view.View.X;
+
 /**
  * Created by microprocess on 2018-10-03.
  */
 
 public class Question_Bank_Frag extends Fragment implements View.OnClickListener
-                                                            , QuestionsBankContract.view {
+                                                            , QuestionsBankContract.view
+                                                            ,RecyclerItemTouchHelper.RecyclerItemTouchHelperListener
+        {
 
     private FloatingActionButton show_addQ_frag;
     private RecyclerView recyclerView;
     QuestionsBankContract.presenter presenter;
     AnimatedDialog dialog;
+            TextView view;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +84,14 @@ public class Question_Bank_Frag extends Fragment implements View.OnClickListener
 
     @Override
     public void RecyclerConfig(List<Questions_Form> Result) {
+
+        // adding item touch helper
+        // only ItemTouchHelper.LEFT added to detect Right to Left swipe
+        // if you want both Right -> Left and Left -> Right
+        // add pass ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT as param
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         QuestionBankAdapter adapter = new QuestionBankAdapter(Result);
         recyclerView.setAdapter(adapter);
@@ -90,4 +106,23 @@ public class Question_Bank_Frag extends Fragment implements View.OnClickListener
         dialog.Close_Dialog();
         Toast.makeText(getActivity(), problem + "", Toast.LENGTH_LONG).show();
     }
-}
+
+
+
+            @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+
+
+        view = viewHolder.itemView.findViewById(R.id.tx);
+        presenter.addQuestionToAddTestRecycler(QuestionBankAdapter.qestions.get(position).getQuestionID());
+
+
+    }
+
+            @Override
+            public void sentSuccessfully(String Result) {
+
+                view.setText("تم الإرسال");
+
+            }
+  }

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
@@ -19,8 +20,10 @@ import java.util.List;
  */
 
 public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapter.ViewHolder> {
-    List<Questions_Form> qestions = new ArrayList<>();
+    public static List<Questions_Form> qestions = new ArrayList<>();
+    
     public QuestionBankAdapter(List <Questions_Form> qestions){
+
         this.qestions = qestions;
 
     }
@@ -40,6 +43,11 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
         holder.Cardview.setScaleX(.9f);
         holder.Cardview.setScaleY(.9f);
         holder.Cardview.animate().scaleX(1f).scaleY(1f).setDuration(500);
+
+        //animation 2
+        holder.background.setScaleX(.9f);
+        holder.background.setScaleY(.9f);
+        holder.background.animate().scaleX(1f).scaleY(1f).setDuration(500);
     }
 
     @Override
@@ -47,14 +55,20 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
         return qestions.size();
     }
 
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView Question ;
         CardView Cardview;
+        LinearLayout background;
+        TextView tx;
 
         public ViewHolder(View itemView) {
             super(itemView);
             Question = itemView.findViewById(R.id.Question);
             Cardview = itemView.findViewById(R.id.Cardview);
+            background = itemView.findViewById(R.id.Cardview2);
+            tx = itemView.findViewById(R.id.tx);
         }
     }
 }

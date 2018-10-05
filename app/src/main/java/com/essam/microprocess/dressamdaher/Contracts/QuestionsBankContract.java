@@ -12,16 +12,20 @@ import java.util.List;
 public interface QuestionsBankContract {
     interface model {
         void getQuestionData();
+        void addQuestionToAddTestRecycler(String questionID);
+
     }
     interface presenter{
 
         void callQuestionData();
         void SendListToView(List<Questions_Form> Result );
         void problem(String problem);
-
+        void sentSuccessfully(String Result);
+        void addQuestionToAddTestRecycler(String questionID);
     }
     interface view{
         void RecyclerConfig(List<Questions_Form> Result );
         void problem(String problem);
+        void sentSuccessfully(String Result);
     }
 }

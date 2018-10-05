@@ -6,9 +6,6 @@ import com.essam.microprocess.dressamdaher.MainModle.Question_BankModel;
 
 import java.util.List;
 
-/**
- * Created by microprocess on 2018-10-05.
- */
 
 public class Question_BankPresenter implements QuestionsBankContract.presenter {
     QuestionsBankContract.view view;
@@ -21,6 +18,7 @@ public class Question_BankPresenter implements QuestionsBankContract.presenter {
 
     @Override
     public void callQuestionData() {
+
         model.getQuestionData();
     }
 
@@ -32,5 +30,19 @@ public class Question_BankPresenter implements QuestionsBankContract.presenter {
     @Override
     public void problem(String problem) {
         view.problem(problem);
+    }
+
+
+
+    @Override
+    public void addQuestionToAddTestRecycler(String questionID) {
+
+        model.addQuestionToAddTestRecycler(questionID);
+
+    }
+
+    @Override
+    public void sentSuccessfully(String Result) {
+            view.sentSuccessfully(Result);
     }
 }

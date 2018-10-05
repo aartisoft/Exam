@@ -6,6 +6,8 @@ import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,5 +60,28 @@ public class Question_BankModel implements QuestionsBankContract.model {
 
             }
         });
+    }
+
+    @Override
+    public void addQuestionToAddTestRecycler(String questionID) {
+
+        DatabaseReference myref = FirebaseDatabase.getInstance().getReference()
+                .child(DataBase_Refrences.CHOSENQUESTIONID.getRef()).child(questionID);
+
+        myref.setValue("yes").addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+                presenter.sentSuccessfully("Successful");
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                presenter.problem(e.toString());
+            }
+        });
+
     }
 }
