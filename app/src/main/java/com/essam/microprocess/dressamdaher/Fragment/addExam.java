@@ -4,9 +4,12 @@ package com.essam.microprocess.dressamdaher.Fragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +19,22 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.essam.microprocess.dressamdaher.Adapter.QuestionBankAdapter;
+import com.essam.microprocess.dressamdaher.Adapter.RecyclerItemTouchHelper;
+import com.essam.microprocess.dressamdaher.Adapter.addExamTouchHelper;
+import com.essam.microprocess.dressamdaher.Adapter.addExam_Rec_Adapter;
+import com.essam.microprocess.dressamdaher.Contracts.addExamContract;
+import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
+import com.essam.microprocess.dressamdaher.MainPresnter.addExamPresenter;
 import com.essam.microprocess.dressamdaher.R;
 
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class addExam extends Fragment {
+public class addExam extends Fragment implements addExamContract.view  ,addExamTouchHelper.RecyclerItemTouchHelperListener{
 
     @BindView(R.id.chosen_Qestions_Rec)
     RecyclerView recyclerView ;
@@ -54,6 +65,7 @@ public class addExam extends Fragment {
 
     String final_degree;
     String hour , minute , second ;
+    addExamContract.presenter presenter ;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -147,6 +159,10 @@ public class addExam extends Fragment {
             }
         });
 
+        //config your recycler view  .
+        presenter = new addExamPresenter(this);
+        presenter.CallgetQestionsToRecycleView();
+
         return v;
     }
 
@@ -171,5 +187,27 @@ public class addExam extends Fragment {
     }
 
 
+    @Override
+    public void ConfigRecyclerview(List<Questions_Form> Questions) {
 
+
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new addExamTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        addExam_Rec_Adapter adapter = new addExam_Rec_Adapter(Questions);
+        recyclerView.setAdapter(adapter);
+        Questions_size.setText(Questions.size()+"");
+
+    }
+
+    @Override
+    public void Problem(String Result) {
+
+        Toast.makeText(getActivity(), Result + "", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+
+    }
 }
