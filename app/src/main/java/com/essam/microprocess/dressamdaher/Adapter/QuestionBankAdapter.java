@@ -117,7 +117,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
                     constraint = constraint.toString().toLowerCase();
                     for (int i = 0; i < listnew.size(); i++) {
                         String data = listnew.get(i).getQuestion();
-                        if (data.toLowerCase().contains(constraint.toString())) {
+                        if (data.toLowerCase().startsWith(constraint.toString())) {
                             FilteredArrList.add(listnew.get(i));
                         }
                     }
@@ -133,7 +133,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
             protected void publishResults(CharSequence constraint, FilterResults results) {
 
                 qestions = (ArrayList<Questions_Form>) results.values;
-                Question.setTextColor(context.getResources().getColor(R.color.color2));
+//                Question.setTextColor(context.getResources().getColor(R.color.color2));
                 // has the filtered values
                 notifyDataSetChanged();
 

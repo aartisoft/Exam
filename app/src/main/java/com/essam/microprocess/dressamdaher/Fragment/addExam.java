@@ -74,7 +74,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     String final_degree;
     String hour , minute , second ;
     addExamContract.presenter presenter ;
-
+    addExam_Rec_Adapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -254,9 +254,9 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new addExamTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        addExam_Rec_Adapter adapter = new addExam_Rec_Adapter(Questions,this);
+        adapter = new addExam_Rec_Adapter(Questions,this);
         recyclerView.setAdapter(adapter);
-        Questions_size.setText(Questions.size()+"");
+        Update_Questions_size(Questions.size());
 
     }
 
@@ -277,6 +277,8 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+
+        adapter.removeItem(viewHolder.getAdapterPosition());
 
     }
 
