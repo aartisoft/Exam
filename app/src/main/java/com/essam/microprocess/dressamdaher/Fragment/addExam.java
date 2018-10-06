@@ -76,7 +76,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
 
     String final_degree;
-    String hour , minute , second ;
+    int hour , minute , second ;
     addExamContract.presenter presenter ;
     addExam_Rec_Adapter adapter;
 
@@ -195,33 +195,12 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
             public void onClick(View view) {
 
 
-                if (!et_hour.getText().toString().isEmpty() && !et_minute.getText().toString().isEmpty()){
 
-
-                    int hourinedit = Integer.parseInt(et_hour.getText().toString());
-                    int miniteinedit = Integer.parseInt(et_minute.getText().toString());
-
-
-                    if (hourinedit==0 && miniteinedit==0){
-
-                        Toast.makeText(getActivity(), "ادخل ارقام صحيحه", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-
-
-                        Toast.makeText(getActivity(), "كله تمااااااااااااااااااااام", Toast.LENGTH_SHORT).show();
-
-                    }
-
-
-
-
-
-
+                Check_Hours_And_Minuts();
+                if(hour > 0 || minute > 0  ) {
+                    //Check is tmam .
+                    Toast.makeText(getActivity(), "H = " + hour + "  M = " + minute, Toast.LENGTH_SHORT).show();
                 }
-
-
-
 
 
 
@@ -239,28 +218,6 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         return v;
     }
 
-//    void ShowTimePicker(){
-//
-//
-//        Calendar mcurrentTime = Calendar.getInstance();
-//        int hours = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-//        int minute = mcurrentTime.get(Calendar.MINUTE);
-//        TimePickerDialog timePickerDialog;
-//
-//        timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
-//            @Override
-//            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-//
-//                    et_hour.setText(String.valueOf(i));
-//                    et_minute.setText(String.valueOf(i1));
-//
-//            }
-//        },hours,minute,true);
-//
-//        timePickerDialog.setTitle("Select Time");
-//        timePickerDialog.show();
-//
-//    }
 
 
     @Override
@@ -347,9 +304,84 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
             et_minute.setText(i1 + "");
 
         }
+
+
     }
 
+    void Check_Hours_And_Minuts(){
 
+        hour = 0 ;
+        minute = 0 ;
+        // لو الاتنين مليانين
+        if (!et_hour.getText().toString().isEmpty() && !et_minute.getText().toString().isEmpty()){
+
+
+            int hours = Integer.parseInt(et_hour.getText().toString());
+            int minutes = Integer.parseInt(et_minute.getText().toString());
+
+            // لو االدقائق والساعات بيساوي صفر
+            if (hours <= 0 && minutes <= 0){
+
+
+                Toast.makeText(getActivity(), "يجب ملئ الساعات او الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                hour = Integer.parseInt(et_hour.getText().toString());
+                minute = Integer.parseInt(et_minute.getText().toString());
+
+
+
+
+            }
+
+
+
+        }
+        // لو الساعات فاضي والدقايق فاضي
+        else if (et_hour.getText().toString().isEmpty() && et_minute.getText().toString().isEmpty()){
+
+
+            Toast.makeText(getActivity(), "يجب ملئ الساعات او الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
+
+
+        }
+        // لو الساعات فاضي والدقائق مليان
+        else if((et_hour.getText().toString().isEmpty() && !et_minute.getText().toString().isEmpty()) ){
+
+            int minutes = Integer.parseInt(et_minute.getText().toString());
+
+            if(minutes <= 0) {
+
+                Toast.makeText(getActivity(), "يجب ملئ الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
+            }
+            else {
+
+                hour = 0;
+                minute = Integer.parseInt(et_minute.getText().toString());
+
+            }
+
+        }
+
+        // لو الساعات مليان والدقائق فاضي
+        else if (!et_hour.getText().toString().isEmpty() && et_minute.getText().toString().isEmpty()){
+
+            int hours = Integer.parseInt(et_hour.getText().toString());
+
+            if(hours <= 0) {
+
+                Toast.makeText(getActivity(), "يجب ملئ الساعات بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
+            }
+            else {
+
+                minute = 0;
+                hour = Integer.parseInt(et_hour.getText().toString());
+
+
+            }
+
+        }
+    }
 
 
 }
