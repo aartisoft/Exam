@@ -68,8 +68,12 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     @BindView(R.id.Final_Degree)
     TextView txFinal_Degree;
 
+    @BindView(R.id.deleteAll)
+    Button Btn_DeleteList;
+
     @BindView(R.id.Btn_addExam)
     Button Btn_addExam;
+
 
     String final_degree;
     String hour , minute , second ;
@@ -174,6 +178,18 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         });
 
 
+
+        Btn_DeleteList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                presenter.ClearList();
+
+
+            }
+        });
+
+
         Btn_addExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -273,6 +289,12 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     }
 
+    @Override
+    public void refreshAdapter() {
+
+        adapter.notifyDataSetChanged();
+
+    }
 
 
     @Override

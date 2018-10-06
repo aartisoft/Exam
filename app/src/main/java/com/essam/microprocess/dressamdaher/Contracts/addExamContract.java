@@ -10,19 +10,29 @@ import java.util.List;
  */
 
 public interface addExamContract  {
+
     interface  model {
 
         void getQestionsToRecycleView();
+        void ClearList();
+
 
     }
+
     interface presenter {
+
         void Problem(String Result);
         void ConfigRecyclerview(List<Questions_Form> Questions);
         void CallgetQestionsToRecycleView();
+        void ClearList();
+        void passQestionSizeToView(int i);
+        void refreshAdapter();
     }
+
     interface view{
-    void ConfigRecyclerview(List<Questions_Form> Questions);
-    void Problem(String Result);
-     void   Update_Questions_size(int lengh);
+        void ConfigRecyclerview(List<Questions_Form> Questions);
+        void Problem(String Result);
+        void   Update_Questions_size(int lengh);
+        void refreshAdapter();
     }
 }
