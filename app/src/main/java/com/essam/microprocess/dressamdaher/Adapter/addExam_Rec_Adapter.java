@@ -9,8 +9,15 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.essam.microprocess.dressamdaher.Contracts.addExamContract;
+import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
+import com.essam.microprocess.dressamdaher.Fragment.addExam;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +28,11 @@ import java.util.List;
 
 public class addExam_Rec_Adapter extends RecyclerView.Adapter<addExam_Rec_Adapter.ViewHolder> {
     List<Questions_Form>  questions ;
-    public addExam_Rec_Adapter(List<Questions_Form> questions) {
-        this.questions = new ArrayList<>();
+    addExamContract.view view;
+    public addExam_Rec_Adapter(List<Questions_Form> questions , addExamContract.view view) {
+
         this.questions = questions;
+        this.view = view ;
     }
 
     @NonNull
@@ -53,6 +62,29 @@ public class addExam_Rec_Adapter extends RecyclerView.Adapter<addExam_Rec_Adapte
         return questions.size();
     }
 
+    public void removeItem(final int position) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.CHOSENQUESTIONID.getRef())
+                .child(questions.get(position).getQuestionID());
+
+        reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                questions.remove(position);
+                // notify the item removed by position
+                // to perform recycler view delete animations
+                // NOTE: don't call notifyDataSetChanged()
+                notifyItemRemoved(position);
+
+                //update Question Size in fragement .
+                view.Update_Questions_size(getItemCount());
+
+            }
+        });
+
+
+    }
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView Cardview ;
         TextView txQuestion;
@@ -64,4 +96,10 @@ public class addExam_Rec_Adapter extends RecyclerView.Adapter<addExam_Rec_Adapte
             background = itemView.findViewById(R.id.background);
         }
     }
+
+
+
+
+
+
 }

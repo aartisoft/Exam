@@ -34,13 +34,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class addExam extends Fragment implements addExamContract.view  ,addExamTouchHelper.RecyclerItemTouchHelperListener{
+public class addExam extends Fragment implements addExamContract.view
+        ,addExamTouchHelper.RecyclerItemTouchHelperListener
+
+
+{
 
     @BindView(R.id.chosen_Qestions_Rec)
     RecyclerView recyclerView ;
 
     @BindView(R.id.questionssize)
-    TextView Questions_size;
+   public TextView Questions_size;
 
     @BindView(R.id.et_second)
     EditText et_second;
@@ -66,6 +70,7 @@ public class addExam extends Fragment implements addExamContract.view  ,addExamT
     String final_degree;
     String hour , minute , second ;
     addExamContract.presenter presenter ;
+    addExam_Rec_Adapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -194,9 +199,12 @@ public class addExam extends Fragment implements addExamContract.view  ,addExamT
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new addExamTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        addExam_Rec_Adapter adapter = new addExam_Rec_Adapter(Questions);
+        recyclerView.setNestedScrollingEnabled(true);
+        adapter = new addExam_Rec_Adapter(Questions,this);
         recyclerView.setAdapter(adapter);
-        Questions_size.setText(Questions.size()+"");
+
+        // update txt Question Size .
+        Update_Questions_size(Questions.size());
 
     }
 
@@ -206,8 +214,23 @@ public class addExam extends Fragment implements addExamContract.view  ,addExamT
         Toast.makeText(getActivity(), Result + "", Toast.LENGTH_LONG).show();
     }
 
+
+
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
 
+
+
+        // remove the item from recycler view
+        adapter.removeItem(viewHolder.getAdapterPosition());
+
+
     }
+
+
+    @Override
+    public void Update_Questions_size(int i) {
+        Questions_size.setText(i+"");
+    }
+
 }

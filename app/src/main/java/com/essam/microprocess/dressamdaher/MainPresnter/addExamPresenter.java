@@ -34,4 +34,7 @@ public class addExamPresenter implements addExamContract.presenter {
     public void CallgetQestionsToRecycleView() {
         model.getQestionsToRecycleView();
     }
+    public void passQestionSizeToView(int i){
+        view.Update_Questions_size(i);
+    }
 }
