@@ -7,8 +7,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -31,15 +35,18 @@ import static android.view.View.X;
  * Created by microprocess on 2018-10-03.
  */
 
-public class Question_Bank_Frag extends Fragment implements View.OnClickListener
-                                                            , QuestionsBankContract.view
-                                                            ,RecyclerItemTouchHelper.RecyclerItemTouchHelperListener
+public class Question_Bank_Frag extends Fragment
+                                implements View.OnClickListener
+                                         , QuestionsBankContract.view
+                                         ,RecyclerItemTouchHelper.RecyclerItemTouchHelperListener
         {
 
     private FloatingActionButton show_addQ_frag;
     private RecyclerView recyclerView;
+    SearchView searchaboutquestion;
     QuestionsBankContract.presenter presenter;
     AnimatedDialog dialog;
+            QuestionBankAdapter adapter;
             TextView view;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,13 +61,35 @@ public class Question_Bank_Frag extends Fragment implements View.OnClickListener
         show_addQ_frag = v.findViewById(R.id.show_addQ_frag);
         recyclerView   = v.findViewById(R.id.rec);
         presenter      = new Question_BankPresenter(this);
+        setHasOptionsMenu(true);
         show_addQ_frag.setOnClickListener(this);
-
+        searchaboutquestion = v.findViewById(R.id.searchaboutquestion);
         //Dialog
         dialog = new AnimatedDialog(getActivity());
         dialog.ShowDialog();
         //call data from firebase .
         presenter.callQuestionData();
+
+        searchaboutquestion.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (adapter!=null){
+
+                    adapter.getFilter().filter(query);
+                }
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (adapter!=null){
+                    adapter.getFilter().filter(newText);
+                }
+                return false;
+            }
+        });
+
 
         return  v;
     }
@@ -82,8 +111,39 @@ public class Question_Bank_Frag extends Fragment implements View.OnClickListener
 
     }
 
-    @Override
-    public void RecyclerConfig(List<Questions_Form> Result) {
+
+            @Override
+            public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+                super.onCreateOptionsMenu(menu, inflater);
+                inflater.inflate(R.menu.search, menu);
+            }
+            @Override
+            public boolean onOptionsItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+
+                    case R.id.Search:
+
+                        searchaboutquestion.setIconified(false); //Expand the search view
+
+                        if (searchaboutquestion.isShown()){
+                            searchaboutquestion.setVisibility(View.GONE);
+                        }else {
+                            searchaboutquestion.setVisibility(View.VISIBLE);
+                        }
+
+                        // Do Fragment menu item stuff here
+                        return true;
+
+                    default:
+                        break;
+                }
+
+                return false;
+            }
+
+            @Override
+    public void RecyclerConfig(final List<Questions_Form> Result) {
 
         // adding item touch helper
         // only ItemTouchHelper.LEFT added to detect Right to Left swipe
@@ -93,10 +153,11 @@ public class Question_Bank_Frag extends Fragment implements View.OnClickListener
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        QuestionBankAdapter adapter = new QuestionBankAdapter(Result);
+        adapter = new QuestionBankAdapter(Result,getActivity());
         recyclerView.setAdapter(adapter);
 
         //close
+
         dialog.Close_Dialog();
     }
 
@@ -113,7 +174,8 @@ public class Question_Bank_Frag extends Fragment implements View.OnClickListener
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
 
 
-        view = viewHolder.itemView.findViewById(R.id.tx);
+        view    = viewHolder.itemView.findViewById(R.id.tx);
+
         presenter.addQuestionToAddTestRecycler(QuestionBankAdapter.qestions.get(position).getQuestionID());
 
 

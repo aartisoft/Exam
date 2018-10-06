@@ -19,11 +19,10 @@ public interface addExamContract  {
         void Problem(String Result);
         void ConfigRecyclerview(List<Questions_Form> Questions);
         void CallgetQestionsToRecycleView();
-        void  passQestionSizeToView(int i);
     }
     interface view{
     void ConfigRecyclerview(List<Questions_Form> Questions);
     void Problem(String Result);
-    void Update_Questions_size(int i );
+     void   Update_Questions_size(int lengh);
     }
 }

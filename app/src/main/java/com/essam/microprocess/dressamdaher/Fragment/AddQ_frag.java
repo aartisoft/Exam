@@ -52,7 +52,8 @@ import static com.android.volley.VolleyLog.TAG;
 /**
  * Created by microprocess on 2018-10-03.
  */
-public class AddQ_frag extends Fragment implements View.OnClickListener , AddQuestionContract.AddQUI {
+public class AddQ_frag extends Fragment
+                       implements View.OnClickListener , AddQuestionContract.AddQUI {
 
 
     Button buttonA , buttonB , buttonC , buttonD , savingData;
@@ -157,7 +158,7 @@ public class AddQ_frag extends Fragment implements View.OnClickListener , AddQue
             ViewsEmpty.isEmpty(answerFour , getResources().getString(R.string.answerFour));
             if (selectAnswer.isEmpty()){
 
-                Toast.makeText(getActivity(), "يرجي ادخال الاجابه الصحيحه", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "يرجي ادخال الاجابه الصحيحه", Toast.LENGTH_LONG).show();
 
             }
 
@@ -206,7 +207,6 @@ public class AddQ_frag extends Fragment implements View.OnClickListener , AddQue
     @Override
     public void problem(String E) {
         animatedDialog.Close_Dialog();
-
         AlertDialog alertDialog = new AlertDialog(getActivity(),"لقد حدثت مشكله اثناء الاتصال");
         alertDialog.show();
     }

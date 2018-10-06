@@ -57,6 +57,24 @@ public class ControlPanel extends AppCompatActivity
     }
 
     @Override
+    public void updatefragToTime(int hour, int minite) {
+        addExam exam = new addExam();
+        Bundle b = new Bundle();
+        b.putInt("hour", hour);
+        b.putInt("min",minite);
+        exam.setArguments(b);
+        Title.setText(R.string.addExam);
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,new addExam())
+                .addToBackStack(null)
+                .commit();
+
+    }
+
+    @Override
     public void initializeViews() {
         toolbar    = findViewById(R.id.toolbar);
         open_nav   = findViewById(R.id.open_nav);

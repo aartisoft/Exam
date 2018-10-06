@@ -76,6 +76,7 @@ public class addExam_Rec_Adapter extends RecyclerView.Adapter<addExam_Rec_Adapte
                 notifyItemRemoved(position);
 
                 //update Question Size in fragement .
+
                 view.Update_Questions_size(getItemCount());
 
             }

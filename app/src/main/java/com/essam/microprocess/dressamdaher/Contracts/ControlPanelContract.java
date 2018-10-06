@@ -5,7 +5,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public interface ControlPanelContract {
 
     interface ControlUI{
-
+        void updatefragToTime(int hour , int minite);
         void initializeViews();
         void emailandpasstrueexit();
         void emailandpassnottrue(String E);
