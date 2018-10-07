@@ -12,7 +12,6 @@ public interface ControlPanelContract {
         void whenClickFAB_showFrag();
         void CheckifUserBannedResult(String Result);
         void editQuestions(String questionID , String val);
-
         void editSuccessopenBank();
 
 

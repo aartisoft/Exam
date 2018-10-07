@@ -6,8 +6,10 @@ import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +35,7 @@ public class Question_BankModel implements QuestionsBankContract.model {
 
     @Override
     public void getQuestionData() {
+
         DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child(DataBase_Refrences.BANKQUESTIONS.getRef());
 
         myref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -82,6 +85,27 @@ public class Question_BankModel implements QuestionsBankContract.model {
                 presenter.problem(e.toString());
             }
         });
+
+    }
+
+    @Override
+    public void removingQuestionFromDatabase(DatabaseReference reference, String Qid, final QuestionsBankContract.presenter presenter, final int position) {
+
+        reference.child(Qid).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+
+                    presenter.Qremoved(position);
+
+                }else {
+
+                    presenter.Q_notRemoved_checking();
+
+                }
+            }
+        });
+
 
     }
 }

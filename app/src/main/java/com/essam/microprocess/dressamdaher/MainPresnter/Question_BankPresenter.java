@@ -3,6 +3,7 @@ package com.essam.microprocess.dressamdaher.MainPresnter;
 import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.MainModle.Question_BankModel;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
@@ -12,8 +13,29 @@ public class Question_BankPresenter implements QuestionsBankContract.presenter {
     QuestionsBankContract.model model;
     public Question_BankPresenter(QuestionsBankContract.view  view){
         this.view = view ;
-
         model = new Question_BankModel(this);
+    }
+
+
+
+    @Override
+    public void Qremoved(int position) {
+
+        view.Q_Removed_InUI(position);
+
+    }
+
+    @Override
+    public void Q_notRemoved_checking() {
+        view.Q_notRemoved_InUI();
+
+    }
+
+    @Override
+    public void tellModletoDeleteQuestion(DatabaseReference reference, String Qid,int position) {
+
+        model.removingQuestionFromDatabase(reference,Qid,this, position);
+
     }
 
     @Override

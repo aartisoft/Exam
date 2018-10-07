@@ -23,9 +23,12 @@ import com.essam.microprocess.dressamdaher.Adapter.RecyclerItemTouchHelper;
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
+import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.MainPresnter.Question_BankPresenter;
 import com.essam.microprocess.dressamdaher.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -45,6 +48,8 @@ public class Question_Bank_Frag extends Fragment
     private RecyclerView recyclerView;
     SearchView searchaboutquestion;
     QuestionsBankContract.presenter presenter;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference reference;
     AnimatedDialog dialog;
             QuestionBankAdapter adapter;
             TextView view;
@@ -52,6 +57,8 @@ public class Question_Bank_Frag extends Fragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference        = firebaseDatabase.getReference(DataBase_Refrences.BANKQUESTIONS.getRef());
 
 
     }
@@ -148,10 +155,6 @@ public class Question_Bank_Frag extends Fragment
             @Override
     public void RecyclerConfig(final List<Questions_Form> Result) {
 
-        // adding item touch helper
-        // only ItemTouchHelper.LEFT added to detect Right to Left swipe
-        // if you want both Right -> Left and Left -> Right
-        // add pass ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT as param
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
@@ -203,6 +206,33 @@ public class Question_Bank_Frag extends Fragment
                 }
 
 
+            }
+
+            @Override
+            public void removingQuestion(String questionID,int position) {
+
+                 Question_BankPresenter presenter = new Question_BankPresenter(this);
+                 presenter.tellModletoDeleteQuestion(reference,questionID,position);
+
+
+
+            }
+
+            @Override
+            public void Q_Removed_InUI(int position) {
+
+                Toast.makeText(getActivity(), "السوال اتمسح", Toast.LENGTH_SHORT).show();
+                if (adapter!=null){
+
+                    adapter.remove(position);
+
+                }
+            }
+
+            @Override
+            public void Q_notRemoved_InUI() {
+
+                Toast.makeText(getActivity(), "فيه مشكله راجع تاني ", Toast.LENGTH_SHORT).show();
             }
 
         }

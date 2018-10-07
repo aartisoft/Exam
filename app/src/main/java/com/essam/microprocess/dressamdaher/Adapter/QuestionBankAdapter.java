@@ -26,9 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Created by microprocess on 2018-10-05.
- */
 
 public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapter.ViewHolder> {
     public static List<Questions_Form> qestions ;
@@ -78,9 +75,13 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
                         if (item.getItemId() == R.id.edit){
 
-
                             listinParent.updateFragbyValuesTogoEditFrag(qestions.get(position).getQuestionID());
 
+                        }
+                        if (item.getItemId()==R.id.delete){
+
+
+                            listinParent.removingQuestion(qestions.get(position).getQuestionID(),position);
 
                         }
 
@@ -97,6 +98,15 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
 
 
+
+    }
+
+
+    public void remove(int position){
+
+
+        qestions.remove(position);
+        notifyDataSetChanged();
 
     }
 
@@ -126,6 +136,12 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     }
 
 
+
+    public void removeItem(){
+
+
+
+    }
 
 
 

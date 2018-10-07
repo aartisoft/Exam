@@ -114,5 +114,6 @@
 
     <string name="edit_Q"> تعديل علي السؤال </string>
     <string name="edit">  تعديل السؤال </string>
+    <string name="delete"> مسح السؤال </string>
 
 </resources>
