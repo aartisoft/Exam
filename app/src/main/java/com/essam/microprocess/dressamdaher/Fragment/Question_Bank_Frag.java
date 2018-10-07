@@ -252,7 +252,7 @@ public class Question_Bank_Frag extends Fragment
             @Override
             public void Q_notRemoved_InUI() {
 
-                Toast.makeText(getActivity(), "فيه مشكله في الحذف ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "يوجد مشكله في الحذف ", Toast.LENGTH_SHORT).show();
             }
 
         }
