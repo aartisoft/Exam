@@ -79,6 +79,8 @@ public class addExam_Rec_Adapter extends RecyclerView.Adapter<addExam_Rec_Adapte
 
                 view.Update_Questions_size(getItemCount());
 
+
+
             }
         });
 

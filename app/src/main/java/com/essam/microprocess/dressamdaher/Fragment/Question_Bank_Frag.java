@@ -53,6 +53,8 @@ public class Question_Bank_Frag extends Fragment
     AnimatedDialog dialog;
             QuestionBankAdapter adapter;
             TextView view;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,11 +162,13 @@ public class Question_Bank_Frag extends Fragment
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new QuestionBankAdapter(Result,getActivity(),this);
+
         recyclerView.setAdapter(adapter);
 
         //close
 
         dialog.Close_Dialog();
+
     }
 
     @Override

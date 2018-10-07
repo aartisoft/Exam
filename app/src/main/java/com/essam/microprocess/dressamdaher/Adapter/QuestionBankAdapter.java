@@ -8,6 +8,7 @@ import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,7 +82,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
                         if (item.getItemId()==R.id.delete){
 
 
-                            listinParent.removingQuestion(qestions.get(position).getQuestionID(),position);
+                           listinParent.removingQuestion(qestions.get(position).getQuestionID(),position);
 
                         }
 
@@ -106,7 +107,15 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
 
         qestions.remove(position);
-        notifyDataSetChanged();
+        // notify the item removed by position
+        // to perform recycler view delete animations
+        // NOTE: don't call notifyDataSetChanged()
+        notifyItemRemoved(position);
+
+        for(int i = 0 ; i < qestions.size(); i ++ ){
+
+            Log.d("qestions",qestions.get(i).getQuestion());
+        }
 
     }
 
@@ -137,11 +146,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
 
 
-    public void removeItem(){
 
-
-
-    }
 
 
 

@@ -50,7 +50,7 @@ public class Question_BankModel implements QuestionsBankContract.model {
                 } else {
 
                     //not exist
-                    presenter.problem("No Questions");
+                    presenter.problem("لايوجد اسئلة");
                 }
             }
 
