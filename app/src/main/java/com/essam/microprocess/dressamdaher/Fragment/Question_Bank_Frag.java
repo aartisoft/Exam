@@ -22,6 +22,7 @@ import com.essam.microprocess.dressamdaher.Adapter.QuestionBankAdapter;
 import com.essam.microprocess.dressamdaher.Adapter.RecyclerItemTouchHelper;
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
+import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
@@ -213,10 +214,23 @@ public class Question_Bank_Frag extends Fragment
             }
 
             @Override
-            public void removingQuestion(String questionID,int position) {
+            public void removingQuestion(final String questionID, final int position) {
 
-                 Question_BankPresenter presenter = new Question_BankPresenter(this);
-                 presenter.tellModletoDeleteQuestion(reference,questionID,position);
+                 final Question_BankPresenter presenter = new Question_BankPresenter(this);
+
+                 //
+                final AlertDialog alertDialog = new AlertDialog(getActivity(),"تحذير","هل انت متأكد من حذف هذا السؤال ؟");
+                alertDialog.show();
+                alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //الحذف
+                        presenter.tellModletoDeleteQuestion(reference,questionID,position);
+                        alertDialog.dismiss();
+
+                    }
+                });
+
 
 
 
@@ -225,7 +239,7 @@ public class Question_Bank_Frag extends Fragment
             @Override
             public void Q_Removed_InUI(int position) {
 
-                Toast.makeText(getActivity(), "السوال اتمسح", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "تم حذف السؤال", Toast.LENGTH_SHORT).show();
                 if (adapter!=null){
 
                     adapter.remove(position);
@@ -236,7 +250,7 @@ public class Question_Bank_Frag extends Fragment
             @Override
             public void Q_notRemoved_InUI() {
 
-                Toast.makeText(getActivity(), "فيه مشكله راجع تاني ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "فيه مشكله في الحذف ", Toast.LENGTH_SHORT).show();
             }
 
         }

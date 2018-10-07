@@ -112,10 +112,6 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
         // NOTE: don't call notifyDataSetChanged()
         notifyItemRemoved(position);
 
-        for(int i = 0 ; i < qestions.size(); i ++ ){
-
-            Log.d("qestions",qestions.get(i).getQuestion());
-        }
 
     }
 
