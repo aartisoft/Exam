@@ -298,4 +298,19 @@ public class ControlPanel extends AppCompatActivity
         }
 
     }
+
+    public boolean CheckifAddExambleFragmentIsDisplayed(){
+
+
+            addExam test = (addExam) getSupportFragmentManager().findFragmentById(R.id.addExamfragment);
+            if (test != null && test.isVisible()) {
+                //DO STUFF
+                return true;
+            } else {
+                //Whatever
+                return false;
+            }
+
+
+    }
 }

@@ -36,6 +36,8 @@ import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.MainPresnter.addExamPresenter;
 import com.essam.microprocess.dressamdaher.R;
+import com.essam.microprocess.dressamdaher.Views.ControlPanel;
+import com.essam.microprocess.dressamdaher.Views.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -270,9 +272,9 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     @Override
     public void Problem(String Result) {
         dialog.Close_Dialog();
-        com.essam.microprocess.dressamdaher.Dialog.AlertDialog alertDialog =
-                new com.essam.microprocess.dressamdaher.Dialog.AlertDialog(getActivity(),Result+"");
-        alertDialog.show();
+
+            Toast.makeText(getActivity(), Result+"", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
