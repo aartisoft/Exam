@@ -94,7 +94,7 @@
 
    <string name="choosenQuestion">الأسئلة المختارة</string>
     <string name="question">اسئلة</string>
-    <string name="examTime">وقت الإختبار</string>
+    <string name="examTime">مدة الإختبار</string>
     <string name="s_m_h">ثانية : دقيقة : ساعة</string>
     <string name="DegreeDistribution">توزيع الدرجات</string>
 

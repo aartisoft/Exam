@@ -48,4 +48,19 @@ public class addExamPresenter implements addExamContract.presenter {
     public void refreshAdapter() {
         view.refreshAdapter();
     }
+
+    @Override
+    public void storeExaminDatabase(int hour, int minute, int second, String oneQestionDegree,
+                                    String NumberofQestion, String final_degree, List<Questions_Form> questions,
+                                    String ExamName, String currentDateandTime) {
+
+        model.storeExaminDatabase(hour,minute,second,oneQestionDegree,
+                NumberofQestion,final_degree,questions,ExamName,currentDateandTime);
+
+    }
+
+    @Override
+    public void Successful_Storing() {
+        view.Successful_Storing();
+    }
 }

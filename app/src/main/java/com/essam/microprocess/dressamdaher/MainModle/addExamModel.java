@@ -4,8 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.essam.microprocess.dressamdaher.Contracts.addExamContract;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
+import com.essam.microprocess.dressamdaher.JsonModel.AddExam_pojo;
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -103,6 +105,23 @@ public class addExamModel implements addExamContract.model {
                 QestionsList.clear();
                 presenter.ConfigRecyclerview(QestionsList);
                 presenter.refreshAdapter();
+            }
+        });
+    }
+
+    @Override
+    public void storeExaminDatabase(int hour, int minute, int second, String oneQestionDegree, String NumberofQestion, String final_degree, List<Questions_Form> questions, String ExamName, String currentDateandTime) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef()).push();
+        AddExam_pojo Exam = new AddExam_pojo(hour,minute,second,reference.getKey(),oneQestionDegree,NumberofQestion,final_degree,questions,ExamName,currentDateandTime);
+        reference.setValue(Exam).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                presenter.Successful_Storing();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                presenter.Problem(e.toString());
             }
         });
     }

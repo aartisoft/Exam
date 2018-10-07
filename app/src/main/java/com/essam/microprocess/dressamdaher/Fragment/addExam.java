@@ -32,20 +32,24 @@ import com.essam.microprocess.dressamdaher.Adapter.RecyclerItemTouchHelper;
 import com.essam.microprocess.dressamdaher.Adapter.addExamTouchHelper;
 import com.essam.microprocess.dressamdaher.Adapter.addExam_Rec_Adapter;
 import com.essam.microprocess.dressamdaher.Contracts.addExamContract;
+import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.MainPresnter.addExamPresenter;
 import com.essam.microprocess.dressamdaher.R;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class addExam extends Fragment implements addExamContract.view  , addExamTouchHelper.RecyclerItemTouchHelperListener{
+public class addExam extends Fragment implements addExamContract.view  , addExamTouchHelper.RecyclerItemTouchHelperListener {
 
     @BindView(R.id.chosen_Qestions_Rec)
-    RecyclerView recyclerView ;
+    RecyclerView recyclerView;
 
     @BindView(R.id.questionssize)
     TextView Questions_size;
@@ -68,6 +72,9 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     @BindView(R.id.Final_Degree)
     TextView txFinal_Degree;
 
+    @BindView(R.id.ExamName)
+    EditText ExamName ;
+
     @BindView(R.id.deleteAll)
     Button Btn_DeleteList;
 
@@ -76,9 +83,12 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
 
     String final_degree;
-    int hour , minute , second ;
-    addExamContract.presenter presenter ;
+    int hour, minute, second;
+    addExamContract.presenter presenter;
     addExam_Rec_Adapter adapter;
+    private List<Questions_Form> Questions;
+    AnimatedDialog dialog ;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,10 +99,12 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-         View v = inflater.inflate(R.layout.add_exam, container, false);
-         et_hour = v.findViewById(R.id.et_hour);
-         et_minute = v.findViewById(R.id.et_minute);
-        ButterKnife.bind(this,v);
+        View v = inflater.inflate(R.layout.add_exam, container, false);
+        et_hour = v.findViewById(R.id.et_hour);
+        et_minute = v.findViewById(R.id.et_minute);
+        Questions = new ArrayList<>();
+        ButterKnife.bind(this, v);
+        dialog = new AnimatedDialog(getActivity());
 
         et_hour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,8 +142,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
                     // Do not Make any Thing .
                     txFinal_Degree.setText("0");
 
-                }
-                else {
+                } else {
 
                     int x = Integer.parseInt(et_random_number_question.getText().toString());
                     int y = Integer.parseInt(String.valueOf(charSequence));
@@ -139,6 +150,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
                     txFinal_Degree.setText(final_degree);
                 }
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
 
@@ -160,8 +172,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
                     // Do not Make any Thing .
                     txFinal_Degree.setText("0");
 
-                }
-                else {
+                } else {
 
                     int x = Integer.parseInt(et_degree.getText().toString());
                     int y = Integer.parseInt(String.valueOf(charSequence));
@@ -176,7 +187,6 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
             }
         });
-
 
 
         Btn_DeleteList.setOnClickListener(new View.OnClickListener() {
@@ -195,18 +205,43 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
             public void onClick(View view) {
 
 
-
                 Check_Hours_And_Minuts();
-                if(hour > 0 || minute > 0  ) {
-                    //Check is tmam .
-                    Toast.makeText(getActivity(), "H = " + hour + "  M = " + minute, Toast.LENGTH_SHORT).show();
+                if (hour > 0 || minute > 0) {
+                    second = 0 ;
+                    if (CheckReminderData()== 1) {
+
+                        if(Questions.size() > 0 ) {
+
+                            if(!ExamName.getText().toString().isEmpty()) {
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                String currentDateandTime = sdf.format(new Date());
+                                dialog.ShowDialog();
+                                presenter.storeExaminDatabase(hour,minute,second,et_degree.getText().toString()
+                                        ,et_random_number_question.getText().toString()
+                                        ,final_degree,Questions,ExamName.getText().toString(),currentDateandTime);
+
+                            }
+                            else {
+
+                                Toast.makeText(getActivity(), "يرجي كتابة اسم الاختبار", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(), "لا يوجد اسئلة مختارة ", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+
+                    }
+
                 }
 
 
-
-                }
-
-
+            }
 
 
         });
@@ -219,15 +254,14 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     }
 
 
-
     @Override
     public void ConfigRecyclerview(List<Questions_Form> Questions) {
 
-
+        this.Questions = Questions ;
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new addExamTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new addExam_Rec_Adapter(Questions,this);
+        adapter = new addExam_Rec_Adapter(Questions, this);
         recyclerView.setAdapter(adapter);
         Update_Questions_size(Questions.size());
 
@@ -235,8 +269,10 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     @Override
     public void Problem(String Result) {
-
-        Toast.makeText(getActivity(), Result + "", Toast.LENGTH_LONG).show();
+        dialog.Close_Dialog();
+        com.essam.microprocess.dressamdaher.Dialog.AlertDialog alertDialog =
+                new com.essam.microprocess.dressamdaher.Dialog.AlertDialog(getActivity(),Result+"");
+        alertDialog.show();
     }
 
     @Override
@@ -253,6 +289,15 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     }
 
+    @Override
+    public void Successful_Storing() {
+        dialog.Close_Dialog();
+        com.essam.microprocess.dressamdaher.Dialog.AlertDialog alertDialog =
+                new com.essam.microprocess.dressamdaher.Dialog.AlertDialog(getActivity(),"تم اضافة الاختبار بنجاح");
+        alertDialog.show();
+
+    }
+
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
@@ -262,18 +307,17 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     }
 
 
-
     public static class TimePickerShow extends DialogFragment
-            implements TimePickerDialog.OnTimeSetListener{
+            implements TimePickerDialog.OnTimeSetListener {
 
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState){
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Calendar calendar = Calendar.getInstance();
             int hour = calendar.get(Calendar.YEAR);
             int minit = calendar.get(Calendar.MONTH);
 
             TimePickerDialog dpd = new TimePickerDialog(getActivity(),
-                    AlertDialog.THEME_HOLO_LIGHT,this,hour,minit,true);
+                    AlertDialog.THEME_HOLO_LIGHT, this, hour, minit, true);
 
             // Create a TextView programmatically.
             TextView tv = new TextView(getActivity());
@@ -285,16 +329,15 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
             tv.setLayoutParams(lp);
             tv.setPadding(10, 10, 10, 10);
             tv.setGravity(Gravity.CENTER);
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
             tv.setText("This is a custom title.");
             tv.setTextColor(Color.parseColor("#ff0000"));
             tv.setBackgroundColor(Color.parseColor("#FFD2DAA7"));
 
             dpd.setTitle("قم باختيار وقت الاختبار"); // Uncomment this line to activate it
 
-            return  dpd;
+            return dpd;
         }
-
 
 
         @Override
@@ -308,37 +351,33 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     }
 
-    void Check_Hours_And_Minuts(){
+    void Check_Hours_And_Minuts() {
 
-        hour = 0 ;
-        minute = 0 ;
+        hour = 0;
+        minute = 0;
         // لو الاتنين مليانين
-        if (!et_hour.getText().toString().isEmpty() && !et_minute.getText().toString().isEmpty()){
+        if (!et_hour.getText().toString().isEmpty() && !et_minute.getText().toString().isEmpty()) {
 
 
             int hours = Integer.parseInt(et_hour.getText().toString());
             int minutes = Integer.parseInt(et_minute.getText().toString());
 
             // لو االدقائق والساعات بيساوي صفر
-            if (hours <= 0 && minutes <= 0){
+            if (hours <= 0 && minutes <= 0) {
 
 
                 Toast.makeText(getActivity(), "يجب ملئ الساعات او الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 hour = Integer.parseInt(et_hour.getText().toString());
                 minute = Integer.parseInt(et_minute.getText().toString());
 
 
-
-
             }
-
 
 
         }
         // لو الساعات فاضي والدقايق فاضي
-        else if (et_hour.getText().toString().isEmpty() && et_minute.getText().toString().isEmpty()){
+        else if (et_hour.getText().toString().isEmpty() && et_minute.getText().toString().isEmpty()) {
 
 
             Toast.makeText(getActivity(), "يجب ملئ الساعات او الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
@@ -346,15 +385,14 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
         }
         // لو الساعات فاضي والدقائق مليان
-        else if((et_hour.getText().toString().isEmpty() && !et_minute.getText().toString().isEmpty()) ){
+        else if ((et_hour.getText().toString().isEmpty() && !et_minute.getText().toString().isEmpty())) {
 
             int minutes = Integer.parseInt(et_minute.getText().toString());
 
-            if(minutes <= 0) {
+            if (minutes <= 0) {
 
                 Toast.makeText(getActivity(), "يجب ملئ الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
 
                 hour = 0;
                 minute = Integer.parseInt(et_minute.getText().toString());
@@ -364,15 +402,14 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         }
 
         // لو الساعات مليان والدقائق فاضي
-        else if (!et_hour.getText().toString().isEmpty() && et_minute.getText().toString().isEmpty()){
+        else if (!et_hour.getText().toString().isEmpty() && et_minute.getText().toString().isEmpty()) {
 
             int hours = Integer.parseInt(et_hour.getText().toString());
 
-            if(hours <= 0) {
+            if (hours <= 0) {
 
                 Toast.makeText(getActivity(), "يجب ملئ الساعات بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
 
                 minute = 0;
                 hour = Integer.parseInt(et_hour.getText().toString());
@@ -383,5 +420,48 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         }
     }
 
+    public int CheckReminderData() {
+        int result = 0 ;
+        if (!et_degree.getText().toString().isEmpty()) {
+
+            int degree = Integer.parseInt(et_degree.getText().toString());
+            if (degree <= 0) {
+                Toast.makeText(getActivity(), "توزيع الدرجات يجب ان يكون اكبر من الصفر", Toast.LENGTH_SHORT).show();
+                result = 0;
+            } else {
+
+                if (!et_random_number_question.getText().toString().isEmpty()) {
+
+                    int random = Integer.parseInt(et_random_number_question.getText().toString());
+                    if (random <= 0) {
+                        Toast.makeText(getActivity(), "يرجى تحديد عدد اسئلة الامتحان", Toast.LENGTH_SHORT).show();
+                        result = 0;
+                    } else {
+                        int finaldegree = Integer.parseInt(txFinal_Degree.getText().toString());
+                        if (random > finaldegree) {
+                            Toast.makeText(getActivity(), "الاسئلة العشوائية يجب ان تكون اقل او تساوي الاسئلة المختارة", Toast.LENGTH_SHORT).show();
+                            result = 0;
+                        } else {
+                            result = 1;
+                        }
+
+                    }
+                }
+                else {
+
+                    result = 0;
+                    Toast.makeText(getActivity(), "يرجي ملئ خانة الأسئلة", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+
+        } else {
+            result = 0;
+            Toast.makeText(getActivity(), "يرجي ملئ خانة الدرجات", Toast.LENGTH_SHORT).show();
+        }
+
+        return result;
+    }
 
 }

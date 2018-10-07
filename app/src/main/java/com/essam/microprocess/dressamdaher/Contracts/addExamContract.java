@@ -15,7 +15,9 @@ public interface addExamContract  {
 
         void getQestionsToRecycleView();
         void ClearList();
-
+        void storeExaminDatabase(int hour, int minute, int second,
+                                 String oneQestionDegree, String NumberofQestion, String final_degree,
+                                 List<Questions_Form> questions, String ExamName, String currentDateandTime);
 
     }
 
@@ -27,6 +29,11 @@ public interface addExamContract  {
         void ClearList();
         void passQestionSizeToView(int i);
         void refreshAdapter();
+
+        void storeExaminDatabase(int hour, int minute, int second,
+                                 String oneQestionDegree, String NumberofQestion, String final_degree,
+                                 List<Questions_Form> questions, String ExamName, String currentDateandTime);
+        void Successful_Storing();
     }
 
     interface view{
@@ -34,5 +41,6 @@ public interface addExamContract  {
         void Problem(String Result);
         void   Update_Questions_size(int lengh);
         void refreshAdapter();
+        void Successful_Storing();
     }
 }
