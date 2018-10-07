@@ -4,6 +4,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/color1</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:itemBackground">@color/color1</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
@@ -35,5 +37,15 @@
         <item name="colorControlNormal">@android:color/white</item>
         <item name="colorControlActivated">@android:color/white</item>
     </style>
+
+
+
+
+    <style name="MyPopupMenu"
+        parent="@android:style/Widget.Holo.ListPopupWindow">
+        <item name="android:popupBackground">@color/color2</item>
+
+    </style>
+
 
 </resources>

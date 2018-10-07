@@ -27,5 +27,7 @@ public interface QuestionsBankContract {
         void RecyclerConfig(List<Questions_Form> Result );
         void problem(String problem);
         void sentSuccessfully(String Result);
+
+        void updateFragbyValuesTogoEditFrag(String questionID);
     }
 }

@@ -4,16 +4,20 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.R;
@@ -31,10 +35,13 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     private List<Questions_Form>listnew;
     Context context;
     TextView Question;
-    public QuestionBankAdapter(List <Questions_Form> qestions, Context context){
+    QuestionsBankContract.view listinParent;
 
+    public QuestionBankAdapter(List <Questions_Form> qestions, Context context, QuestionsBankContract.view view){
+        this.listinParent = view;
         this.qestions = qestions;
         this.context  = context;
+
 
     }
 
@@ -46,9 +53,8 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull QuestionBankAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final QuestionBankAdapter.ViewHolder holder, final int position) {
         this.Question.setText(qestions.get(position).getQuestion());
-
         //animation
         holder.Cardview.setScaleX(.9f);
         holder.Cardview.setScaleY(.9f);
@@ -58,6 +64,38 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
         holder.background.setScaleX(.9f);
         holder.background.setScaleY(.9f);
         holder.background.animate().scaleX(1f).scaleY(1f).setDuration(500);
+        holder.Cardview.setOnClickListener(new View.OnClickListener() {    // when click to edit question
+            @Override
+            public void onClick(final View view) {
+
+                PopupMenu popup = new PopupMenu(context, holder.Cardview);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.edit_q_menu, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        if (item.getItemId() == R.id.edit){
+
+
+                            listinParent.updateFragbyValuesTogoEditFrag(qestions.get(position).getQuestionID());
+
+
+                        }
+
+
+                        return true;
+                    }
+                });
+
+
+                popup.show();
+
+            }
+        });
+
+
 
 
     }
@@ -94,8 +132,6 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     public Filter getFilter() {
 
 
-
-
         Filter filter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
@@ -117,7 +153,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
                     constraint = constraint.toString().toLowerCase();
                     for (int i = 0; i < listnew.size(); i++) {
                         String data = listnew.get(i).getQuestion();
-                        if (data.toLowerCase().startsWith(constraint.toString())) {
+                        if (data.toLowerCase().contains(constraint.toString())) {
                             FilteredArrList.add(listnew.get(i));
                         }
                     }
@@ -133,7 +169,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
             protected void publishResults(CharSequence constraint, FilterResults results) {
 
                 qestions = (ArrayList<Questions_Form>) results.values;
-//                Question.setTextColor(context.getResources().getColor(R.color.color2));
+                Question.setTextColor(context.getResources().getColor(R.color.color2));
                 // has the filtered values
                 notifyDataSetChanged();
 
@@ -141,5 +177,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
         };
         return filter;
     }
+
+
 
 }

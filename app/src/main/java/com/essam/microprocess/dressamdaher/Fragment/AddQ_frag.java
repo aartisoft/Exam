@@ -22,6 +22,7 @@ import com.android.volley.toolbox.HttpResponse;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.essam.microprocess.dressamdaher.Contracts.AddQuestionContract;
+import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
@@ -63,6 +64,8 @@ public class AddQ_frag extends Fragment
     FirebaseDatabase firebaseDatabaseQuestions;
     DatabaseReference databaseReferenceQuestions;
     AnimatedDialog animatedDialog;
+    String val = "";
+    String QestionID = "";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +75,17 @@ public class AddQ_frag extends Fragment
         firebaseDatabaseQuestions = FirebaseDatabase.getInstance();
         databaseReferenceQuestions= firebaseDatabaseQuestions.getReference(DataBase_Refrences.BANKQUESTIONS.getRef());
         animatedDialog            = new AnimatedDialog(getActivity());
+
+        if (getArguments()!=null){
+
+            QestionID = getArguments().getString("ID","");
+            val       = getArguments().getString("val","");
+
+        }
+
+
+
+
     }
 
 
@@ -92,9 +106,15 @@ public class AddQ_frag extends Fragment
         buttonA.setOnClickListener(this);
         buttonB.setOnClickListener(this);
         buttonC.setOnClickListener(this);
-
         buttonD.setOnClickListener(this);
         savingData.setOnClickListener(this);
+
+        if (val.equals("Editing") && !QestionID.equals("") && !val.equals("")){
+            animatedDialog.ShowDialog();
+            AddQ_Presnter addQ_presnter = new AddQ_Presnter(this);
+            addQ_presnter.tellModletoGetQuestion(databaseReferenceQuestions,this,QestionID);
+        }
+
         return v;
     }
 
@@ -170,11 +190,29 @@ public class AddQ_frag extends Fragment
                     && !answerFour.getText().toString().isEmpty()
                     && !selectAnswer.isEmpty()){
 
-                Questions_Form questions_form  = new Questions_Form(writeQuestion.getText().toString(),answerOne.getText().toString(),answerTwo.getText().toString(),answerThree.getText().toString()
-                        ,answerFour.getText().toString(),databaseReferenceQuestions.push().getKey(),selectAnswer);
-                animatedDialog.ShowDialog();
-                AddQ_Presnter addQ_presnter    = new AddQ_Presnter(this);
-                addQ_presnter.updateModelToSaveData(databaseReferenceQuestions,questions_form);
+
+                if (!val.equals("") && val.equals("Editing") && !QestionID.equals("") ){
+
+
+                    Questions_Form questions_form  = new Questions_Form(writeQuestion.getText().toString(),answerOne.getText().toString(),answerTwo.getText().toString(),answerThree.getText().toString()
+                            ,answerFour.getText().toString(),QestionID,selectAnswer);
+                    animatedDialog.ShowDialog();
+                    AddQ_Presnter addQ_presnter    = new AddQ_Presnter(this);
+                    addQ_presnter.update_modle_to_editQuestion(databaseReferenceQuestions,this,QestionID,questions_form);
+
+                }else {
+
+                    Questions_Form questions_form  = new Questions_Form(writeQuestion.getText().toString(),answerOne.getText().toString(),answerTwo.getText().toString(),answerThree.getText().toString()
+                            ,answerFour.getText().toString(),databaseReferenceQuestions.push().getKey(),selectAnswer);
+                    animatedDialog.ShowDialog();
+                    AddQ_Presnter addQ_presnter    = new AddQ_Presnter(this);
+                    addQ_presnter.updateModelToSaveData(databaseReferenceQuestions,questions_form);
+
+
+                }
+
+
+
 
             }
 
@@ -187,6 +225,7 @@ public class AddQ_frag extends Fragment
 
     @Override
     public void dataSaved() {
+
         animatedDialog.Close_Dialog();
         selectAnswer = "";
         buttonD.setBackground(falseClick);
@@ -210,4 +249,48 @@ public class AddQ_frag extends Fragment
         AlertDialog alertDialog = new AlertDialog(getActivity(),"لقد حدثت مشكله اثناء الاتصال");
         alertDialog.show();
     }
+
+    @Override
+    public void questionHere(Questions_Form questions_form) {
+
+
+        writeQuestion.setText(questions_form.getQuestion());
+        answerOne.setText(questions_form.getAnswerOne());
+        answerTwo.setText(questions_form.getAnswerTwo());
+        answerThree.setText(questions_form.getAnswerThree());
+        answerFour.setText(questions_form.getAnswerFour());
+        animatedDialog.Close_Dialog();
+
+    }
+
+    @Override
+    public void problem_notHere(String error) {
+
+    }
+
+
+
+    @Override
+    public void dataEditedsussess() {
+
+        animatedDialog.Close_Dialog();
+        Toast.makeText(getActivity(), "لقد تم تعديل السوال بنجاح", Toast.LENGTH_SHORT).show();
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+
+        if (controlUI!=null){
+
+            controlUI.editSuccessopenBank();
+
+        }
+
+    }
+
+    @Override
+    public void datanotEditedfailed(String E) {
+
+        animatedDialog.Close_Dialog();
+        Toast.makeText(getActivity(), "لقد حدثت مشكله حاول مره اخري", Toast.LENGTH_SHORT).show();
+    }
+
+
 }

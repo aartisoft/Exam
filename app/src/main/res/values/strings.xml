@@ -107,4 +107,12 @@
     <string name="ExamName">إسم الإختبار</string>
 
 
+
+
+
+
+
+    <string name="edit_Q"> تعديل علي السؤال </string>
+    <string name="edit">  تعديل السؤال </string>
+
 </resources>

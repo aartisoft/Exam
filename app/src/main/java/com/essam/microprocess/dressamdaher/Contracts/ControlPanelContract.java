@@ -11,6 +11,9 @@ public interface ControlPanelContract {
         void emailandpassnottrue(String E);
         void whenClickFAB_showFrag();
         void CheckifUserBannedResult(String Result);
+        void editQuestions(String questionID , String val);
+
+        void editSuccessopenBank();
 
 
     }

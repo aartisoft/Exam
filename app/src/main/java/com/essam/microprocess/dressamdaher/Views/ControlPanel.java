@@ -153,6 +153,41 @@ public class ControlPanel extends AppCompatActivity
     }
 
     @Override
+    public void editQuestions(String questionID, String val) {
+
+        AddQ_frag addQ_frag = new AddQ_frag();
+        Bundle b = new Bundle();
+        b.putString("ID",questionID);
+        b.putString("val",val);
+        addQ_frag.setArguments(b);
+        Title.setText(getResources().getString(R.string.edit));
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,addQ_frag)
+                .addToBackStack(null)
+                .commit();
+
+
+    }
+
+    @Override
+    public void editSuccessopenBank() {
+
+        Title.setText(R.string.questions);
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,new Question_Bank_Frag())
+                .addToBackStack(null)
+                .commit();
+
+
+    }
+
+    @Override
     public void onClick(View view) {
 
         if (view == open_nav){

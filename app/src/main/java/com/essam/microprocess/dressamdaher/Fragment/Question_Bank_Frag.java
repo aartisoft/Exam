@@ -51,6 +51,9 @@ public class Question_Bank_Frag extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
     }
 
 
@@ -153,7 +156,7 @@ public class Question_Bank_Frag extends Fragment
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new QuestionBankAdapter(Result,getActivity());
+        adapter = new QuestionBankAdapter(Result,getActivity(),this);
         recyclerView.setAdapter(adapter);
 
         //close
@@ -187,4 +190,19 @@ public class Question_Bank_Frag extends Fragment
                 view.setText("تم الإرسال");
 
             }
-  }
+
+            @Override
+            public void updateFragbyValuesTogoEditFrag(String questionID) {
+
+                ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+
+                if (controlUI!=null){
+
+                    controlUI.editQuestions(questionID,"Editing");
+
+                }
+
+
+            }
+
+        }
