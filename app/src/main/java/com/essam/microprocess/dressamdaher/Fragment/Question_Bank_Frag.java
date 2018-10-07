@@ -176,8 +176,10 @@ public class Question_Bank_Frag extends Fragment
     public void problem(String problem) {
         //close
         dialog.Close_Dialog();
-        Toast.makeText(getActivity(), problem + "", Toast.LENGTH_LONG).show();
+        AlertDialog alertDialog = new AlertDialog(getActivity(),problem+"");
+        alertDialog.show();
     }
+
 
 
 

@@ -106,7 +106,9 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         et_minute = v.findViewById(R.id.et_minute);
         Questions = new ArrayList<>();
         ButterKnife.bind(this, v);
+        //display dialog .
         dialog = new AnimatedDialog(getActivity());
+        dialog.ShowDialog();
 
         et_hour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,7 +260,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     @Override
     public void ConfigRecyclerview(List<Questions_Form> Questions) {
-
+        dialog.Close_Dialog();
         this.Questions = Questions ;
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new addExamTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
@@ -273,8 +275,9 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     public void Problem(String Result) {
         dialog.Close_Dialog();
 
-            Toast.makeText(getActivity(), Result+"", Toast.LENGTH_SHORT).show();
-
+        com.essam.microprocess.dressamdaher.Dialog.AlertDialog alertDialog =
+                new com.essam.microprocess.dressamdaher.Dialog.AlertDialog(getActivity(),Result+"");
+        alertDialog.show();
     }
 
     @Override
