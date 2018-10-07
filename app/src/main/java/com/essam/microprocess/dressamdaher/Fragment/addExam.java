@@ -433,13 +433,15 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
                 if (!et_random_number_question.getText().toString().isEmpty()) {
 
                     int random = Integer.parseInt(et_random_number_question.getText().toString());
+
                     if (random <= 0) {
                         Toast.makeText(getActivity(), "يرجى تحديد عدد اسئلة الامتحان", Toast.LENGTH_SHORT).show();
                         result = 0;
                     } else {
-                        int finaldegree = Integer.parseInt(txFinal_Degree.getText().toString());
+
+                        int finaldegree = Integer.parseInt(Questions_size.getText().toString());
                         if (random > finaldegree) {
-                            Toast.makeText(getActivity(), "الاسئلة العشوائية يجب ان تكون اقل او تساوي الاسئلة المختارة", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "الاسئلة العشوائية يجب ان تكون اقل من او تساوي الاسئلة المختارة", Toast.LENGTH_SHORT).show();
                             result = 0;
                         } else {
                             result = 1;
