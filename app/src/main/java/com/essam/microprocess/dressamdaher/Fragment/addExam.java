@@ -104,6 +104,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         View v = inflater.inflate(R.layout.add_exam, container, false);
         et_hour = v.findViewById(R.id.et_hour);
         et_minute = v.findViewById(R.id.et_minute);
+        et_second = v.findViewById(R.id.et_second);
         Questions = new ArrayList<>();
         ButterKnife.bind(this, v);
         //display dialog .
@@ -300,6 +301,16 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         com.essam.microprocess.dressamdaher.Dialog.AlertDialog alertDialog =
                 new com.essam.microprocess.dressamdaher.Dialog.AlertDialog(getActivity(),"تم اضافة الاختبار بنجاح");
         alertDialog.show();
+        et_hour.setText("00");
+        et_minute.setText("00");
+        et_second.setText("00");
+        et_random_number_question.setText("0");
+        et_degree.setText("0");
+        presenter.ClearList();
+        txFinal_Degree.setText("0");
+        ExamName.setText("");
+
+
 
     }
 
