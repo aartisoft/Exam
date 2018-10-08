@@ -2,14 +2,19 @@ package com.essam.microprocess.dressamdaher.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
+import com.essam.microprocess.dressamdaher.Dialog.CustomTypeFaceSpan;
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.R;
@@ -88,6 +94,15 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
                 });
 
 
+                    Menu menu = popup.getMenu();
+                    for (int i = 0; i < menu.size(); i++) {
+                        MenuItem mi = menu.getItem(i);
+
+                        applyFontToMenuItem(mi);
+                    }
+
+
+
                 popup.show();
 
             }
@@ -113,11 +128,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     }
 
 
-    public List<Questions_Form> removeList(){
 
-       return qestions;
-
-    }
 
 
     @Override
@@ -197,5 +208,13 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     }
 
 
+    private void applyFontToMenuItem(MenuItem mi) {
+
+        Typeface font = Typeface.createFromAsset(context.getAssets(),"atherfont.ttf");
+        SpannableString mNewTitle = new SpannableString(mi.getTitle());
+        mNewTitle.setSpan(new CustomTypeFaceSpan("", font,Color.WHITE), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(mNewTitle);
+
+    }
 
 }

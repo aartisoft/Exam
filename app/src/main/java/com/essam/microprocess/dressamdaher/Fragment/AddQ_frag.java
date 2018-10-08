@@ -253,12 +253,45 @@ public class AddQ_frag extends Fragment
     @Override
     public void questionHere(Questions_Form questions_form) {
 
+        String [] allanswer = new String[]{ questions_form.getAnswerOne(),questions_form.getAnswerTwo(),questions_form.getAnswerThree(),questions_form.getAnswerFour()};
 
         writeQuestion.setText(questions_form.getQuestion());
         answerOne.setText(questions_form.getAnswerOne());
         answerTwo.setText(questions_form.getAnswerTwo());
         answerThree.setText(questions_form.getAnswerThree());
         answerFour.setText(questions_form.getAnswerFour());
+        returnResult(allanswer,questions_form.getCorrectAnswer());
+
+        if (!selectAnswer.equals("")){
+
+
+
+            if (selectAnswer.equals(answerOne.getText().toString())){
+
+                buttonA.setBackground(trueClick);
+
+            }
+            if (selectAnswer.equals(answerTwo.getText().toString())){
+
+                buttonB.setBackground(trueClick);
+
+            }
+            if (selectAnswer.equals(answerThree.getText().toString())){
+
+                buttonC.setBackground(trueClick);
+
+            }
+            if (selectAnswer.equals(answerFour.getText().toString())){
+
+                buttonD.setBackground(trueClick);
+            }
+
+
+
+
+        }
+
+
         animatedDialog.Close_Dialog();
 
 
@@ -294,4 +327,19 @@ public class AddQ_frag extends Fragment
     }
 
 
+
+    private void returnResult(String [] allAnswer , String result){
+
+        for (int i=0 ; i<allAnswer.length ; i++){
+
+            if (result.equals(allAnswer[i])){
+
+                selectAnswer = allAnswer[i];
+                break;
+
+            }
+
+        }
+
+    }
 }
