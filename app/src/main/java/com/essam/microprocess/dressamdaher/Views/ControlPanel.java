@@ -20,6 +20,7 @@ import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Fragment.AddQ_frag;
+import com.essam.microprocess.dressamdaher.Fragment.ExamList;
 import com.essam.microprocess.dressamdaher.Fragment.Question_Bank_Frag;
 import com.essam.microprocess.dressamdaher.Fragment.StudentManagement;
 import com.essam.microprocess.dressamdaher.Fragment.addExam;
@@ -47,12 +48,18 @@ public class ControlPanel extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawaer);
 
-
         controlpanelPresnter = new ControlpanelPresnter(this);
         controlpanelPresnter.updateUitoViews();
 
         //Check if User Banned افحص المستخدم اذا كان محظور
         controlpanelPresnter.CheckifUserBanned(auth.getCurrentUser().getUid());
+
+        //default fragment .
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,new ExamList())
+                .commit();
 
     }
 

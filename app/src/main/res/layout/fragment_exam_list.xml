@@ -2,7 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color3"
     tools:context="com.essam.microprocess.dressamdaher.Fragment.ExamList">
 
+    <android.support.v7.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/Exam_List_rec"
+    >
+
+
+    </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>
