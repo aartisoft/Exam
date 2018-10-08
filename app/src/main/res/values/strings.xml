@@ -114,6 +114,12 @@
 
     <string name="edit_Q"> تعديل علي السؤال </string>
     <string name="edit">  تعديل السؤال </string>
-    <string name="delete"> مسح السؤال </string>
+    <string name="delete"> حذف السؤال </string>
+
+    <string name="MyResult">نتائجي</string>
+    <string name="aboutus">تواصل معنا</string>
+    <string name="aboutDoctor">عن الدكتور</string>
+    <string name="aboutProgrammer">عن المبرمج</string>
+
 
 </resources>
