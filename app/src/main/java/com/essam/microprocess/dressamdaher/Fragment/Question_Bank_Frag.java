@@ -163,7 +163,6 @@ public class Question_Bank_Frag extends Fragment
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             adapter     = new QuestionBankAdapter(Result,getActivity(),this);
             adapter.notifyDataSetChanged();
-            recyclerView.setAdapter(null);
             recyclerView.setAdapter(adapter);
             dialog.Close_Dialog();
 
