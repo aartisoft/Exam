@@ -31,6 +31,7 @@ public class ExamList extends Fragment {
         // Inflate the layout for this fragment
          View v = inflater.inflate(R.layout.fragment_exam_list, container, false);
         ButterKnife.bind(this,v);
+
         ConfigRecyceler();
 
          return v;
