@@ -43,6 +43,7 @@ public class ControlPanel extends AppCompatActivity
     ControlpanelPresnter controlpanelPresnter;
     AnimatedDialog animatedDialog;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,11 +220,13 @@ public class ControlPanel extends AppCompatActivity
 
             case R.id.emams:
 
-                AlertDialog aleart_ok = new AlertDialog(this,getString(R.string.message));
-                aleart_ok.setCancelable(false);
-                aleart_ok.show();
-                Toast.makeText(this, "hhhhhhhhh", Toast.LENGTH_SHORT).show();
-                //  هنا اعمل الي انت عاوزه دي قائمه الاختبارات
+                getSupportFragmentManager().popBackStack();
+                Title.setText(R.string.examList);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                        .replace(R.id.Exam_Frame,new ExamList()).addToBackStack(null)
+                        .commit();
 
                 break;
 

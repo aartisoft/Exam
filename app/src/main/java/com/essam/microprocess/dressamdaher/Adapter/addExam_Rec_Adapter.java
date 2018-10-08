@@ -29,6 +29,7 @@ import java.util.List;
 public class addExam_Rec_Adapter extends RecyclerView.Adapter<addExam_Rec_Adapter.ViewHolder> {
     List<Questions_Form>  questions ;
     addExamContract.view view;
+
     public addExam_Rec_Adapter(List<Questions_Form> questions , addExamContract.view view) {
 
         this.questions = questions;
