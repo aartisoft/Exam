@@ -70,9 +70,6 @@ public class addExam_Rec_Adapter extends RecyclerView.Adapter<addExam_Rec_Adapte
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 questions.remove(position);
-                // notify the item removed by position
-                // to perform recycler view delete animations
-                // NOTE: don't call notifyDataSetChanged()
                 notifyItemRemoved(position);
 
                 //update Question Size in fragement .

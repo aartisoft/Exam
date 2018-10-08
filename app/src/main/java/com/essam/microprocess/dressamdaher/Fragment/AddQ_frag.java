@@ -261,6 +261,7 @@ public class AddQ_frag extends Fragment
         answerFour.setText(questions_form.getAnswerFour());
         animatedDialog.Close_Dialog();
 
+
     }
 
     @Override

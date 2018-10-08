@@ -22,7 +22,6 @@ import com.essam.microprocess.dressamdaher.Adapter.QuestionBankAdapter;
 import com.essam.microprocess.dressamdaher.Adapter.RecyclerItemTouchHelper;
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
-import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
@@ -31,6 +30,7 @@ import com.essam.microprocess.dressamdaher.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.view.View.X;
@@ -52,10 +52,9 @@ public class Question_Bank_Frag extends Fragment
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
     AnimatedDialog dialog;
+
             QuestionBankAdapter adapter;
             TextView view;
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,17 +157,19 @@ public class Question_Bank_Frag extends Fragment
             @Override
     public void RecyclerConfig(final List<Questions_Form> Result) {
 
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new QuestionBankAdapter(Result,getActivity(),this);
+            ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+            new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            adapter     = new QuestionBankAdapter(Result,getActivity(),this);
+            adapter.notifyDataSetChanged();
+            recyclerView.setAdapter(null);
+            recyclerView.setAdapter(adapter);
+            dialog.Close_Dialog();
 
-        recyclerView.setAdapter(adapter);
 
-        //close
 
-        dialog.Close_Dialog();
+
 
     }
 
@@ -176,10 +177,9 @@ public class Question_Bank_Frag extends Fragment
     public void problem(String problem) {
         //close
         dialog.Close_Dialog();
-        AlertDialog alertDialog = new AlertDialog(getActivity(),problem+"");
-        alertDialog.show();
-    }
+        Toast.makeText(getActivity(), problem + "", Toast.LENGTH_LONG).show();
 
+    }
 
 
 
@@ -216,23 +216,10 @@ public class Question_Bank_Frag extends Fragment
             }
 
             @Override
-            public void removingQuestion(final String questionID, final int position) {
+            public void removingQuestion(String questionID,int position) {
 
-                 final Question_BankPresenter presenter = new Question_BankPresenter(this);
-
-                 //
-                final AlertDialog alertDialog = new AlertDialog(getActivity(),"تحذير","هل انت متأكد من حذف هذا السؤال ؟");
-                alertDialog.show();
-                alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //الحذف
-                        presenter.tellModletoDeleteQuestion(reference,questionID,position);
-                        alertDialog.dismiss();
-
-                    }
-                });
-
+                 Question_BankPresenter presenter = new Question_BankPresenter(this);
+                 presenter.tellModletoDeleteQuestion(reference,questionID,position);
 
 
 
@@ -241,7 +228,7 @@ public class Question_Bank_Frag extends Fragment
             @Override
             public void Q_Removed_InUI(int position) {
 
-                Toast.makeText(getActivity(), "تم حذف السؤال", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "لقد تم حذف السؤال بنجاح", Toast.LENGTH_SHORT).show();
                 if (adapter!=null){
 
                     adapter.remove(position);
@@ -252,7 +239,7 @@ public class Question_Bank_Frag extends Fragment
             @Override
             public void Q_notRemoved_InUI() {
 
-                Toast.makeText(getActivity(), "يوجد مشكله في الحذف ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "فيه مشكله راجع تاني ", Toast.LENGTH_SHORT).show();
             }
 
         }

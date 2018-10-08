@@ -38,15 +38,19 @@ public class Question_BankModel implements QuestionsBankContract.model {
 
         DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child(DataBase_Refrences.BANKQUESTIONS.getRef());
 
-        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+        myref.addListenerForSingleValueEvent( new ValueEventListener() {
+
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
                         Questions_Form g1 = data.getValue(Questions_Form.class);
                         StudentsDetails.add(g1);
                         presenter.SendListToView(StudentsDetails);
                     }
+
+
                 } else {
 
                     //not exist
@@ -55,7 +59,7 @@ public class Question_BankModel implements QuestionsBankContract.model {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 //problem
                 presenter.problem(databaseError.getMessage());
@@ -94,6 +98,7 @@ public class Question_BankModel implements QuestionsBankContract.model {
         reference.child(Qid).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+
                 if (task.isSuccessful()){
 
                     presenter.Qremoved(position);

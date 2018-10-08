@@ -79,14 +79,10 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
                             listinParent.updateFragbyValuesTogoEditFrag(qestions.get(position).getQuestionID());
 
                         }
-                        if (item.getItemId()==R.id.delete){
+                        if (item.getItemId() == R.id.delete){
 
-
-                           listinParent.removingQuestion(qestions.get(position).getQuestionID(),position);
-
+                              listinParent.removingQuestion(qestions.get(position).getQuestionID(),position);
                         }
-
-
                         return true;
                     }
                 });
@@ -97,14 +93,9 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
             }
         });
 
-
-
-
     }
 
-
     public void remove(int position){
-
 
         qestions.remove(position);
         // notify the item removed by position
@@ -113,7 +104,21 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
         notifyItemRemoved(position);
 
 
+        for (int i=0  ; i<qestions.size() ; i++){
+
+            Log.d("message",qestions.get(i).getQuestion());
+
+        }
+
     }
+
+
+    public List<Questions_Form> removeList(){
+
+       return qestions;
+
+    }
+
 
     @Override
     public int getItemCount() {
@@ -139,9 +144,6 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
             tx = itemView.findViewById(R.id.tx);
         }
     }
-
-
-
 
 
 
@@ -187,7 +189,6 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
                 qestions = (ArrayList<Questions_Form>) results.values;
                 Question.setTextColor(context.getResources().getColor(R.color.color2));
-                // has the filtered values
                 notifyDataSetChanged();
 
             }
