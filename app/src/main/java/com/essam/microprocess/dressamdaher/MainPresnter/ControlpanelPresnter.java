@@ -43,4 +43,24 @@ public class ControlpanelPresnter implements ControlPanelContract.ControlPresnte
     public void CheckifUserBannedResult(String Result) {
         view.CheckifUserBannedResult(Result);
     }
+
+    @Override
+    public void CheckifAdmin(String uid) {
+        controlPanelModel.CheckifAdmin(uid);
+    }
+
+    @Override
+    public void HeIsAdmin() {
+        view.AdminTools();
+    }
+
+    @Override
+    public void getuserName(String uid) {
+        controlPanelModel.getuserName(uid);
+    }
+
+    @Override
+    public void SetUsername(String nameStudent) {
+        view.SetUsername(nameStudent);
+    }
 }

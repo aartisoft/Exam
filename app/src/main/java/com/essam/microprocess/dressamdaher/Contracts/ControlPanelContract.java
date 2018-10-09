@@ -14,7 +14,8 @@ public interface ControlPanelContract {
         void editQuestions(String questionID , String val);
         void editSuccessopenBank();
 
-
+        void SetUsername(String nameStudent);
+        void AdminTools();
     }
 
 
@@ -27,6 +28,14 @@ public interface ControlPanelContract {
         void datanotTrue(String E);
         void CheckifUserBanned(String Uid);
         void CheckifUserBannedResult(String Result);
+
+        void CheckifAdmin(String uid);
+
+        void HeIsAdmin();
+
+        void getuserName(String uid);
+
+        void SetUsername(String nameStudent);
     }
 
 
@@ -35,6 +44,10 @@ public interface ControlPanelContract {
 
         void checking(ControlPanelContract.ControlPresnterUI controlPresnterUI,FirebaseAuth auth, String email , String password);
         void CheckifUserBanned(String Uid);
+
+        void CheckifAdmin(String Uid);
+
+        void getuserName(String uid);
     }
 
 }

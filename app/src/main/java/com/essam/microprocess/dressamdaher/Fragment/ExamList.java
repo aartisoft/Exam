@@ -2,6 +2,9 @@ package com.essam.microprocess.dressamdaher.Fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,31 +14,54 @@ import android.view.ViewGroup;
 
 import com.essam.microprocess.dressamdaher.Adapter.ExamList_Rec_Adapter;
 import com.essam.microprocess.dressamdaher.Adapter.ViewHolder;
+import com.essam.microprocess.dressamdaher.Contracts.ExamListContract;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.AddExam_pojo;
+import com.essam.microprocess.dressamdaher.MainPresnter.ExamListPresenter;
 import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.Views.ControlPanel;
 import com.essam.microprocess.dressamdaher.Views.MainActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class ExamList extends Fragment {
+public class ExamList extends Fragment implements ExamListContract.view{
     @BindView(R.id.Exam_List_rec)
     RecyclerView recyclerView;
+
+    @BindView(R.id.FloatActionbutton)
+    FloatingActionButton actionButton;
+
+    private FirebaseAuth auth;
+    ExamListContract.presenter presenter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        auth  = FirebaseAuth.getInstance();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
          View v = inflater.inflate(R.layout.fragment_exam_list, container, false);
-        ButterKnife.bind(this,v);
-        ControlPanel.Title.setText(R.string.examList);
-        ConfigRecyceler();
+
+         ButterKnife.bind(this,v);
+         ControlPanel.Title.setText(R.string.examList);
+         ConfigRecyceler();
+         presenter = new ExamListPresenter(this);
+         presenter.CheckifAdmin(auth.getCurrentUser().getUid());
 
          return v;
     }
@@ -64,4 +90,8 @@ public class ExamList extends Fragment {
     }
 
 
+    @Override
+    public void ShowAdminTools() {
+        actionButton.setVisibility(View.VISIBLE);
+    }
 }

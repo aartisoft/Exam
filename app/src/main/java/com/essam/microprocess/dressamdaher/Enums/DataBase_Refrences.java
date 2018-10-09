@@ -4,7 +4,7 @@ public enum DataBase_Refrences {
 
 
     USERREF("Users"),BLOCKUSER("Blocked_User"),BANKQUESTIONS("Banck_Questions"),CHOSENQUESTIONID("Chosen_questions_ID")
-    ,EXAMS("Exams");
+    ,EXAMS("Exams"),ADMIN("Admins");
 
     private String val;
 

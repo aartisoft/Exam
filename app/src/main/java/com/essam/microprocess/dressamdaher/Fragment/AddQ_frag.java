@@ -78,7 +78,6 @@ public class AddQ_frag extends Fragment
         animatedDialog            = new AnimatedDialog(getActivity());
         ControlPanel.Title.setText(getString(R.string.addQ));
         if (getArguments()!=null){
-
             ControlPanel.Title.setText(getString(R.string.edit));
             QestionID = getArguments().getString("ID","");
             val       = getArguments().getString("val","");
@@ -95,6 +94,7 @@ public class AddQ_frag extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v        = inflater.inflate(R.layout.add_qestion_frag_layout,container,false);
+
         buttonA       = v.findViewById(R.id.A);
         buttonB       = v.findViewById(R.id.B);
         buttonC       = v.findViewById(R.id.C);

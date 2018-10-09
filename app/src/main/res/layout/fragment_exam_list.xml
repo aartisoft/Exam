@@ -29,6 +29,7 @@
         app:backgroundTint="@color/color6"
         app:borderWidth="3dp"
         app:fabSize="normal"
+        android:visibility="gone"
         app:layout_anchor="@+id/Exam_List_rec"
         app:layout_anchorGravity="right|bottom"
         app:layout_behavior="com.essam.microprocess.dressamdaher.Dialog.FloatingActionButtonScrollBehavior"

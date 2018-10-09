@@ -1,19 +1,22 @@
 package com.essam.microprocess.dressamdaher.Contracts;
 
-import android.support.v7.widget.RecyclerView;
 
 /**
  * Created by microprocess on 2018-10-08.
  */
 
-interface  ExamListContract  {
+public interface  ExamListContract  {
     interface view{
-
+        void ShowAdminTools();
     }
     interface presenter{
 
+        void CheckifAdmin(String Uid);
+        void ShowAdminTools();
+
     }
     interface model {
+        void CheckifAdmin(String Uid);
 
     }
 

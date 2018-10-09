@@ -46,6 +46,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManagementAdapter.ViewHolder> {
     List<FullRegisterForm> items ;
     List<FullRegisterForm>listnew;
+    FirebaseAuth auth;
     int photosCounter = 0 ;
     Context context;
 
@@ -53,7 +54,7 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
         this.items = items ;
         this.context = context;
-
+        auth = FirebaseAuth.getInstance();
     }
 
 
@@ -142,10 +143,15 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
                 }
             });
 
-            //Banned User .
-             Check_if_user_banned(items.get(position).getuID(), holder);
+
+            // to avoid  Ban of Admin Ban himself .
+            if(!auth.getCurrentUser().getUid().equals(items.get(position).getuID())) {
+
+                //Banned User .
+                Check_if_user_banned(items.get(position).getuID(), holder);
 
 
+            }
 
 
 

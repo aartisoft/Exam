@@ -61,7 +61,7 @@ public class Question_Bank_Frag extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ControlPanel.Title.setText(R.string.questions);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference        = firebaseDatabase.getReference(DataBase_Refrences.BANKQUESTIONS.getRef());
 
@@ -73,6 +73,7 @@ public class Question_Bank_Frag extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.question_bank_layout,container,false);
+        ControlPanel.Title.setText(R.string.questions);
         show_addQ_frag = v.findViewById(R.id.show_addQ_frag);
         recyclerView   = v.findViewById(R.id.rec);
         presenter      = new Question_BankPresenter(this);

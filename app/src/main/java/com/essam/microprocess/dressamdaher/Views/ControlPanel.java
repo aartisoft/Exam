@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,6 +30,8 @@ import com.essam.microprocess.dressamdaher.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ControlPanel extends AppCompatActivity
                           implements ControlPanelContract.ControlUI
                                    , View.OnClickListener
@@ -42,15 +45,20 @@ public class ControlPanel extends AppCompatActivity
     private FirebaseAuth auth;
     ControlpanelPresnter controlpanelPresnter;
     AnimatedDialog animatedDialog;
-
+    CircleImageView circleImageView;
+    TextView UserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawaer);
 
+
+
         controlpanelPresnter = new ControlpanelPresnter(this);
         controlpanelPresnter.updateUitoViews();
+        //اخفاء الادوات من المستخدم العادي
+        hideAdminToolsFromUsers();
 
         //Check if User Banned افحص المستخدم اذا كان محظور
         controlpanelPresnter.CheckifUserBanned(auth.getCurrentUser().getUid());
@@ -61,6 +69,10 @@ public class ControlPanel extends AppCompatActivity
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
                 .replace(R.id.Exam_Frame,new ExamList())
                 .commit();
+
+
+        controlpanelPresnter.CheckifAdmin(auth.getCurrentUser().getUid());
+        controlpanelPresnter.getuserName(auth.getCurrentUser().getUid());
 
     }
 
@@ -91,6 +103,9 @@ public class ControlPanel extends AppCompatActivity
         Title      = toolbar.findViewById(R.id.toolbar_title);
         auth       = FirebaseAuth.getInstance();
         animatedDialog = new AnimatedDialog(this);
+        View headerLayout = navigation.getHeaderView(0);
+        circleImageView = headerLayout.findViewById(R.id.myprofile);
+        UserName        = headerLayout.findViewById(R.id.UserName);
         setSupportActionBar(toolbar);
         open_nav.setOnClickListener(this);
         navigation.setNavigationItemSelectedListener(this);
@@ -185,6 +200,9 @@ public class ControlPanel extends AppCompatActivity
         onBackPressed();
 
     }
+
+
+
 
     @Override
     public void onClick(View view) {
@@ -298,18 +316,31 @@ public class ControlPanel extends AppCompatActivity
 
     }
 
-    public boolean CheckifAddExambleFragmentIsDisplayed(){
 
+    private void hideAdminToolsFromUsers()
+    {
 
-            addExam test = (addExam) getSupportFragmentManager().findFragmentById(R.id.addExamfragment);
-            if (test != null && test.isVisible()) {
-                //DO STUFF
-                return true;
-            } else {
-                //Whatever
-                return false;
-            }
-
+        Menu nav_Menu = navigation.getMenu();
+        nav_Menu.findItem(R.id.addExam).setVisible(false);
+        nav_Menu.findItem(R.id.questions).setVisible(false);
+        nav_Menu.findItem(R.id.results).setVisible(false);
+        nav_Menu.findItem(R.id.studentManger).setVisible(false);
 
     }
+    @Override
+    public void AdminTools() {
+        Menu nav_Menu = navigation.getMenu();
+        nav_Menu.findItem(R.id.addExam).setVisible(true);
+        nav_Menu.findItem(R.id.questions).setVisible(true);
+        nav_Menu.findItem(R.id.results).setVisible(true);
+        nav_Menu.findItem(R.id.studentManger).setVisible(true);
+        circleImageView.setBackgroundResource(R.drawable.essamphoto);
+
+    }
+
+    @Override
+    public void SetUsername(String nameStudent) {
+        UserName.setText( " مرحبا , " + nameStudent );
+    }
+
 }
