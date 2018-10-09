@@ -38,7 +38,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     public static List<Questions_Form> qestions ;
     private List<Questions_Form>listnew;
     Context context;
-    TextView Question;
+
     QuestionsBankContract.view listinParent;
 
     public QuestionBankAdapter(List <Questions_Form> qestions, Context context, QuestionsBankContract.view view){
@@ -58,7 +58,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final QuestionBankAdapter.ViewHolder holder, final int position) {
-        this.Question.setText(qestions.get(position).getQuestion());
+        holder.Question.setText(qestions.get(position).getQuestion());
         //animation
         holder.Cardview.setScaleX(.9f);
         holder.Cardview.setScaleY(.9f);
@@ -146,7 +146,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
         CardView Cardview;
         LinearLayout background;
         TextView tx;
-
+        TextView Question;
         public ViewHolder(View itemView) {
             super(itemView);
             Question = itemView.findViewById(R.id.Question);
@@ -199,7 +199,6 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
             protected void publishResults(CharSequence constraint, FilterResults results) {
 
                 qestions = (ArrayList<Questions_Form>) results.values;
-                Question.setTextColor(context.getResources().getColor(R.color.color2));
                 notifyDataSetChanged();
 
             }
