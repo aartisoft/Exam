@@ -1,5 +1,6 @@
 package com.essam.microprocess.dressamdaher.Fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,11 +23,13 @@ import com.essam.microprocess.dressamdaher.Adapter.QuestionBankAdapter;
 import com.essam.microprocess.dressamdaher.Adapter.RecyclerItemTouchHelper;
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
+import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.MainPresnter.Question_BankPresenter;
 import com.essam.microprocess.dressamdaher.R;
+import com.essam.microprocess.dressamdaher.Views.ControlPanel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -58,7 +61,7 @@ public class Question_Bank_Frag extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ControlPanel.Title.setText(R.string.questions);
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference        = firebaseDatabase.getReference(DataBase_Refrences.BANKQUESTIONS.getRef());
 
@@ -154,44 +157,44 @@ public class Question_Bank_Frag extends Fragment
                 return false;
             }
 
-            @Override
-    public void RecyclerConfig(final List<Questions_Form> Result) {
+                    @Override
+            public void RecyclerConfig(final List<Questions_Form> Result) {
 
 
-            ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
-            new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            adapter     = new QuestionBankAdapter(Result,getActivity(),this);
-            adapter.notifyDataSetChanged();
-            recyclerView.setAdapter(adapter);
-            dialog.Close_Dialog();
+                    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+                    new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    adapter     = new QuestionBankAdapter(Result,getActivity(),this);
+                    adapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(adapter);
+                    dialog.Close_Dialog();
 
 
 
 
 
-    }
-
-    @Override
-    public void problem(String problem) {
-        //close
-        dialog.Close_Dialog();
-        Toast.makeText(getActivity(), problem + "", Toast.LENGTH_LONG).show();
-
-    }
-
-
+            }
 
             @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+            public void problem(String problem) {
+                //close
+                dialog.Close_Dialog();
+                Toast.makeText(getActivity(), problem + "", Toast.LENGTH_LONG).show();
+
+            }
 
 
-        view    = viewHolder.itemView.findViewById(R.id.tx);
 
-        presenter.addQuestionToAddTestRecycler(QuestionBankAdapter.qestions.get(position).getQuestionID());
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
 
 
-    }
+                view    = viewHolder.itemView.findViewById(R.id.tx);
+
+                presenter.addQuestionToAddTestRecycler(QuestionBankAdapter.qestions.get(position).getQuestionID());
+
+
+             }
 
             @Override
             public void sentSuccessfully(String Result) {
@@ -215,10 +218,25 @@ public class Question_Bank_Frag extends Fragment
             }
 
             @Override
-            public void removingQuestion(String questionID,int position) {
+            public void removingQuestion(final String questionID, final int position) {
 
-                 Question_BankPresenter presenter = new Question_BankPresenter(this);
-                 presenter.tellModletoDeleteQuestion(reference,questionID,position);
+                 final Question_BankPresenter presenter = new Question_BankPresenter(this);
+
+                final AlertDialog alertDialog = new AlertDialog(getActivity(),"تحذير"," متأكد من حذف هذا السؤال ؟");
+                alertDialog.show();
+                alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        //delete
+                        presenter.tellModletoDeleteQuestion(reference,questionID,position);
+                        alertDialog.dismiss();
+
+                        dialog.ShowDialog();
+
+                    }
+                });
+
 
 
 
@@ -226,7 +244,7 @@ public class Question_Bank_Frag extends Fragment
 
             @Override
             public void Q_Removed_InUI(int position) {
-
+                dialog.Close_Dialog();
                 Toast.makeText(getActivity(), "لقد تم حذف السؤال بنجاح", Toast.LENGTH_SHORT).show();
                 if (adapter!=null){
 
@@ -237,7 +255,7 @@ public class Question_Bank_Frag extends Fragment
 
             @Override
             public void Q_notRemoved_InUI() {
-
+                dialog.Close_Dialog();
                 Toast.makeText(getActivity(), "فيه مشكله راجع تاني ", Toast.LENGTH_SHORT).show();
             }
 

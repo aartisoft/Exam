@@ -95,14 +95,14 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ControlPanel.Title.setText(R.string.addExam);
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.add_exam, container, false);
-        et_hour = v.findViewById(R.id.et_hour);
+        et_hour   = v.findViewById(R.id.et_hour);
         et_minute = v.findViewById(R.id.et_minute);
         et_second = v.findViewById(R.id.et_second);
         Questions = new ArrayList<>();

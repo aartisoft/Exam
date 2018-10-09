@@ -1,4 +1,5 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,4 +15,23 @@
 
     </android.support.v7.widget.RecyclerView>
 
-</FrameLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/FloatActionbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="23dp"
+        android:layout_marginEnd="21dp"
+        android:elevation="16dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_add_to_photos_black_24dp"
+        app:backgroundTint="@color/color6"
+        app:borderWidth="3dp"
+        app:fabSize="normal"
+        app:layout_anchor="@+id/Exam_List_rec"
+        app:layout_anchorGravity="right|bottom"
+        app:layout_behavior="com.essam.microprocess.dressamdaher.Dialog.FloatingActionButtonScrollBehavior"
+        app:rippleColor="@android:color/white" />
+
+</android.support.design.widget.CoordinatorLayout>

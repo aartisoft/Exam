@@ -30,6 +30,7 @@ import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.MainPresnter.AddQ_Presnter;
 import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.Utils.ViewsEmpty;
+import com.essam.microprocess.dressamdaher.Views.ControlPanel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -75,9 +76,10 @@ public class AddQ_frag extends Fragment
         firebaseDatabaseQuestions = FirebaseDatabase.getInstance();
         databaseReferenceQuestions= firebaseDatabaseQuestions.getReference(DataBase_Refrences.BANKQUESTIONS.getRef());
         animatedDialog            = new AnimatedDialog(getActivity());
-
+        ControlPanel.Title.setText(getString(R.string.addQ));
         if (getArguments()!=null){
 
+            ControlPanel.Title.setText(getString(R.string.edit));
             QestionID = getArguments().getString("ID","");
             val       = getArguments().getString("val","");
 
@@ -308,7 +310,7 @@ public class AddQ_frag extends Fragment
     public void dataEditedsussess() {
 
         animatedDialog.Close_Dialog();
-        Toast.makeText(getActivity(), "لقد تم تعديل السوال بنجاح", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "لقد تم تعديل السؤال بنجاح", Toast.LENGTH_SHORT).show();
         ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
 
         if (controlUI!=null){

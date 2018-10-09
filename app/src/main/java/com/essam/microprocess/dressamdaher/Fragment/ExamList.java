@@ -14,12 +14,15 @@ import com.essam.microprocess.dressamdaher.Adapter.ViewHolder;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.AddExam_pojo;
 import com.essam.microprocess.dressamdaher.R;
+import com.essam.microprocess.dressamdaher.Views.ControlPanel;
+import com.essam.microprocess.dressamdaher.Views.MainActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class ExamList extends Fragment {
@@ -31,7 +34,7 @@ public class ExamList extends Fragment {
         // Inflate the layout for this fragment
          View v = inflater.inflate(R.layout.fragment_exam_list, container, false);
         ButterKnife.bind(this,v);
-
+        ControlPanel.Title.setText(R.string.examList);
         ConfigRecyceler();
 
          return v;
@@ -46,5 +49,19 @@ public class ExamList extends Fragment {
         recyclerView.setAdapter(adapter);
 
     }
+
+    @OnClick(R.id.FloatActionbutton)
+    void OpenAddExam(View view){
+
+        getActivity().getSupportFragmentManager().popBackStack();
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,new addExam())
+                .addToBackStack(null)
+                .commit();
+
+    }
+
 
 }

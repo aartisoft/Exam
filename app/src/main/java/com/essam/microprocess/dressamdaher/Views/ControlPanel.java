@@ -38,7 +38,7 @@ public class ControlPanel extends AppCompatActivity
     private ImageView open_nav;
     private DrawerLayout drawer;
     private NavigationView navigation;
-    private TextView Title ;
+    public static TextView Title ;
     private FirebaseAuth auth;
     ControlpanelPresnter controlpanelPresnter;
     AnimatedDialog animatedDialog;
@@ -117,8 +117,7 @@ public class ControlPanel extends AppCompatActivity
 
     @Override
     public void whenClickFAB_showFrag() {
-        Title.setText(getResources().getString(R.string.addQ));
-        getSupportFragmentManager().popBackStack();
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
@@ -168,8 +167,8 @@ public class ControlPanel extends AppCompatActivity
         b.putString("ID",questionID);
         b.putString("val",val);
         addQ_frag.setArguments(b);
-        Title.setText(getResources().getString(R.string.edit));
-        getSupportFragmentManager().popBackStack();
+
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
@@ -183,15 +182,7 @@ public class ControlPanel extends AppCompatActivity
     @Override
     public void editSuccessopenBank() {
 
-        Title.setText(R.string.questions);
-        getSupportFragmentManager().popBackStack();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                .replace(R.id.Exam_Frame,new Question_Bank_Frag())
-                .addToBackStack(null)
-                .commit();
-
+        onBackPressed();
 
     }
 
@@ -221,7 +212,6 @@ public class ControlPanel extends AppCompatActivity
             case R.id.emams:
 
                 getSupportFragmentManager().popBackStack();
-                Title.setText(R.string.examList);
                 getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
@@ -234,7 +224,6 @@ public class ControlPanel extends AppCompatActivity
 
                 //  اداره الطلاب
                 getSupportFragmentManager().popBackStack();
-                Title.setText(R.string.mangeStudent);
                 getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
@@ -270,7 +259,7 @@ public class ControlPanel extends AppCompatActivity
                 break;
             case R.id.questions:
 
-                Title.setText(R.string.questions);
+
                 getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -284,7 +273,7 @@ public class ControlPanel extends AppCompatActivity
 
             case R.id.addExam :
 
-                Title.setText(R.string.addExam);
+
                 getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager()
                         .beginTransaction()

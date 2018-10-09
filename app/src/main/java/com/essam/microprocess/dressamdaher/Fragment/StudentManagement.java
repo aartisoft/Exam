@@ -20,6 +20,7 @@ import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.MainPresnter.StudentMangementPresenter;
 import com.essam.microprocess.dressamdaher.R;
+import com.essam.microprocess.dressamdaher.Views.ControlPanel;
 
 import java.util.List;
 
@@ -41,6 +42,8 @@ public class StudentManagement extends Fragment implements StudentManagementCont
         // Inflate the layout for this fragment
          View v = inflater.inflate(R.layout.student_mangment, container, false);
         ButterKnife.bind(this,v);
+        ControlPanel.Title.setText(R.string.mangeStudent);
+
         searchview = v.findViewById(R.id.search);
 
         searchview.setQueryHint("قم بالبحث عن طريق الاسم ");
