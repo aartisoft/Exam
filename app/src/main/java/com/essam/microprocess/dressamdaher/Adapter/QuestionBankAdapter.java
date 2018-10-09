@@ -27,6 +27,7 @@ import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
 import com.essam.microprocess.dressamdaher.Dialog.CustomTypeFaceSpan;
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
+import com.essam.microprocess.dressamdaher.MainPresnter.Question_BankPresenter;
 import com.essam.microprocess.dressamdaher.R;
 
 import java.util.ArrayList;
@@ -40,12 +41,12 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     Context context;
 
     QuestionsBankContract.view listinParent;
-
+    QuestionsBankContract.presenter presenter;
     public QuestionBankAdapter(List <Questions_Form> qestions, Context context, QuestionsBankContract.view view){
         this.listinParent = view;
         this.qestions = qestions;
         this.context  = context;
-
+        presenter = new Question_BankPresenter(listinParent) ;
 
     }
 
@@ -142,7 +143,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+   static public class ViewHolder extends RecyclerView.ViewHolder {
         CardView Cardview;
         LinearLayout background;
         TextView tx;

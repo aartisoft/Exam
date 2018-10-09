@@ -120,6 +120,8 @@
     <string name="aboutus">تواصل معنا</string>
     <string name="aboutDoctor">عن الدكتور</string>
     <string name="aboutProgrammer">عن المبرمج</string>
+    <string name="sendtoaddexam">إرسال إلى إضافة إختبار</string>
+    <string name="delete_Exam">حذف الاختبار</string>
 
 
 </resources>

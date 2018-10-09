@@ -71,7 +71,7 @@ public class ExamList extends Fragment implements ExamListContract.view{
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ExamList_Rec_Adapter adapter = new ExamList_Rec_Adapter(AddExam_pojo.class,R.layout.examlist_rec_layout,
-               ViewHolder.class,reference);
+               ViewHolder.class,reference,getActivity());
         recyclerView.setAdapter(adapter);
 
     }

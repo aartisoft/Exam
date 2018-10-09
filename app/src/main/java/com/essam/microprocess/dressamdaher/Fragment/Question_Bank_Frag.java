@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Adapter.QuestionBankAdapter;
 import com.essam.microprocess.dressamdaher.Adapter.RecyclerItemTouchHelper;
+import com.essam.microprocess.dressamdaher.Adapter.ViewHolder;
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
@@ -190,7 +191,7 @@ public class Question_Bank_Frag extends Fragment
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
 
 
-                view    = viewHolder.itemView.findViewById(R.id.tx);
+                 view    = viewHolder.itemView.findViewById(R.id.tx);
 
                 presenter.addQuestionToAddTestRecycler(QuestionBankAdapter.qestions.get(position).getQuestionID());
 
@@ -200,7 +201,7 @@ public class Question_Bank_Frag extends Fragment
             @Override
             public void sentSuccessfully(String Result) {
 
-                view.setText("تم الإرسال");
+                 view.setText("تم الإرسال");
 
             }
 

@@ -1,13 +1,22 @@
 package com.essam.microprocess.dressamdaher.Adapter;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.essam.microprocess.dressamdaher.Dialog.CustomTypeFaceSpan;
 import com.essam.microprocess.dressamdaher.JsonModel.AddExam_pojo;
 import com.essam.microprocess.dressamdaher.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -22,7 +31,7 @@ import java.util.List;
 
 public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,ViewHolder> {
 
-
+    Context context;
     /**
      * @param modelClass      Firebase will marshall the data at a location into
      *                        an instance of a class that you provide
@@ -33,8 +42,9 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
      * @param ref             The Firebase location to watch for data changes. Can also be a slice of a location,
      *                        using some combination of {@code limit()}, {@code startAt()}, and {@code endAt()}.
      */
-    public ExamList_Rec_Adapter(Class<AddExam_pojo> modelClass, int modelLayout, Class<ViewHolder> viewHolderClass, Query ref) {
+    public ExamList_Rec_Adapter(Class<AddExam_pojo> modelClass, int modelLayout, Class<ViewHolder> viewHolderClass, Query ref, Context context) {
         super(modelClass, modelLayout, viewHolderClass, ref);
+        this.context = context;
     }
 
     @Override
@@ -46,9 +56,9 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
         holder.Cardview.setScaleY(.9f);
         holder.Cardview.animate().scaleX(1f).scaleY(1f).setDuration(500);
 
+        holder.ExamID = model.getExamID();
 
 
     }
-
 
 }
