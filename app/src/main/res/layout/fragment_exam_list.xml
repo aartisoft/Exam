@@ -15,6 +15,17 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <ImageView
+    android:id="@+id/backgroundground"
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    android:src="@drawable/ic_noexams"
+    android:layout_gravity="center_horizontal|center_vertical"
+    android:visibility="gone"
+    android:scaleType="fitXY"
+
+    />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/FloatActionbutton"
         android:layout_width="wrap_content"

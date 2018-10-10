@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.essam.microprocess.dressamdaher.Adapter.ExamList_Rec_Adapter;
 import com.essam.microprocess.dressamdaher.Adapter.ViewHolder;
@@ -41,6 +42,9 @@ public class ExamList extends Fragment implements ExamListContract.view{
 
     @BindView(R.id.FloatActionbutton)
     FloatingActionButton actionButton;
+
+    @BindView(R.id.backgroundground)
+    ImageView background;
 
     private FirebaseAuth auth;
     ExamListContract.presenter presenter;
@@ -73,6 +77,25 @@ public class ExamList extends Fragment implements ExamListContract.view{
         ExamList_Rec_Adapter adapter = new ExamList_Rec_Adapter(AddExam_pojo.class,R.layout.examlist_rec_layout,
                ViewHolder.class,reference,getActivity());
         recyclerView.setAdapter(adapter);
+
+        //BACKGROUND
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    background.setVisibility(View.GONE);
+                }
+                else {
+                    background.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
 

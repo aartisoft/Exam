@@ -103,6 +103,9 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
 
        if(Result.equals("Successful")){
 
+
+           SignIn.setEnabled(false);
+
            dialog.ShowDialog();
            presenter.passlogIn(et_email.getText().toString().trim() , et_password.getText().toString());
 
@@ -135,6 +138,8 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
     public void logInResult(String Result) {
 
         if (Result.equals("Successful")){
+
+
             //Successful Login .
             dialog.Close_Dialog();
             //Toast.makeText(getActivity(), Result, Toast.LENGTH_SHORT).show();
@@ -148,10 +153,12 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
 
         }
         else {
+            SignIn.setEnabled(true);
             //Failure Login .
             dialog.Close_Dialog();
             if (isNetworkConnected()) {
                 et_password.setError(getString(R.string.PleaseMakesure),null);
+
             }
             else {
                 et_password.setError(getString(R.string.makesure_fromNetword),null);
