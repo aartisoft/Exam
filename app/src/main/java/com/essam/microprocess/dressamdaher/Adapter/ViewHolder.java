@@ -92,7 +92,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
                 Menu menu = popup.getMenu();
                 for (int i = 0; i < menu.size(); i++) {
-
                     MenuItem mi = menu.getItem(i);
                     applyFontToMenuItem(mi);
 
@@ -111,13 +110,17 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
+
                     linear.setEnabled(true);
+
                 }
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
 
             }
         });
@@ -138,17 +141,22 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+
                 dialog.Close_Dialog();
                 AlertDialog alertDialog = new AlertDialog(context,"تم حذف الاختبار بنجاح");
                 alertDialog.show();
 
+
             }
         }).addOnFailureListener(new OnFailureListener() {
+
             @Override
             public void onFailure(@NonNull Exception e) {
+
                 dialog.Close_Dialog();
                 AlertDialog alertDialog = new AlertDialog(context,"حدثت مشكلة" +e.toString() );
                 alertDialog.show();
+
             }
         });
     }

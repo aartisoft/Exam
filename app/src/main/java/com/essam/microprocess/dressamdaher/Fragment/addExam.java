@@ -34,16 +34,21 @@ import com.essam.microprocess.dressamdaher.Adapter.addExam_Rec_Adapter;
 import com.essam.microprocess.dressamdaher.Contracts.addExamContract;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
+import com.essam.microprocess.dressamdaher.JsonModel.Zone;
 import com.essam.microprocess.dressamdaher.MainPresnter.addExamPresenter;
 import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.Views.ControlPanel;
 import com.essam.microprocess.dressamdaher.Views.MainActivity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -217,13 +222,26 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
                         if(Questions.size() > 0 ) {
 
+
                             if(!ExamName.getText().toString().isEmpty()) {
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                                String currentDateandTime = sdf.format(new Date());
+
                                 dialog.ShowDialog();
-                                presenter.storeExaminDatabase(hour,minute,second,et_degree.getText().toString()
-                                        ,et_random_number_question.getText().toString()
-                                        ,final_degree,Questions,ExamName.getText().toString(),currentDateandTime);
+                                //  getting time from server  ..... //
+                                Map<String , String> map = new HashMap<>();
+                                map.put("key","KXG6INZZU6EO");
+                                map.put("format","json");
+
+                                addExamPresenter addExamPresenter = new addExamPresenter(addExam.this);
+                                addExamPresenter.tellModelToGetDate(map);
+//
+//                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                                String currentDateandTime = sdf.format(new Date());
+//
+////                                presenter.storeExaminDatabase(hour,minute,second,et_degree.getText().toString()
+////                                        ,et_random_number_question.getText().toString()
+////                                        ,final_degree,Questions,ExamName.getText().toString(),currentDateandTime);
+
+
 
                             }
                             else {
@@ -258,6 +276,26 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         return v;
     }
 
+
+    @Override
+    public void realtimehere(Zone zone) {
+
+
+       String date  = getDate(zone.getTimestamp());
+
+        //  هنا الوقت موجود من هنا بقا حنقدر نخزن الوقت في الداتا بيز
+        presenter.storeExaminDatabase(hour,minute,second,et_degree.getText().toString()
+                ,et_random_number_question.getText().toString()
+                ,final_degree,Questions,ExamName.getText().toString(),date);
+        dialog.Close_Dialog();
+
+
+    }
+
+    @Override
+    public void cantgetRealTime(String E) {
+
+    }
 
     @Override
     public void ConfigRecyclerview(List<Questions_Form> Questions) {
@@ -482,6 +520,10 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         return result;
     }
 
+    private String getDate(long time_stamp_server) {
 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+        return formatter.format(time_stamp_server);
+    }
 
 }

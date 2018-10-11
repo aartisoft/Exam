@@ -7,12 +7,13 @@ import java.util.List;
  */
 
 public class AddExam_pojo {
-    int hour,minute , second;
 
-    String examID,oneQestionDegree, numberofQestion, final_degree;
+    private int hour,minute , second;
 
-    List<Questions_Form> questions;
-    String examName, currentDateandTime;
+    private String examID,oneQestionDegree, numberofQestion, final_degree;
+
+    private List<Questions_Form> questions;
+    private String examName, currentDateandTime;
 
     public AddExam_pojo() {
     }

@@ -3,12 +3,16 @@ package com.essam.microprocess.dressamdaher.MainModle;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import com.essam.microprocess.dressamdaher.ApiRetrofit.ApiMethod;
+import com.essam.microprocess.dressamdaher.ApiRetrofit.Retrofit_Body;
 import com.essam.microprocess.dressamdaher.Contracts.addExamContract;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.Fragment.addExam;
 import com.essam.microprocess.dressamdaher.JsonModel.AddExam_pojo;
+import com.essam.microprocess.dressamdaher.JsonModel.All_Country_Details;
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
+import com.essam.microprocess.dressamdaher.JsonModel.Zone;
 import com.essam.microprocess.dressamdaher.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,6 +24,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by microprocess on 2018-10-05.
@@ -101,6 +111,11 @@ public class addExamModel implements addExamContract.model {
 
     @Override
     public void ClearList() {
+
+
+
+
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.CHOSENQUESTIONID.getRef());
         reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -110,7 +125,13 @@ public class addExamModel implements addExamContract.model {
                 presenter.refreshAdapter();
             }
         });
+
+
+
     }
+
+
+
 
     @Override
     public void storeExaminDatabase(int hour, int minute, int second, String oneQestionDegree, String NumberofQestion, String final_degree, List<Questions_Form> questions, String ExamName, String currentDateandTime) {
@@ -127,6 +148,34 @@ public class addExamModel implements addExamContract.model {
                 presenter.Problem(e.toString());
             }
         });
+    }
+
+    @Override
+    public void getDateAndTime(Map<String , String> map) {
+
+        ApiMethod apiMethod =  Retrofit_Body.getRetrofit().create(ApiMethod.class);
+        Call<All_Country_Details> connection = apiMethod.getTiming(map);
+        connection.enqueue(new Callback<All_Country_Details>() {
+            @Override
+            public void onResponse(@NonNull Call<All_Country_Details> call, @NonNull Response<All_Country_Details> response) {
+
+                if (response.isSuccessful()){
+
+                   Zone zone = Objects.requireNonNull(response.body()).getZones().get(105);
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<All_Country_Details> call, @NonNull Throwable t) {
+
+            }
+        });
+
+
     }
 
 

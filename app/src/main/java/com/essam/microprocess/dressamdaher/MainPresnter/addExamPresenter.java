@@ -2,22 +2,41 @@ package com.essam.microprocess.dressamdaher.MainPresnter;
 
 import com.essam.microprocess.dressamdaher.Contracts.addExamContract;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
+import com.essam.microprocess.dressamdaher.JsonModel.Zone;
 import com.essam.microprocess.dressamdaher.MainModle.addExamModel;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by microprocess on 2018-10-05.
  */
 
 public class addExamPresenter implements addExamContract.presenter {
+
     addExamContract.model model;
-    addExamContract.view view ;
+    addExamContract.view  view ;
+
     public addExamPresenter(addExamContract.view view){
 
         this.view = view ;
-        model = new addExamModel(this);
+        model     = new addExamModel(this);
 
+    }
+
+    @Override
+    public void updateUItoDate(Zone zone) {
+
+    }
+
+    @Override
+    public void problemwithTime(String E) {
+
+    }
+
+    @Override
+    public void tellModelToGetDate(Map<String, String> map) {
+        model.getDateAndTime(map);
     }
 
     @Override
