@@ -448,6 +448,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
             if (minutes <= 0) {
 
                 Toast.makeText(getActivity(), "يجب ملئ الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "يجب ملئ الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
             } else {
 
                 hour = 0;
@@ -528,8 +529,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 //        return formatter.format(time_stamp_server);
           Calendar cal = Calendar.getInstance(Locale.ENGLISH);
           cal.setTimeInMillis(time_stamp_server * 1000L);
-         return DateFormat.format("dd-MM-yyyy", cal).toString();
-
+          return DateFormat.format("dd-MM-yyyy", cal).toString();
 
     }
 
