@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -42,11 +43,13 @@ import com.essam.microprocess.dressamdaher.Views.MainActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -287,7 +290,6 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         presenter.storeExaminDatabase(hour,minute,second,et_degree.getText().toString()
                 ,et_random_number_question.getText().toString()
                 ,final_degree,Questions,ExamName.getText().toString(),date);
-        dialog.Close_Dialog();
 
 
     }
@@ -347,7 +349,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         presenter.ClearList();
         txFinal_Degree.setText("0");
         ExamName.setText("");
-
+        dialog.Close_Dialog();
 
 
     }
@@ -522,8 +524,13 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     private String getDate(long time_stamp_server) {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
-        return formatter.format(time_stamp_server);
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+//        return formatter.format(time_stamp_server);
+          Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+          cal.setTimeInMillis(time_stamp_server * 1000L);
+         return DateFormat.format("dd-MM-yyyy", cal).toString();
+
+
     }
 
 }

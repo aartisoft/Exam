@@ -26,11 +26,13 @@ public class addExamPresenter implements addExamContract.presenter {
 
     @Override
     public void updateUItoDate(Zone zone) {
-
+        view.realtimehere(zone);
     }
 
     @Override
     public void problemwithTime(String E) {
+
+        view.cantgetRealTime(E);
 
     }
 
@@ -41,6 +43,7 @@ public class addExamPresenter implements addExamContract.presenter {
 
     @Override
     public void Problem(String Result) {
+
         view.Problem(Result);
     }
 

@@ -161,7 +161,8 @@ public class addExamModel implements addExamContract.model {
 
                 if (response.isSuccessful()){
 
-                   Zone zone = Objects.requireNonNull(response.body()).getZones().get(105);
+                   Zone zone = Objects.requireNonNull(response.body()).getZones().get(144);
+                    presenter.updateUItoDate(zone);
 
                 }
 
@@ -171,6 +172,8 @@ public class addExamModel implements addExamContract.model {
 
             @Override
             public void onFailure(@NonNull Call<All_Country_Details> call, @NonNull Throwable t) {
+
+                presenter.problemwithTime(t.getMessage());
 
             }
         });
