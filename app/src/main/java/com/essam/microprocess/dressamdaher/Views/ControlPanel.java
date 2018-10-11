@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
+import com.essam.microprocess.dressamdaher.Fragment.AboutProgrammer;
 import com.essam.microprocess.dressamdaher.Fragment.AddQ_frag;
 import com.essam.microprocess.dressamdaher.Fragment.ExamList;
 import com.essam.microprocess.dressamdaher.Fragment.Question_Bank_Frag;
@@ -299,6 +300,19 @@ public class ControlPanel extends AppCompatActivity
                         .replace(R.id.Exam_Frame,new addExam())
                         .addToBackStack(null)
                         .commit();
+                break;
+
+            case R.id.aboutProgrammer :
+
+                getSupportFragmentManager().popBackStack();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                        .replace(R.id.Exam_Frame,new AboutProgrammer())
+                        .addToBackStack(null)
+                        .commit();
+
+
                 break;
         }
 //        getSupportFragmentManager().popBackStack();   //finish

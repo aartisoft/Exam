@@ -78,7 +78,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="إبدأ الإختبار"
+            android:text="@string/startexam"
             android:textColor="@android:color/white"
             android:fontFamily="@font/cairo"
             android:background="@drawable/button_background4"

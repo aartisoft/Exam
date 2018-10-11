@@ -63,7 +63,7 @@
 
     // menu //
 
-    <string name="addExam">إضافه إختبار</string>
+    <string name="addExam">إضافه اختبار</string>
     <string name="mangeStudent">إدارة الطلاب</string>
 
     <string name="examList">قائمة الاختبارات</string>
@@ -71,7 +71,7 @@
     <string name="banned">حظر الطالب</string>
     <string name="Rating"> تقييم الطالب </string>
     <string name="results">نتائج الاختبارات</string>
-    <string name="questions">بنك الاسئله </string>
+    <string name="questions">بنك الاسئلة </string>
     <string name="exit">خروج</string>
     <string name="Search">البحث</string>
 
@@ -92,9 +92,9 @@
     <string name="RemoveAsk">هل حقا تريد فك حظر هذا الطالب ؟ </string>
     <string name="RemoveDone">تم فك حظر الطالب بنجاح</string>
 
-   <string name="choosenQuestion">الأسئلة المختارة</string>
+    <string name="choosenQuestion">الأسئلة المختارة</string>
     <string name="question">اسئلة</string>
-    <string name="examTime">مدة الإختبار</string>
+    <string name="examTime">مدة الاختبار</string>
     <string name="s_m_h">ثانية : دقيقة : ساعة</string>
     <string name="DegreeDistribution">توزيع الدرجات</string>
 
@@ -104,12 +104,7 @@
     <string name="answerTwo"> يرجي ادخال الاجابه الثانيه هنا </string>
     <string name="answerThre"> يرجي ادخال الاجابه الثالثه هنا </string>
     <string name="answerFour"> يرجي ادخال الاجابه الرابعه هنا </string>
-    <string name="ExamName">إسم الإختبار</string>
-
-
-
-
-
+    <string name="ExamName">إسم الاختبار</string>
 
 
     <string name="edit_Q"> تعديل علي السؤال </string>
@@ -120,8 +115,12 @@
     <string name="aboutus">تواصل معنا</string>
     <string name="aboutDoctor">عن الدكتور</string>
     <string name="aboutProgrammer">عن المبرمج</string>
-    <string name="sendtoaddexam">إرسال إلى إضافة إختبار</string>
+    <string name="sendtoaddexam">إرسال إلى إضافة اختبار</string>
     <string name="delete_Exam">حذف الاختبار</string>
+    <string name="Aboutus1">دائما نبحث عن التميز والابداع\nومازلنا نبحث عما يرضي أذواق \n عملائنا الكرام</string>
+    <string name="Contectus">للتواصل</string>
+    <string name="Aboutus2">\nم/ علاء محمود \n alaadah95@gmail.com \n م/ محمد رسلان \n mohamed.raslan79@yahoo.com</string>
+    <string name="startexam">إبدأ الاختبار</string>
 
 
 </resources>
