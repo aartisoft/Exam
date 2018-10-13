@@ -61,7 +61,8 @@ public class Exam extends AppCompatActivity implements View.OnClickListener{
         buttonB.setOnClickListener(this);
         buttonC.setOnClickListener(this);
         buttonD.setOnClickListener(this);
-
+        trueClick                 = Objects.requireNonNull(this).getDrawable(R.drawable.radiobutton_check_true);
+        falseClick                = Objects.requireNonNull(this).getDrawable(R.drawable.radiobutton_check_false);
 
     }
 
@@ -73,8 +74,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener{
         layout1.setAnimation(RTL);
         relativeLayout.startAnimation(LTR);
         relativeLayout2.startAnimation(downtoup);
-        trueClick                 = Objects.requireNonNull(this).getDrawable(R.drawable.radiobutton_check_true);
-        falseClick                = Objects.requireNonNull(this).getDrawable(R.drawable.radiobutton_check_false);
+
     }
 
 
