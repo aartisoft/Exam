@@ -1,15 +1,30 @@
 package com.essam.microprocess.dressamdaher.MainModle;
 
 import android.support.annotation.NonNull;
+import android.text.format.DateFormat;
 
+import com.essam.microprocess.dressamdaher.ApiRetrofit.ApiMethod;
+import com.essam.microprocess.dressamdaher.ApiRetrofit.Retrofit_Body;
 import com.essam.microprocess.dressamdaher.Contracts.ExamListContract;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
+import com.essam.microprocess.dressamdaher.JsonModel.All_Country_Details;
+import com.essam.microprocess.dressamdaher.JsonModel.Zone;
 import com.essam.microprocess.dressamdaher.MainPresnter.ExamListPresenter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by microprocess on 2018-10-09.
@@ -52,4 +67,57 @@ public class ExamListModel implements ExamListContract.model {
             });
 
     }
+
+
+    public void getDateAndTime() {
+
+        Map<String , String> map = new HashMap<>();
+        map.put("key", DataBase_Refrences.TimeApiKey.getRef());
+        map.put("format",DataBase_Refrences.Format.getRef());
+        ApiMethod apiMethod =  Retrofit_Body.getRetrofit().create(ApiMethod.class);
+        Call<All_Country_Details> connection = apiMethod.getTiming(map);
+        connection.enqueue(new Callback<All_Country_Details>() {
+            @Override
+            public void onResponse(@NonNull Call<All_Country_Details> call, @NonNull Response<All_Country_Details> response) {
+
+                if (response.isSuccessful()){
+
+                    Zone zone = Objects.requireNonNull(response.body()).getZones().get(144);
+                    realtimehere(zone);
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<All_Country_Details> call, @NonNull Throwable t) {
+
+
+
+            }
+        });
+
+
+    }
+
+
+
+    public String getDate(long time_stamp_server) {
+
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+//        return formatter.format(time_stamp_server);
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTimeInMillis(time_stamp_server * 1000L);
+        return DateFormat.format("dd-MM-yyyy", cal).toString();
+
+    }
+
+    public void realtimehere(Zone zone) {
+
+        final String date  = getDate(zone.getTimestamp());
+        presenter.PassRealTimeFromServerToView(date);
+    }
+
 }

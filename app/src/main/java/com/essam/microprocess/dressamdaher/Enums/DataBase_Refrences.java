@@ -4,7 +4,9 @@ public enum DataBase_Refrences {
 
 
     USERREF("Users"),BLOCKUSER("Blocked_User"),BANKQUESTIONS("Banck_Questions"),CHOSENQUESTIONID("Chosen_questions_ID")
-    ,EXAMS("Exams"),ADMIN("Admins");
+    ,EXAMS("Exams"),ADMIN("Admins"),TimeApiKey("KXG6INZZU6EO"),Format("json");
+
+
 
     private String val;
 

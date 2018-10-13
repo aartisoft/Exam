@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
@@ -34,19 +33,20 @@ import com.google.firebase.database.ValueEventListener;
  * Created by microprocess on 2018-10-08.
  */
 
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class ViewHolder extends RecyclerView.ViewHolder  {
     TextView ExamName;
-    TextView date;
+    TextView Date;
     CardView Cardview;
     Context context;
     LinearLayout linear;
     String ExamID;
     AnimatedDialog dialog;
     FirebaseAuth auth ;
+
     public ViewHolder(View itemView) {
         super(itemView);
         ExamName = itemView.findViewById(R.id.ExamName);
-        date     = itemView.findViewById(R.id.date);
+        Date     = itemView.findViewById(R.id.date);
         Cardview = itemView.findViewById(R.id.card);
         linear = itemView.findViewById(R.id.linear);
         context = itemView.getContext();
@@ -102,6 +102,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
               popup.show();
             }
         });
+
+
     }
 
     private void CheckifAdmin() {
@@ -159,5 +161,9 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
             }
         });
+
+
+
     }
+
 }

@@ -63,19 +63,24 @@ public class ExamList extends Fragment implements ExamListContract.view{
 
          ButterKnife.bind(this,v);
          ControlPanel.Title.setText(R.string.examList);
-         ConfigRecyceler();
+
          presenter = new ExamListPresenter(this);
          presenter.CheckifAdmin(auth.getCurrentUser().getUid());
 
+         //Get Time From Server Then run Recycler .
+        presenter.GetTime();
+
          return v;
     }
-    void ConfigRecyceler(){
+
+    @Override
+    public void ConfigRecyceler(String date ){
 
         Query reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ExamList_Rec_Adapter adapter = new ExamList_Rec_Adapter(AddExam_pojo.class,R.layout.examlist_rec_layout,
-               ViewHolder.class,reference,getActivity());
+               ViewHolder.class,reference,date);
         recyclerView.setAdapter(adapter);
 
         //BACKGROUND

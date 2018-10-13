@@ -28,4 +28,14 @@ public class ExamListPresenter implements ExamListContract.presenter {
         View.ShowAdminTools();
 
     }
+
+    @Override
+    public void PassRealTimeFromServerToView(String date) {
+        View.ConfigRecyceler(date);
+    }
+
+    @Override
+    public void GetTime() {
+        model.getDateAndTime();
+    }
 }

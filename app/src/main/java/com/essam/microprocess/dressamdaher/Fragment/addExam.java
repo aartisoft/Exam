@@ -34,6 +34,7 @@ import com.essam.microprocess.dressamdaher.Adapter.addExamTouchHelper;
 import com.essam.microprocess.dressamdaher.Adapter.addExam_Rec_Adapter;
 import com.essam.microprocess.dressamdaher.Contracts.addExamContract;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
+import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.JsonModel.Zone;
 import com.essam.microprocess.dressamdaher.MainPresnter.addExamPresenter;
@@ -231,8 +232,8 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
                                 dialog.ShowDialog();
                                 //  getting time from server  ..... //
                                 Map<String , String> map = new HashMap<>();
-                                map.put("key","KXG6INZZU6EO");
-                                map.put("format","json");
+                                map.put("key", DataBase_Refrences.TimeApiKey.getRef());
+                                map.put("format",DataBase_Refrences.Format.getRef());
 
                                 addExamPresenter addExamPresenter = new addExamPresenter(addExam.this);
                                 addExamPresenter.tellModelToGetDate(map);
