@@ -2,8 +2,14 @@ package com.essam.microprocess.dressamdaher.Adapter;
 
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.view.View;
+
 import com.essam.microprocess.dressamdaher.JsonModel.AddExam_pojo;
 import com.essam.microprocess.dressamdaher.R;
+import com.essam.microprocess.dressamdaher.Views.Exam;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
 
@@ -20,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,ViewHolder> {
-
+    Activity context;
     String ServerDate;
     /**
      * @param modelClass      Firebase will marshall the data at a location into
@@ -32,10 +38,12 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
      * @param ref             The Firebase location to watch for data changes. Can also be a slice of a location,
 *                        using some combination of {@code limit()}, {@code startAt()}, and {@code endAt()}.
      * @param ServerDate
+     * @param context
      */
-    public ExamList_Rec_Adapter(Class<AddExam_pojo> modelClass, int modelLayout, Class<ViewHolder> viewHolderClass, Query ref, String ServerDate) {
+    public ExamList_Rec_Adapter(Class<AddExam_pojo> modelClass, int modelLayout, Class<ViewHolder> viewHolderClass, Query ref, String ServerDate, Activity context) {
         super(modelClass, modelLayout, viewHolderClass, ref);
         this.ServerDate = ServerDate;
+        this.context = context;
     }
 
     @Override
@@ -50,8 +58,18 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
         //Data
         int dateDifference = (int) SubtractTwoDate(new SimpleDateFormat("dd-MM-yyyy"), model.getCurrentDateandTime() ,ServerDate);
-
         holder.Date.setText(Chcek(dateDifference));
+
+        //StartExam
+        holder.BtnStartExam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,Exam.class);
+                context.startActivity(intent);
+
+
+            }
+        });
 
     }
 

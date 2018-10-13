@@ -7,6 +7,8 @@
         <item name="android:itemBackground">@color/color1</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+
     </style>
 
 
@@ -45,6 +47,7 @@
         <item name="android:popupBackground">@color/color2</item>
 
     </style>
+
 
 
 </resources>

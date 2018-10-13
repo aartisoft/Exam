@@ -12,6 +12,7 @@ import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class ViewHolder extends RecyclerView.ViewHolder  {
+    Button BtnStartExam;
     TextView ExamName;
     TextView Date;
     CardView Cardview;
@@ -52,7 +54,7 @@ public class ViewHolder extends RecyclerView.ViewHolder  {
         context = itemView.getContext();
         dialog = new AnimatedDialog(context);
         auth = FirebaseAuth.getInstance();
-
+        BtnStartExam = itemView.findViewById(R.id.StartExam);
 
         linear.setEnabled(false);
         CheckifAdmin();

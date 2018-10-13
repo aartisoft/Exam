@@ -15,23 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
-
-
-        <activity android:name=".Views.ControlPanel"
+        <activity
+            android:name=".Views.ControlPanel"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            >
-
-
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity
             android:name=".Views.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,16 +30,11 @@
             </intent-filter>
         </activity>
 
-
-
-
-
-
-
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".Views.Exam"></activity>
 
     </application>
 

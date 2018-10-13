@@ -64,11 +64,15 @@ public class ExamList extends Fragment implements ExamListContract.view{
          ButterKnife.bind(this,v);
          ControlPanel.Title.setText(R.string.examList);
 
-         presenter = new ExamListPresenter(this);
-         presenter.CheckifAdmin(auth.getCurrentUser().getUid());
 
-         //Get Time From Server Then run Recycler .
+        //Get Time From Server Then run Recycler .
+        presenter = new ExamListPresenter(this);
         presenter.GetTime();
+
+        //Admin Check .
+        presenter.CheckifAdmin(auth.getCurrentUser().getUid());
+
+
 
          return v;
     }
@@ -80,7 +84,7 @@ public class ExamList extends Fragment implements ExamListContract.view{
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ExamList_Rec_Adapter adapter = new ExamList_Rec_Adapter(AddExam_pojo.class,R.layout.examlist_rec_layout,
-               ViewHolder.class,reference,date);
+               ViewHolder.class,reference,date,getActivity());
         recyclerView.setAdapter(adapter);
 
         //BACKGROUND
