@@ -82,7 +82,7 @@ public class ExamListModel implements ExamListContract.model {
 
                 if (response.isSuccessful()){
 
-                    Zone zone = Objects.requireNonNull(response.body()).getZones().get(144);
+                    Zone zone = Objects.requireNonNull(response.body()).getZones().get(DataBase_Refrences.CountryNum.getINTref());
                     realtimehere(zone);
 
                 }

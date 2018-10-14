@@ -4,7 +4,7 @@ public enum DataBase_Refrences {
 
 
     USERREF("Users"),BLOCKUSER("Blocked_User"),BANKQUESTIONS("Banck_Questions"),CHOSENQUESTIONID("Chosen_questions_ID")
-    ,EXAMS("Exams"),ADMIN("Admins"),TimeApiKey("KXG6INZZU6EO"),Format("json");
+    ,EXAMS("Exams"),ADMIN("Admins"),TimeApiKey("KXG6INZZU6EO"),Format("json"),STARTEDEXAM("ExamStarted"),CountryNum("335");
 
 
 
@@ -18,6 +18,12 @@ public enum DataBase_Refrences {
     public String getRef(){
 
         return this.val;
+
+    }
+
+    public int getINTref(){
+
+        return Integer.parseInt(this.val);
 
     }
 }

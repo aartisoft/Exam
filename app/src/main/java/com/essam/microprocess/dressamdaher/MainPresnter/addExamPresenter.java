@@ -74,10 +74,10 @@ public class addExamPresenter implements addExamContract.presenter {
     @Override
     public void storeExaminDatabase(int hour, int minute, int second, String oneQestionDegree,
                                     String NumberofQestion, String final_degree, List<Questions_Form> questions,
-                                    String ExamName, String currentDateandTime) {
+                                    String ExamName, String currentDateandTime, String Questions_size, Integer timestamp) {
 
         model.storeExaminDatabase(hour,minute,second,oneQestionDegree,
-                NumberofQestion,final_degree,questions,ExamName,currentDateandTime);
+                NumberofQestion,final_degree,questions,ExamName,currentDateandTime,Questions_size,timestamp);
 
     }
 

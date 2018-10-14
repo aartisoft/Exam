@@ -14,11 +14,12 @@ public class AddExam_pojo {
 
     private List<Questions_Form> questions;
     private String examName, currentDateandTime;
+    private String allqestionsize;
 
     public AddExam_pojo() {
     }
 
-    public AddExam_pojo(int hour, int minute, int second, String examID, String oneQestionDegree, String numberofQestion, String final_degree, List<Questions_Form> questions, String examName, String currentDateandTime) {
+    public AddExam_pojo(int hour, int minute, int second, String examID, String oneQestionDegree, String numberofQestion, String final_degree, List<Questions_Form> questions, String examName, String currentDateandTime,String allqestionsize) {
         this.hour = hour;
         this.minute = minute;
         this.second = second;
@@ -29,6 +30,11 @@ public class AddExam_pojo {
         this.questions = questions;
         this.examName = examName;
         this.currentDateandTime = currentDateandTime;
+        this.allqestionsize = allqestionsize;
+    }
+
+    public String getAllqestionsize() {
+        return allqestionsize;
     }
 
     public int getHour() {

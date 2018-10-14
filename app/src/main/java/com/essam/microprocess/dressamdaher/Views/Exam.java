@@ -1,5 +1,6 @@
 package com.essam.microprocess.dressamdaher.Views;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.R;
+import com.essam.microprocess.dressamdaher.SqLite.SQlHelper;
 
 import java.util.Objects;
 
@@ -50,13 +53,27 @@ public class Exam extends AppCompatActivity implements View.OnClickListener{
 
     private String selectAnswer = "";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam);
         ButterKnife.bind(this);
+        intialViews();
         //Animation
         Animation();
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+
+            Toast.makeText(this, ""+ bundle.getString("SqlTableName"), Toast.LENGTH_SHORT).show();
+        }
+
+
+
+    }
+    private void intialViews(){
+
         buttonA.setOnClickListener(this);
         buttonB.setOnClickListener(this);
         buttonC.setOnClickListener(this);
@@ -65,7 +82,6 @@ public class Exam extends AppCompatActivity implements View.OnClickListener{
         falseClick                = Objects.requireNonNull(this).getDrawable(R.drawable.radiobutton_check_false);
 
     }
-
     private void Animation(){
         //Animation
         LTR =  AnimationUtils.loadAnimation(this,R.anim.slide_in_left);

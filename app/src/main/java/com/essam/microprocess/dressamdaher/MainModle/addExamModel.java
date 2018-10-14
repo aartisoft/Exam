@@ -1,19 +1,15 @@
 package com.essam.microprocess.dressamdaher.MainModle;
 
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.ApiRetrofit.ApiMethod;
 import com.essam.microprocess.dressamdaher.ApiRetrofit.Retrofit_Body;
 import com.essam.microprocess.dressamdaher.Contracts.addExamContract;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
-import com.essam.microprocess.dressamdaher.Fragment.addExam;
 import com.essam.microprocess.dressamdaher.JsonModel.AddExam_pojo;
 import com.essam.microprocess.dressamdaher.JsonModel.All_Country_Details;
-import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.JsonModel.Zone;
-import com.essam.microprocess.dressamdaher.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -134,9 +130,9 @@ public class addExamModel implements addExamContract.model {
 
 
     @Override
-    public void storeExaminDatabase(int hour, int minute, int second, String oneQestionDegree, String NumberofQestion, String final_degree, List<Questions_Form> questions, String ExamName, String currentDateandTime) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef()).push();
-        AddExam_pojo Exam = new AddExam_pojo(hour,minute,second,reference.getKey(),oneQestionDegree,NumberofQestion,final_degree,questions,ExamName,currentDateandTime);
+    public void storeExaminDatabase(int hour, int minute, int second, String oneQestionDegree, String NumberofQestion, String final_degree, List<Questions_Form> questions, String ExamName, String currentDateandTime, String questions_size, Integer timestamp) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef()).child(String.valueOf(timestamp));
+        AddExam_pojo Exam = new AddExam_pojo(hour,minute,second,String.valueOf(timestamp),oneQestionDegree,NumberofQestion,final_degree,questions,ExamName,currentDateandTime,questions_size);
         reference.setValue(Exam).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -161,7 +157,7 @@ public class addExamModel implements addExamContract.model {
 
                 if (response.isSuccessful()){
 
-                   Zone zone = Objects.requireNonNull(response.body()).getZones().get(144);
+                   Zone zone = Objects.requireNonNull(response.body()).getZones().get(DataBase_Refrences.CountryNum.getINTref());
                     presenter.updateUItoDate(zone);
 
                 }

@@ -290,7 +290,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         //  هنا الوقت موجود من هنا بقا حنقدر نخزن الوقت في الداتا بيز
         presenter.storeExaminDatabase(hour,minute,second,et_degree.getText().toString()
                 ,et_random_number_question.getText().toString()
-                ,final_degree,Questions,ExamName.getText().toString(),date);
+                ,final_degree,Questions,ExamName.getText().toString(),date,Questions_size.getText().toString(),zone.getTimestamp());
 
 
     }

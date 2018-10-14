@@ -3,7 +3,6 @@ package com.essam.microprocess.dressamdaher.Contracts;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.JsonModel.Zone;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public interface addExamContract  {
         void ClearList();
         void storeExaminDatabase(int hour, int minute, int second,
                                  String oneQestionDegree, String NumberofQestion, String final_degree,
-                                 List<Questions_Form> questions, String ExamName, String currentDateandTime);
+                                 List<Questions_Form> questions, String ExamName, String currentDateandTime, String questions_size, Integer timestamp);
 
         void getDateAndTime(Map<String , String> map);
 
@@ -40,7 +39,7 @@ public interface addExamContract  {
 
         void storeExaminDatabase(int hour, int minute, int second,
                                  String oneQestionDegree, String NumberofQestion, String final_degree,
-                                 List<Questions_Form> questions, String ExamName, String currentDateandTime);
+                                 List<Questions_Form> questions, String ExamName, String currentDateandTime, String Questions_size, Integer timestamp);
         void Successful_Storing();
     }
 
