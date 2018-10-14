@@ -11,9 +11,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.essam.microprocess.dressamdaher.Contracts.ExamContract;
+import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
+import com.essam.microprocess.dressamdaher.MainPresnter.ExamPresenter;
 import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.SqLite.SQlHelper;
 
@@ -23,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Exam extends AppCompatActivity implements View.OnClickListener{
+public class Exam extends AppCompatActivity implements View.OnClickListener , ExamContract.view{
     @BindView(R.id.Liner1)
     LinearLayout layout1 ;
 
@@ -48,12 +52,17 @@ public class Exam extends AppCompatActivity implements View.OnClickListener{
     @BindView(R.id.scrollView)
     ScrollView scrollView;
 
+    @BindView(R.id.Question)
+    TextView textView;
+
     Animation LTR,RTL,downtoup;
     Drawable trueClick,falseClick;
 
-    private String selectAnswer = "";
+    private String selectAnswer = "",ID_Qestion="";
 
-
+    ExamContract.presenter presenter;
+    SQLiteDatabase db;
+    String TableName = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +73,15 @@ public class Exam extends AppCompatActivity implements View.OnClickListener{
         Animation();
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
+        if( bundle != null ){
+             TableName = bundle.getString("SqlTableName");
 
-            Toast.makeText(this, ""+ bundle.getString("SqlTableName"), Toast.LENGTH_SHORT).show();
+
+
+            SQlHelper helper = new SQlHelper(this);
+            db = helper.getWritableDatabase();
+            presenter.getQuestion(db,TableName);
         }
-
 
 
     }
@@ -81,6 +94,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener{
         trueClick                 = Objects.requireNonNull(this).getDrawable(R.drawable.radiobutton_check_true);
         falseClick                = Objects.requireNonNull(this).getDrawable(R.drawable.radiobutton_check_false);
 
+        presenter = new ExamPresenter(this);
     }
     private void Animation(){
         //Animation
@@ -152,15 +166,46 @@ public class Exam extends AppCompatActivity implements View.OnClickListener{
         @OnClick(R.id.Next)
         void BtnNext(View view){
 
-            buttonD.setBackground(falseClick);
-            buttonB.setBackground(falseClick);
-            buttonA.setBackground(falseClick);
-            buttonC.setBackground(falseClick);
-            Toast.makeText(this,selectAnswer+"",Toast.LENGTH_SHORT).show();
+            if(!selectAnswer.isEmpty()) {
+                presenter.insertAnswerInSql(db,TableName,ID_Qestion,selectAnswer);
+            }
+            else {
+                Toast.makeText(this,"يرجي اختيار اجابة",Toast.LENGTH_SHORT).show();
+            }
 
-            //Last Thing.
-            selectAnswer = "" ;
-            scrollView.scrollTo(5, 10);
-            Animation();
+
         }
+
+    @Override
+    public void quetionIs(String ID_Qestion, String question, String answerOne, String answerTwo, String answerThree, String answerFour, String correctAnswer) {
+        textView.setText(question);
+        buttonA.setText(answerOne);
+        buttonB.setText(answerTwo);
+        buttonC.setText(answerThree);
+        buttonD.setText(answerFour);
+        this.ID_Qestion = ID_Qestion ;
+
+    }
+
+    @Override
+    public void Problem(String s) {
+        AlertDialog alertDialog = new AlertDialog(this,s);
+        alertDialog.show();
+    }
+
+    @Override
+    public void AnswerInserted() {
+
+        buttonD.setBackground(falseClick);
+        buttonB.setBackground(falseClick);
+        buttonA.setBackground(falseClick);
+        buttonC.setBackground(falseClick);
+        Toast.makeText(this,selectAnswer+"",Toast.LENGTH_SHORT).show();
+
+        //Last Thing.
+        selectAnswer = "" ;
+        scrollView.scrollTo(5, 10);
+        Animation();
+        presenter.getQuestion(db,TableName);
+    }
 }

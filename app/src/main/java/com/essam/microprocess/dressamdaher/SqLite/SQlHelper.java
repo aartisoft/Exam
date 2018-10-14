@@ -20,15 +20,30 @@ public class SQlHelper extends SQLiteOpenHelper {
     public static String correctAnswer = "correctAnswer";
     public static String Student_Answer = "StudentAnswer";
 
-    public SQlHelper(Context context , String ExamID ) {
+    public SQlHelper(Context context  ) {
         super(context,DataBase_Name,null,4);
-        this.ExamID = ExamID;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        sqLiteDatabase.execSQL("CREATE TABLE " + ExamID + " ( "
+//        sqLiteDatabase.execSQL("CREATE TABLE " + ExamID + " ( "
+//                + ID_Qestion + " TEXT ,"
+//                + question + " TEXT ,"
+//                + answerOne + " TEXT ,"
+//                + answerTwo + " TEXT ,"
+//                + answerThree + " TEXT ,"
+//                + answerFour + " TEXT ,"
+//                + correctAnswer + " TEXT ,"
+//                + Student_Answer + " TEXT "
+//                +" ) "
+//        );
+    }
+
+    public void createExamTable(String ExamID) {
+        final SQLiteDatabase db = getWritableDatabase();
+
+        db.execSQL("CREATE TABLE " + ExamID + " ( "
                 + ID_Qestion + " TEXT ,"
                 + question + " TEXT ,"
                 + answerOne + " TEXT ,"
@@ -39,6 +54,8 @@ public class SQlHelper extends SQLiteOpenHelper {
                 + Student_Answer + " TEXT "
                 +" ) "
         );
+
+        db.close();
     }
 
     @Override

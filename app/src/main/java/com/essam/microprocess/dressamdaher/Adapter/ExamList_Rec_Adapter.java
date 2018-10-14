@@ -212,7 +212,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                         @Override
                         public void onSuccess(Void aVoid) {
                             getRandomQestionAndPutitInSQl(model);
-                            GotoExam("T"+model.getExamID());
+
                         }
                     });
 
@@ -241,7 +241,8 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
 
                 //then Put it in Sqlite .
-                SQlHelper helper = new SQlHelper(context,"T"+model.getExamID()); //substring To clear ( - ) from id.
+                SQlHelper helper = new SQlHelper(context); //substring To clear ( - ) from id.
+                helper.createExamTable("T"+model.getExamID());
                 SQLiteDatabase db = helper.getWritableDatabase();
                 for (int i = 0 ; i < QuestionsNumber ; ++i) {
                     // insert
@@ -258,6 +259,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                     Log.d("ExamID",x+" / Inserted");
                 }
 
+            GotoExam("T"+model.getExamID());
 
 //        String [] Cols = {SQlHelper.ID_Qestion,SQlHelper.question,SQlHelper.answerOne,SQlHelper.answerTwo,SQlHelper.answerThree
 //                ,SQlHelper.answerFour,SQlHelper.correctAnswer,SQlHelper.Student_Answer};
