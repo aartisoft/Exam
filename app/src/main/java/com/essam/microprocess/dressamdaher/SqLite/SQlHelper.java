@@ -19,6 +19,7 @@ public class SQlHelper extends SQLiteOpenHelper {
     public static String answerFour = "answerFour";
     public static String correctAnswer = "correctAnswer";
     public static String Student_Answer = "StudentAnswer";
+    public static String Degree = "Degree";
 
     public SQlHelper(Context context  ) {
         super(context,DataBase_Name,null,4);
@@ -51,8 +52,9 @@ public class SQlHelper extends SQLiteOpenHelper {
                 + answerThree + " TEXT ,"
                 + answerFour + " TEXT ,"
                 + correctAnswer + " TEXT ,"
-                + Student_Answer + " TEXT "
-                +" ) "
+                + Student_Answer + " TEXT ,"
+                + Degree + " TEXT "
+                + " ) "
         );
 
         db.close();

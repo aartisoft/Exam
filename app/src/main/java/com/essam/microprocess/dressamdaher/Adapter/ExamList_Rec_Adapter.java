@@ -100,7 +100,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
             @Override
             public void onClick(View view) {
 
-
+                dialog.ShowDialog();
                 getDateAndTime(model);
 
             }
@@ -202,7 +202,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
                     //I Dont Know .
-                    GotoExam("T"+model.getExamID());
+                    GotoExam("T"+model.getExamID(),model.getOneQestionDegree(),model.getFinal_degree());
                 }
                 else {
 
@@ -255,11 +255,12 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                     row.put(SQlHelper.answerFour, model.getQuestions().get(Random.get(i)).getAnswerFour());
                     row.put(SQlHelper.correctAnswer, model.getQuestions().get(Random.get(i)).getCorrectAnswer());
                     row.put(SQlHelper.Student_Answer, "");
+                    row.put(SQlHelper.Degree,"");
                    long x =  db.insert("T"+model.getExamID(), null, row);
                     Log.d("ExamID",x+" / Inserted");
                 }
 
-            GotoExam("T"+model.getExamID());
+            GotoExam("T"+model.getExamID(),model.getOneQestionDegree(),model.getFinal_degree());
 
 //        String [] Cols = {SQlHelper.ID_Qestion,SQlHelper.question,SQlHelper.answerOne,SQlHelper.answerTwo,SQlHelper.answerThree
 //                ,SQlHelper.answerFour,SQlHelper.correctAnswer,SQlHelper.Student_Answer};
@@ -275,9 +276,13 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
     }
 
-    void GotoExam(String SqlTableName){
+    void GotoExam(String SqlTableName,String oneQestionDegree ,String final_degree){
+
+                dialog.Close_Dialog();
                 Intent intent = new Intent(context,Exam.class);
                 intent.putExtra("SqlTableName",SqlTableName);
+                intent.putExtra("oneQestionDegree",oneQestionDegree);
+                intent.putExtra("final_degree",final_degree);
                 //here Take Date ;
                 context.startActivity(intent);
 

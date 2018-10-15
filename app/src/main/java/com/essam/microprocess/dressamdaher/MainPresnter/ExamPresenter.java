@@ -29,8 +29,8 @@ public class ExamPresenter implements ExamContract.presenter {
     }
 
     @Override
-    public void insertAnswerInSql(SQLiteDatabase db, String sqlTableName, String ID_Qestion, String selectAnswer) {
-        model.insertAnswerInSql(db,sqlTableName,ID_Qestion,selectAnswer);
+    public void insertAnswerInSql(SQLiteDatabase db, String sqlTableName, String ID_Qestion, String selectAnswer , String oneQestionDegree) {
+        model.insertAnswerInSql(db,sqlTableName,ID_Qestion,selectAnswer , oneQestionDegree);
     }
 
     @Override
@@ -41,5 +41,19 @@ public class ExamPresenter implements ExamContract.presenter {
     @Override
     public void Problem(String s) {
         view.Problem(s);
+    }
+
+    @Override
+    public void Skiped() {
+
+        view.Skipped();
+
+    }
+
+    @Override
+    public void Skip(SQLiteDatabase db, String tableName, String id_qestion) {
+
+        model.skip(db,tableName,id_qestion);
+
     }
 }

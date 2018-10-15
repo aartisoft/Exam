@@ -58,7 +58,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
     Animation LTR,RTL,downtoup;
     Drawable trueClick,falseClick;
 
-    private String selectAnswer = "",ID_Qestion="";
+    private String selectAnswer = "",ID_Qestion="" , oneQestionDegree = "" , final_degree = "";
 
     ExamContract.presenter presenter;
     SQLiteDatabase db;
@@ -75,6 +75,8 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         Bundle bundle = getIntent().getExtras();
         if( bundle != null ){
              TableName = bundle.getString("SqlTableName");
+            oneQestionDegree = bundle.getString("oneQestionDegree");
+            final_degree = bundle.getString("final_degree");
 
 
 
@@ -147,19 +149,14 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
             buttonC.setBackground(falseClick);
 
         }
-        Toast.makeText(this,selectAnswer+"",Toast.LENGTH_SHORT).show();
+
     }
 
         @OnClick(R.id.Skip)
         void BtnSkip(View view){
-            scrollView.scrollTo(5, 10);
-            Animation();
-            selectAnswer = "" ;
-            buttonD.setBackground(falseClick);
-            buttonB.setBackground(falseClick);
-            buttonA.setBackground(falseClick);
-            buttonC.setBackground(falseClick);
-            Toast.makeText(this,selectAnswer+"",Toast.LENGTH_SHORT).show();
+
+            presenter.Skip(db,TableName,ID_Qestion);
+
         }
 
 
@@ -167,7 +164,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         void BtnNext(View view){
 
             if(!selectAnswer.isEmpty()) {
-                presenter.insertAnswerInSql(db,TableName,ID_Qestion,selectAnswer);
+                presenter.insertAnswerInSql(db,TableName,ID_Qestion,selectAnswer,oneQestionDegree);
             }
             else {
                 Toast.makeText(this,"يرجي اختيار اجابة",Toast.LENGTH_SHORT).show();
@@ -206,6 +203,21 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         selectAnswer = "" ;
         scrollView.scrollTo(5, 10);
         Animation();
+        //get Another Question.
+        presenter.getQuestion(db,TableName);
+    }
+
+    @Override
+    public void Skipped() {
+
+        selectAnswer = "" ;
+        scrollView.scrollTo(5, 10);
+        Animation();
+        buttonD.setBackground(falseClick);
+        buttonB.setBackground(falseClick);
+        buttonA.setBackground(falseClick);
+        buttonC.setBackground(falseClick);
+        //get Another Question.
         presenter.getQuestion(db,TableName);
     }
 }

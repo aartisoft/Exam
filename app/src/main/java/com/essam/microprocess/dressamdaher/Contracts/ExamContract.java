@@ -13,6 +13,8 @@ public interface ExamContract {
         void Problem(String s);
 
         void AnswerInserted();
+
+        void Skipped();
     }
     interface presenter{
 
@@ -20,16 +22,23 @@ public interface ExamContract {
 
         void quetionIs(String ID_Qestion, String question, String answerOne, String answerTwo, String answerThree, String answerFour, String correctAnswer);
 
-        void insertAnswerInSql(SQLiteDatabase db, String sqlTableName , String ID_Qestion, String selectAnswer);
+        void insertAnswerInSql(SQLiteDatabase db, String sqlTableName , String ID_Qestion, String selectAnswer ,String oneQestionDegree);
 
         void AnswerInserted();
 
         void Problem(String s);
+
+        void Skiped();
+
+        void Skip(SQLiteDatabase db, String tableName, String id_qestion);
     }
     interface model{
 
         void getQuestion(SQLiteDatabase db , String sqlTableName);
 
-        void insertAnswerInSql(SQLiteDatabase db, String sqlTableName , String ID_Qestion ,String selectAnswer);
+        void insertAnswerInSql(SQLiteDatabase db, String sqlTableName , String ID_Qestion ,String selectAnswer ,String oneQestionDegree);
+        String getCorrectAnswer(SQLiteDatabase db,  String sqlTableName ,String ID_Qestion);
+        boolean deleteRow(SQLiteDatabase db, String sqlTableName  , String ID_Qestion);
+        void skip (SQLiteDatabase db, String sqlTableName  , String ID_Qestion);
     }
 }
