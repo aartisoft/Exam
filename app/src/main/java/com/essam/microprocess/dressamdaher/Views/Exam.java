@@ -224,10 +224,11 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
 
     @Override
     public void ExamEnd(String s) {
-        finish();
         Intent intent = new Intent(this,Result.class);
         intent.putExtra("SqlTableName",TableName);
         intent.putExtra("Message",s);
+        intent.putExtra("final_degree",final_degree);
         startActivity(intent);
+        finish();
     }
 }

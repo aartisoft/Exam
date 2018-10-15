@@ -255,7 +255,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                     row.put(SQlHelper.answerFour, model.getQuestions().get(Random.get(i)).getAnswerFour());
                     row.put(SQlHelper.correctAnswer, model.getQuestions().get(Random.get(i)).getCorrectAnswer());
                     row.put(SQlHelper.Student_Answer, "");
-                    row.put(SQlHelper.Degree,"");
+                    row.put(SQlHelper.Degree,"0");
                    long x =  db.insert("T"+model.getExamID(), null, row);
                     Log.d("ExamID",x+" / Inserted");
                 }
