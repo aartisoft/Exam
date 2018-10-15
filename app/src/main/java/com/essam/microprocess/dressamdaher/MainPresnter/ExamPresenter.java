@@ -56,4 +56,9 @@ public class ExamPresenter implements ExamContract.presenter {
         model.skip(db,tableName,id_qestion);
 
     }
+
+    @Override
+    public void ExamEnd(String s) {
+        view.ExamEnd(s);
+    }
 }

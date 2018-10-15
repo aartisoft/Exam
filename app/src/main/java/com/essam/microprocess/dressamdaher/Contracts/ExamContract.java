@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public interface ExamContract {
     interface view {
+
         void quetionIs(String ID_Qestion, String question, String answerOne, String answerTwo, String answerThree, String answerFour, String correctAnswer);
 
         void Problem(String s);
@@ -15,6 +16,9 @@ public interface ExamContract {
         void AnswerInserted();
 
         void Skipped();
+
+        void ExamEnd(String s);
+
     }
     interface presenter{
 
@@ -31,6 +35,8 @@ public interface ExamContract {
         void Skiped();
 
         void Skip(SQLiteDatabase db, String tableName, String id_qestion);
+
+        void ExamEnd(String s);
     }
     interface model{
 

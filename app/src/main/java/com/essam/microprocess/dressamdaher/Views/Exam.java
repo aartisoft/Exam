@@ -1,5 +1,6 @@
 package com.essam.microprocess.dressamdaher.Views;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
@@ -219,5 +220,14 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         buttonC.setBackground(falseClick);
         //get Another Question.
         presenter.getQuestion(db,TableName);
+    }
+
+    @Override
+    public void ExamEnd(String s) {
+        finish();
+        Intent intent = new Intent(this,Result.class);
+        intent.putExtra("SqlTableName",TableName);
+        intent.putExtra("Message",s);
+        startActivity(intent);
     }
 }

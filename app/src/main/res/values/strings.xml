@@ -123,6 +123,8 @@
     <string name="startexam">إبدأ الاختبار</string>
     <string name="Next">التالي</string>
     <string name="Skip">تخطي</string>
+    <string name="Result">نتيجة الاختبار</string>
+    <string name="Home">الرئيسية</string>
 
 
 </resources>

@@ -35,7 +35,7 @@ public class ExamModel implements ExamContract.model {
         }
         else {
 
-            presenter.Problem(" لقد انهيت الاختبار ");
+            presenter.ExamEnd(" لقد انهيت الاختبار ");
 
         }
 
