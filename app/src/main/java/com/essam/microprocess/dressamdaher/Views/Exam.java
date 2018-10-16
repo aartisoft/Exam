@@ -92,9 +92,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
             ExamDate = bundle.getString("ExamDate");
             TimerInMilliSecond = bundle.getLong("TimerInMilliSecond");
 
-            SQlHelper helper = new SQlHelper(this);
-            db = helper.getWritableDatabase();
-            presenter.getQuestion(db,TableName);
+
         }
 
 
@@ -118,6 +116,10 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
                 ExamEnd("انتهى وقت اختبارك");
             }
         }.start();
+
+        SQlHelper helper = new SQlHelper(this);
+        db = helper.getWritableDatabase();
+        presenter.getQuestion(db,TableName);
 
     }
     private void intialViews(){
@@ -268,6 +270,9 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
 
     @Override
     public void BlockScreen(String s) {
+
+        TimerCounter.cancel();
+
         AlertDialog alertDialog = new AlertDialog(this,s);
         alertDialog.show();
         alertDialog.setCancelable(false);
@@ -275,6 +280,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
             @Override
             public void onClick(View view) {
                 finish();
+
                 //لا تنس إغلاق ال Services هنا
 
             }
