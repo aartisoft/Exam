@@ -16,7 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -71,34 +73,38 @@ public class ExamListModel implements ExamListContract.model {
 
     public void getDateAndTime() {
 
-        Map<String , String> map = new HashMap<>();
-        map.put("key", DataBase_Refrences.TimeApiKey.getRef());
-        map.put("format",DataBase_Refrences.Format.getRef());
-        ApiMethod apiMethod =  Retrofit_Body.getRetrofit().create(ApiMethod.class);
-        Call<All_Country_Details> connection = apiMethod.getTiming(map);
-        connection.enqueue(new Callback<All_Country_Details>() {
-            @Override
-            public void onResponse(@NonNull Call<All_Country_Details> call, @NonNull Response<All_Country_Details> response) {
+//        Map<String , String> map = new HashMap<>();
+//        map.put("key", DataBase_Refrences.TimeApiKey.getRef());
+//        map.put("format",DataBase_Refrences.Format.getRef());
+//        ApiMethod apiMethod =  Retrofit_Body.getRetrofit().create(ApiMethod.class);
+//        Call<All_Country_Details> connection = apiMethod.getTiming(map);
+//        connection.enqueue(new Callback<All_Country_Details>() {
+//            @Override
+//            public void onResponse(@NonNull Call<All_Country_Details> call, @NonNull Response<All_Country_Details> response) {
+//
+//                if (response.isSuccessful()){
+//
+//                    Zone zone = Objects.requireNonNull(response.body()).getZones().get(DataBase_Refrences.CountryNum.getINTref());
+//                    realtimehere(zone);
+//
+//                }
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<All_Country_Details> call, @NonNull Throwable t) {
+//
+//
+//
+//            }
+//        });
 
-                if (response.isSuccessful()){
-
-                    Zone zone = Objects.requireNonNull(response.body()).getZones().get(DataBase_Refrences.CountryNum.getINTref());
-                    realtimehere(zone);
-
-                }
-
-
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<All_Country_Details> call, @NonNull Throwable t) {
-
-
-
-            }
-        });
-
+        ///////without Server .
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String currentDateandTime = sdf.format(new Date());
+        presenter.PassRealTimeFromServerToView(currentDateandTime);
 
     }
 

@@ -12,13 +12,16 @@ import android.support.annotation.NonNull;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.ApiRetrofit.ApiMethod;
 import com.essam.microprocess.dressamdaher.ApiRetrofit.Retrofit_Body;
+import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.AddExam_pojo;
 import com.essam.microprocess.dressamdaher.JsonModel.All_Country_Details;
+import com.essam.microprocess.dressamdaher.JsonModel.ExamStartTime_Pojo;
 import com.essam.microprocess.dressamdaher.JsonModel.Zone;
 import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.SqLite.SQlHelper;
@@ -48,6 +51,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
@@ -101,7 +105,11 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
             public void onClick(View view) {
 
                 dialog.ShowDialog();
-                getDateAndTime(model);
+
+                //withServer
+                //getDateAndTime(model);
+                //withoutServer
+                realtimehere(model);
 
             }
         });
@@ -143,55 +151,64 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
 
 
-    public void getDateAndTime(final AddExam_pojo model) {
+//    public void getDateAndTime(final AddExam_pojo model) {
+//
+//        Map<String , String> map = new HashMap<>();
+//        map.put("key", DataBase_Refrences.TimeApiKey.getRef());
+//        map.put("format",DataBase_Refrences.Format.getRef());
+//        ApiMethod apiMethod =  Retrofit_Body.getRetrofit().create(ApiMethod.class);
+//        Call<All_Country_Details> connection = apiMethod.getTiming(map);
+//        connection.enqueue(new Callback<All_Country_Details>() {
+//            @Override
+//            public void onResponse(@NonNull Call<All_Country_Details> call, @NonNull Response<All_Country_Details> response) {
+//
+//                if (response.isSuccessful()){
+//
+//                    Zone zone = Objects.requireNonNull(response.body()).getZones().get(DataBase_Refrences.CountryNum.getINTref());
+//                    realtimehere(zone,model);
+//
+//                }
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<All_Country_Details> call, @NonNull Throwable t) {
+//
+//
+//
+//            }
+//        });
+//
+//
+//    }
+//
+//
+//
+//    public String getDate(long time_stamp_server) {
+//
+////        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+////        return formatter.format(time_stamp_server);
+//        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+//        cal.setTimeInMillis(time_stamp_server * 1000L);
+//        cal.add(Calendar.HOUR , -2);
+//        return DateFormat.format("dd/MM/yyyy hh:mm:ss", cal).toString();
+//
+//    }
+/*
 
-        Map<String , String> map = new HashMap<>();
-        map.put("key", DataBase_Refrences.TimeApiKey.getRef());
-        map.put("format",DataBase_Refrences.Format.getRef());
-        ApiMethod apiMethod =  Retrofit_Body.getRetrofit().create(ApiMethod.class);
-        Call<All_Country_Details> connection = apiMethod.getTiming(map);
-        connection.enqueue(new Callback<All_Country_Details>() {
-            @Override
-            public void onResponse(@NonNull Call<All_Country_Details> call, @NonNull Response<All_Country_Details> response) {
+ */
+    public void realtimehere(/*Zone zone, */ final AddExam_pojo model) {
 
-                if (response.isSuccessful()){
+        //withServer
+        //final String startTime  = getDate(zone.getTimestamp());
 
-                    Zone zone = Objects.requireNonNull(response.body()).getZones().get(DataBase_Refrences.CountryNum.getINTref());
-                    realtimehere(zone,model);
-
-                }
+        //without server
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        final String startTime = sdf.format(new Date());
 
 
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<All_Country_Details> call, @NonNull Throwable t) {
-
-
-
-            }
-        });
-
-
-    }
-
-
-
-    public String getDate(long time_stamp_server) {
-
-//        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
-//        return formatter.format(time_stamp_server);
-        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-        cal.setTimeInMillis(time_stamp_server * 1000L);
-        cal.add(Calendar.HOUR , -2);
-        return DateFormat.format("dd/MM/yyyy hh:mm:ss", cal).toString();
-
-    }
-
-    public void realtimehere(Zone zone, final AddExam_pojo model) {
-
-        final String startTime  = getDate(zone.getTimestamp());
 
         //Check if User Logged in Exam Before ? .
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef())
@@ -201,17 +218,44 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
-                    //I Dont Know .
-                    GotoExam("T"+model.getExamID(),model.getOneQestionDegree(),model.getFinal_degree());
+
+
+                    CheckIfIBetweenTwoTimes(dataSnapshot,model);
+
                 }
                 else {
+                    String time1 = startTime;
+                    String time2=  ""+model.getHour()+":"+model.getMinute()+":"+model.getSecond()+"";
 
-                    reference.setValue(startTime).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    SimpleDateFormat timeFormat1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                    SimpleDateFormat timeFormat2 = new SimpleDateFormat("HH:mm:ss");
+                    timeFormat1.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+                    Date date1 = null;
+                    try {
+                        date1 = timeFormat1.parse(time1);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    Date date2 = null;
+                    try {
+                        date2 = timeFormat2.parse(time2);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    long sum = date1.getTime() + date2.getTime();
+
+                    final String endtime = timeFormat1.format(new Date(sum));
+
+                    ExamStartTime_Pojo time_pojo = new ExamStartTime_Pojo(startTime,endtime);
+                    reference.setValue(time_pojo).addOnSuccessListener(new OnSuccessListener<Void>() {
 
 
                         @Override
                         public void onSuccess(Void aVoid) {
-                            getRandomQestionAndPutitInSQl(model);
+
+                            getRandomQestionAndPutitInSQl(model,startTime,endtime);
 
                         }
                     });
@@ -227,7 +271,8 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
     }
 
-    void getRandomQestionAndPutitInSQl(AddExam_pojo model){
+
+    void getRandomQestionAndPutitInSQl(AddExam_pojo model, String startTime, String endtime){
 
                 //get Random Questions.
                 int QuestionsNumber = Integer.parseInt(model.getNumberofQestion());
@@ -260,7 +305,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                     Log.d("ExamID",x+" / Inserted");
                 }
 
-            GotoExam("T"+model.getExamID(),model.getOneQestionDegree(),model.getFinal_degree());
+            GotoExam("T"+model.getExamID(),model.getOneQestionDegree(),model.getFinal_degree(),model.getExamName(),model.getCurrentDateandTime(),startTime,endtime);
 
 //        String [] Cols = {SQlHelper.ID_Qestion,SQlHelper.question,SQlHelper.answerOne,SQlHelper.answerTwo,SQlHelper.answerThree
 //                ,SQlHelper.answerFour,SQlHelper.correctAnswer,SQlHelper.Student_Answer};
@@ -276,15 +321,76 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
     }
 
-    void GotoExam(String SqlTableName,String oneQestionDegree ,String final_degree){
+    void GotoExam(String SqlTableName,String oneQestionDegree ,
+                  String final_degree,String Examname ,String ExamDate ,
+                  String CurrentTime , String EndTime){
 
                 dialog.Close_Dialog();
                 Intent intent = new Intent(context,Exam.class);
                 intent.putExtra("SqlTableName",SqlTableName);
                 intent.putExtra("oneQestionDegree",oneQestionDegree);
                 intent.putExtra("final_degree",final_degree);
+                intent.putExtra("Examname",Examname);
+                intent.putExtra("ExamDate",ExamDate);
+                intent.putExtra("TimerInMilliSecond",ConvertRemiderTimeToMilliSecond(CurrentTime,EndTime));
                 //here Take Date ;
                 context.startActivity(intent);
 
     }
+    private void CheckIfIBetweenTwoTimes(DataSnapshot dataSnapshot, AddExam_pojo model) {
+       ExamStartTime_Pojo time_pojo = dataSnapshot.getValue(ExamStartTime_Pojo.class);
+       SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+       String CurrentTime = sdf.format(new Date());
+       String StartTime = time_pojo.getStartTime();
+       String EndTime   = time_pojo.getEndTime();
+
+        Date currentTimeDate = null;
+        try {
+            currentTimeDate = sdf.parse(CurrentTime);
+            Date StartTimeDate     = sdf.parse(StartTime);
+            Date endTimeDateDate     = sdf.parse(EndTime);
+            // لو الوقت الحالي بعد وقت البداية وقبل وقت النهاية ادخل جوه .
+           if(currentTimeDate.after(StartTimeDate) && currentTimeDate.before(endTimeDateDate)){
+
+
+               GotoExam("T"+model.getExamID(),model.getOneQestionDegree(),model.getFinal_degree()
+                       ,model.getExamName(),model.getCurrentDateandTime(),CurrentTime,EndTime);
+
+
+           }
+           else {
+               dialog.Close_Dialog();
+               AlertDialog alertDialog = new AlertDialog(context,"انتهى وقت اختبارك .");
+               alertDialog.show();
+
+           }
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    long ConvertRemiderTimeToMilliSecond(String CurrentTime ,String EndTime){
+
+        //وظيفة ال method   هي جلب الوقت الباقي للمستخدم عند دخول الامتحان و تحويلها إلي ثواني
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        Date txdate = null;
+        Date txdate2 = null;
+        try {
+            txdate = df.parse(CurrentTime);
+            txdate2 = df.parse(EndTime);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long diff = txdate2.getTime() - txdate.getTime();
+
+        return diff ;
+    }
+
 }

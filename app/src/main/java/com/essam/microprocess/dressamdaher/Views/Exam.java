@@ -56,6 +56,9 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
     @BindView(R.id.Question)
     TextView textView;
 
+    @BindView(R.id.Timer)
+            TextView Timer;
+
     Animation LTR,RTL,downtoup;
     Drawable trueClick,falseClick;
 
@@ -64,6 +67,10 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
     ExamContract.presenter presenter;
     SQLiteDatabase db;
     String TableName = "";
+    private String Examname;
+    private String ExamDate;
+    long TimerInMilliSecond = 0 ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,13 +85,15 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
              TableName = bundle.getString("SqlTableName");
             oneQestionDegree = bundle.getString("oneQestionDegree");
             final_degree = bundle.getString("final_degree");
-
-
+            Examname = bundle.getString("Examname");
+            ExamDate = bundle.getString("ExamDate");
+            TimerInMilliSecond = bundle.getLong("TimerInMilliSecond");
 
             SQlHelper helper = new SQlHelper(this);
             db = helper.getWritableDatabase();
             presenter.getQuestion(db,TableName);
         }
+
 
 
     }
@@ -228,6 +237,8 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         intent.putExtra("SqlTableName",TableName);
         intent.putExtra("Message",s);
         intent.putExtra("final_degree",final_degree);
+        intent.putExtra("Examname",Examname);
+        intent.putExtra("ExamDate",ExamDate);
         startActivity(intent);
         finish();
     }

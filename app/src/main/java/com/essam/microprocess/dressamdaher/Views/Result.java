@@ -3,15 +3,21 @@ package com.essam.microprocess.dressamdaher.Views;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.essam.microprocess.dressamdaher.Contracts.ResultContract;
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
+import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
+import com.essam.microprocess.dressamdaher.JsonModel.WorngQestion;
 import com.essam.microprocess.dressamdaher.MainPresnter.ResultPresenter;
 import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.SqLite.SQlHelper;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +37,12 @@ public class Result extends AppCompatActivity implements ResultContract.view {
     SQLiteDatabase db;
     String TableName = "", finalDegree = "";
     ResultContract.presenter presenter;
-    String Message;
+    AnimatedDialog dialog ;
+
+    String total;
+    private String Examname;
+    private String ExamDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +50,11 @@ public class Result extends AppCompatActivity implements ResultContract.view {
         intial();
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
-            Message        = bundle.getString("Message");
             TableName      = bundle.getString("SqlTableName");
             finalDegree    = bundle.getString("final_degree");
-//            AlertDialog alertDialog = new AlertDialog(this,Message);
-//            alertDialog.show();
+            Examname = bundle.getString("Examname");
+            ExamDate = bundle.getString("ExamDate");
+
 
 
             presenter.CountDegree(db,TableName);
@@ -63,12 +74,41 @@ public class Result extends AppCompatActivity implements ResultContract.view {
         presenter = new ResultPresenter(this);
          helper = new SQlHelper(this);
          db = helper.getWritableDatabase();
-
+        dialog = new AnimatedDialog(this);
+        dialog.ShowDialog();
     }
 
     @Override
     public void TotalDegrees(int total) {
+        this.total = String.valueOf(total);
         txFinalDegree.setText(finalDegree);
-        txDegree.setText(String.valueOf(total));
+        txDegree.setText(this.total);
+
+        //get Wrong Questions .
+        presenter.getWrongQestions(db,TableName);
+    }
+
+    @Override
+    public void WrongQuestions(ArrayList<WorngQestion> worngQestions) {
+
+        presenter.UploadResult(TableName.substring(1),FirebaseAuth.getInstance().getCurrentUser().getUid(),
+                ExamDate,Examname,finalDegree, total ,worngQestions
+                );
+
+        dialog.Close_Dialog();
+    }
+
+    @Override
+    public void UploadSuccessFull(String s) {
+        dialog.Close_Dialog();
+                    AlertDialog alertDialog = new AlertDialog(this,s);
+                     alertDialog.show();
+    }
+
+    @Override
+    public void ResultUploadFaild(String s) {
+        dialog.Close_Dialog();
+        AlertDialog alertDialog = new AlertDialog(this,s);
+        alertDialog.show();
     }
 }
