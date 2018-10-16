@@ -41,7 +41,7 @@ public class ExamModel implements ExamContract.model {
 
             }
         } else {
-            presenter.BlockScreen("لا يمكنك الاختبار من هاتف اخر او انك قمت بحذف بيانات البرنامج يرجي مراسلة المختص . ");
+            presenter.BlockScreen("لقد بدأت اختبارك من هاتف اخر او انك قمت بحذف بيانات البرنامج يرجي مراسلة المختص . ");
         }
 
     }
