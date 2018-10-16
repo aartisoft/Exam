@@ -61,4 +61,9 @@ public class ExamPresenter implements ExamContract.presenter {
     public void ExamEnd(String s) {
         view.ExamEnd(s);
     }
+
+    @Override
+    public void BlockScreen(String s) {
+        view.BlockScreen(s);
+    }
 }

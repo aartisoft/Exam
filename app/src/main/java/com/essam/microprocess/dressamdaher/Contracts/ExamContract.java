@@ -19,6 +19,7 @@ public interface ExamContract {
 
         void ExamEnd(String s);
 
+        void BlockScreen(String s);
     }
     interface presenter{
 
@@ -37,6 +38,8 @@ public interface ExamContract {
         void Skip(SQLiteDatabase db, String tableName, String id_qestion);
 
         void ExamEnd(String s);
+
+        void BlockScreen(String s);
     }
     interface model{
 

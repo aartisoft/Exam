@@ -4,26 +4,22 @@ package com.essam.microprocess.dressamdaher.Adapter;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
+
 import android.content.Intent;
-import android.database.Cursor;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
-import android.text.format.DateFormat;
+
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.essam.microprocess.dressamdaher.ApiRetrofit.ApiMethod;
-import com.essam.microprocess.dressamdaher.ApiRetrofit.Retrofit_Body;
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.AddExam_pojo;
-import com.essam.microprocess.dressamdaher.JsonModel.All_Country_Details;
+
 import com.essam.microprocess.dressamdaher.JsonModel.ExamStartTime_Pojo;
-import com.essam.microprocess.dressamdaher.JsonModel.Zone;
-import com.essam.microprocess.dressamdaher.R;
+
 import com.essam.microprocess.dressamdaher.SqLite.SQlHelper;
 import com.essam.microprocess.dressamdaher.Views.Exam;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -40,23 +36,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Random;
-import java.util.Set;
+
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
 
 /**
  * Created by microprocess on 2018-10-08.
@@ -103,13 +90,34 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
         holder.BtnStartExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 dialog.ShowDialog();
 
-                //withServer
-                //getDateAndTime(model);
-                //withoutServer
-                realtimehere(model);
+                DatabaseReference reference =FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef())
+                        .child(model.getExamID()).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+
+                            dialog.Close_Dialog();
+                            AlertDialog alertDialog = new AlertDialog(context,"انت بالفعل اكملت اختبارك .");
+                            alertDialog.show();
+
+                        }
+                        else {
+                            //withServer
+                            //getDateAndTime(model);
+                            //withoutServer
+                            realtimehere(model);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
             }
         });
@@ -217,18 +225,18 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
 
+                if (dataSnapshot.exists()){
 
                     CheckIfIBetweenTwoTimes(dataSnapshot,model);
 
                 }
                 else {
+
                     String time1 = startTime;
-                    String time2=  ""+model.getHour()+":"+model.getMinute()+":"+model.getSecond()+"";
+                    long time2 =  TimeUnit.HOURS.toMillis(model.getHour())+TimeUnit.MINUTES.toMillis(model.getMinute()) + TimeUnit.MINUTES.toMillis(model.getSecond());
 
                     SimpleDateFormat timeFormat1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                    SimpleDateFormat timeFormat2 = new SimpleDateFormat("HH:mm:ss");
                     timeFormat1.setTimeZone(TimeZone.getTimeZone("UTC"));
 
                     Date date1 = null;
@@ -237,14 +245,9 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    Date date2 = null;
-                    try {
-                        date2 = timeFormat2.parse(time2);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
 
-                    long sum = date1.getTime() + date2.getTime();
+
+                    long sum = date1.getTime() + time2 ;
 
                     final String endtime = timeFormat1.format(new Date(sum));
 
@@ -392,5 +395,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
         return diff ;
     }
+
+
 
 }

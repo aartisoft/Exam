@@ -3,8 +3,10 @@ package com.essam.microprocess.dressamdaher.Views;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -70,6 +72,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
     private String Examname;
     private String ExamDate;
     long TimerInMilliSecond = 0 ;
+    CountDownTimer TimerCounter ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,26 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         }
 
 
+        TimerCounter =  new CountDownTimer(TimerInMilliSecond, 1000) {
+            @Override
+            public void onTick(long l) {       // l is Reminder of time
+
+                Log.d("TAG1",String.valueOf(l/1000));
+                long timeInSeconds = l / 1000;
+                long hours, minutes, seconds;
+                hours = timeInSeconds / 3600;
+                timeInSeconds = timeInSeconds - (hours * 3600);
+                minutes = timeInSeconds / 60;
+                timeInSeconds = timeInSeconds - (minutes * 60);
+                seconds = timeInSeconds;
+                Timer.setText(String.valueOf(hours)+" : "+String.valueOf(minutes)+" : "+String.valueOf(seconds));
+            }
+
+            @Override
+            public void onFinish() {
+                ExamEnd("انتهى وقت اختبارك");
+            }
+        }.start();
 
     }
     private void intialViews(){
@@ -241,5 +264,27 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         intent.putExtra("ExamDate",ExamDate);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void BlockScreen(String s) {
+        AlertDialog alertDialog = new AlertDialog(this,s);
+        alertDialog.show();
+        alertDialog.setCancelable(false);
+        alertDialog.btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                //لا تنس إغلاق ال Services هنا
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        TimerCounter.cancel();
     }
 }
