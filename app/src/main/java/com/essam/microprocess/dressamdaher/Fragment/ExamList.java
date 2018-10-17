@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Adapter.ExamList_Rec_Adapter;
 import com.essam.microprocess.dressamdaher.Adapter.ViewHolder;
@@ -53,6 +54,7 @@ public class ExamList extends Fragment implements ExamListContract.view{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         auth  = FirebaseAuth.getInstance();
+
     }
 
     @Override

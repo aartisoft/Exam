@@ -7,6 +7,7 @@ import android.content.ContentValues;
 
 import android.content.Intent;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
@@ -258,7 +259,9 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                         @Override
                         public void onSuccess(Void aVoid) {
 
-                            getRandomQestionAndPutitInSQl(model,startTime,endtime);
+
+                                getRandomQestionAndPutitInSQl(model);
+
 
                         }
                     });
@@ -275,7 +278,10 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
     }
 
 
-    void getRandomQestionAndPutitInSQl(AddExam_pojo model, String startTime, String endtime){
+    void getRandomQestionAndPutitInSQl(AddExam_pojo model){
+
+               String ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+               String TableName = "T"+model.getExamID()+ID;
 
                 //get Random Questions.
                 int QuestionsNumber = Integer.parseInt(model.getNumberofQestion());
@@ -289,10 +295,26 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
 
                 //then Put it in Sqlite .
-                SQlHelper helper = new SQlHelper(context); //substring To clear ( - ) from id.
-                helper.createExamTable("T"+model.getExamID());
-                SQLiteDatabase db = helper.getWritableDatabase();
-                for (int i = 0 ; i < QuestionsNumber ; ++i) {
+                 SQlHelper helper = new SQlHelper(context);
+                 SQLiteDatabase db = helper.getWritableDatabase();
+
+
+
+                    //create table if not exists .
+                    helper.createExamTable(TableName);
+                    //clear table . (this for if a new user will test the same exam from his account in same mobile(friend mobile)(friend test exam before him . ))
+                    db.delete(TableName, null,null);
+
+
+
+
+
+
+
+
+
+               // insert new Questions.
+                for (int i = 0 ; i < QuestionsNumber ; i++) {
                     // insert
                     ContentValues row = new ContentValues();
                     row.put(SQlHelper.ID_Qestion,model.getQuestions().get(Random.get(i)).getQuestionID());
@@ -304,11 +326,11 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                     row.put(SQlHelper.correctAnswer, model.getQuestions().get(Random.get(i)).getCorrectAnswer());
                     row.put(SQlHelper.Student_Answer, "");
                     row.put(SQlHelper.Degree,"0");
-                   long x =  db.insert("T"+model.getExamID(), null, row);
+                   long x =  db.insert(TableName, null, row);
                     Log.d("ExamID",x+" / Inserted");
                 }
 
-            GotoExam("T"+model.getExamID(),model.getOneQestionDegree(),model.getFinal_degree(),model.getExamName(),model.getCurrentDateandTime(),startTime,endtime);
+            GotoExam(TableName,model.getOneQestionDegree(),model.getFinal_degree(),model.getExamName(),model.getCurrentDateandTime());
 
 //        String [] Cols = {SQlHelper.ID_Qestion,SQlHelper.question,SQlHelper.answerOne,SQlHelper.answerTwo,SQlHelper.answerThree
 //                ,SQlHelper.answerFour,SQlHelper.correctAnswer,SQlHelper.Student_Answer};
@@ -325,8 +347,8 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
     }
 
     void GotoExam(String SqlTableName,String oneQestionDegree ,
-                  String final_degree,String Examname ,String ExamDate ,
-                  String CurrentTime , String EndTime){
+                  String final_degree,String Examname ,String ExamDate
+                  ){
 
                 dialog.Close_Dialog();
                 Intent intent = new Intent(context,Exam.class);
@@ -335,12 +357,18 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                 intent.putExtra("final_degree",final_degree);
                 intent.putExtra("Examname",Examname);
                 intent.putExtra("ExamDate",ExamDate);
-                intent.putExtra("TimerInMilliSecond",ConvertRemiderTimeToMilliSecond(CurrentTime,EndTime));
                 //here Take Date ;
                 context.startActivity(intent);
 
     }
     private void CheckIfIBetweenTwoTimes(DataSnapshot dataSnapshot, AddExam_pojo model) {
+        //**\\table Name
+
+        String ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String TableName = "T"+model.getExamID()+ID;
+
+        //**//
+
        ExamStartTime_Pojo time_pojo = dataSnapshot.getValue(ExamStartTime_Pojo.class);
        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
        String CurrentTime = sdf.format(new Date());
@@ -356,8 +384,8 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
            if(currentTimeDate.after(StartTimeDate) && currentTimeDate.before(endTimeDateDate)){
 
 
-               GotoExam("T"+model.getExamID(),model.getOneQestionDegree(),model.getFinal_degree()
-                       ,model.getExamName(),model.getCurrentDateandTime(),CurrentTime,EndTime);
+               GotoExam(TableName,model.getOneQestionDegree(),model.getFinal_degree()
+                       ,model.getExamName(),model.getCurrentDateandTime());
 
 
            }
@@ -375,26 +403,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
 
     }
-    long ConvertRemiderTimeToMilliSecond(String CurrentTime ,String EndTime){
 
-        //وظيفة ال method   هي جلب الوقت الباقي للمستخدم عند دخول الامتحان و تحويلها إلي ثواني
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-
-        Date txdate = null;
-        Date txdate2 = null;
-        try {
-            txdate = df.parse(CurrentTime);
-            txdate2 = df.parse(EndTime);
-
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        long diff = txdate2.getTime() - txdate.getTime();
-
-        return diff ;
-    }
 
 
 

@@ -91,11 +91,13 @@ public class Result extends AppCompatActivity implements ResultContract.view {
     @Override
     public void WrongQuestions(ArrayList<WorngQestion> worngQestions) {
 
-        presenter.UploadResult(TableName.substring(1),FirebaseAuth.getInstance().getCurrentUser().getUid(),
+        presenter.UploadResult(TableName.replace(FirebaseAuth.getInstance().getCurrentUser().getUid(),"").substring(1)
+                ,FirebaseAuth.getInstance().getCurrentUser().getUid(),
                 ExamDate,Examname,finalDegree, total ,worngQestions
                 );
 
         dialog.Close_Dialog();
+
     }
 
     @Override

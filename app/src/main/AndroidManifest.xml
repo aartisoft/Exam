@@ -34,7 +34,8 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".Views.Exam" />
-        <activity android:name=".Views.Result"></activity>
+        <activity android:name=".Views.Result" />
+        <service android:name=".Services.TimerServices"/>
     </application>
 
 </manifest>

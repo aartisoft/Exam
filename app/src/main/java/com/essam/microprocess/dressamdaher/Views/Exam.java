@@ -1,6 +1,9 @@
 package com.essam.microprocess.dressamdaher.Views;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
@@ -22,7 +25,9 @@ import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.MainPresnter.ExamPresenter;
 import com.essam.microprocess.dressamdaher.R;
+import com.essam.microprocess.dressamdaher.Services.TimerServices;
 import com.essam.microprocess.dressamdaher.SqLite.SQlHelper;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
@@ -71,8 +76,8 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
     String TableName = "";
     private String Examname;
     private String ExamDate;
-    long TimerInMilliSecond = 0 ;
-    CountDownTimer TimerCounter ;
+    Intent Timerservices;
+    BroadcastReceiver broadcastReceiver ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,36 +91,21 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         Bundle bundle = getIntent().getExtras();
         if( bundle != null ){
              TableName = bundle.getString("SqlTableName");
+
+
             oneQestionDegree = bundle.getString("oneQestionDegree");
             final_degree = bundle.getString("final_degree");
             Examname = bundle.getString("Examname");
             ExamDate = bundle.getString("ExamDate");
-            TimerInMilliSecond = bundle.getLong("TimerInMilliSecond");
+
 
 
         }
 
-
-        TimerCounter =  new CountDownTimer(TimerInMilliSecond, 1000) {
-            @Override
-            public void onTick(long l) {       // l is Reminder of time
-
-                Log.d("TAG1",String.valueOf(l/1000));
-                long timeInSeconds = l / 1000;
-                long hours, minutes, seconds;
-                hours = timeInSeconds / 3600;
-                timeInSeconds = timeInSeconds - (hours * 3600);
-                minutes = timeInSeconds / 60;
-                timeInSeconds = timeInSeconds - (minutes * 60);
-                seconds = timeInSeconds;
-                Timer.setText(String.valueOf(hours)+" : "+String.valueOf(minutes)+" : "+String.valueOf(seconds));
-            }
-
-            @Override
-            public void onFinish() {
-                ExamEnd("انتهى وقت اختبارك");
-            }
-        }.start();
+        //start Timer .
+         Timerservices = new Intent(this, TimerServices.class);
+        Timerservices.putExtra("TableName",TableName.replace(FirebaseAuth.getInstance().getCurrentUser().getUid(),"").substring(1));
+        startService(Timerservices);
 
         SQlHelper helper = new SQlHelper(this);
         db = helper.getWritableDatabase();
@@ -232,7 +222,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         buttonB.setBackground(falseClick);
         buttonA.setBackground(falseClick);
         buttonC.setBackground(falseClick);
-        Toast.makeText(this,selectAnswer+"",Toast.LENGTH_SHORT).show();
+
 
         //Last Thing.
         selectAnswer = "" ;
@@ -271,7 +261,8 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
     @Override
     public void BlockScreen(String s) {
 
-        TimerCounter.cancel();
+        //لا تنس إغلاق ال Services هنا
+        stopService(Timerservices);
 
         AlertDialog alertDialog = new AlertDialog(this,s);
         alertDialog.show();
@@ -281,7 +272,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
             public void onClick(View view) {
                 finish();
 
-                //لا تنس إغلاق ال Services هنا
+
 
             }
         });
@@ -291,6 +282,39 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        TimerCounter.cancel();
+        stopService(Timerservices);
+        if(broadcastReceiver != null) {
+            unregisterReceiver(broadcastReceiver);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+         broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("ServicesTimer")) {
+                    long hours =  intent.getLongExtra("hours",0);
+                    long minutes =  intent.getLongExtra("minutes",0);
+                    long seconds =  intent.getLongExtra("seconds",0);
+                    Timer.setText(hours+" : "+minutes+" : "+seconds);
+                }
+            }
+        };
+
+        IntentFilter intentFilter = new IntentFilter();
+        // set the custom action
+        intentFilter.addAction("ServicesTimer"); //Action is just a string used to identify the receiver as there can be many in your app so it helps deciding which receiver should receive the intent.
+        // register the receiver
+        registerReceiver(broadcastReceiver, intentFilter);
+
     }
 }

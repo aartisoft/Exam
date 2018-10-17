@@ -1,6 +1,10 @@
 package com.essam.microprocess.dressamdaher.MainModle;
 
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
@@ -172,4 +176,8 @@ public class ExamModel implements ExamContract.model {
         }
         return false;
     }
+
+
+
+
 }

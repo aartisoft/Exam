@@ -44,7 +44,7 @@ public class SQlHelper extends SQLiteOpenHelper {
     public void createExamTable(String ExamID) {
         final SQLiteDatabase db = getWritableDatabase();
 
-        db.execSQL("CREATE TABLE " + ExamID + " ( "
+        db.execSQL("create table if not exists " + ExamID + " ( "
                 + ID_Qestion + " TEXT ,"
                 + question + " TEXT ,"
                 + answerOne + " TEXT ,"
@@ -57,8 +57,9 @@ public class SQlHelper extends SQLiteOpenHelper {
                 + " ) "
         );
 
-        db.close();
+
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
