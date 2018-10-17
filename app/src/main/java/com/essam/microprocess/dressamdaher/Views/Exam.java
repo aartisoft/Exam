@@ -78,7 +78,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
     private String ExamDate;
     Intent Timerservices;
     BroadcastReceiver broadcastReceiver ;
-
+    boolean OpenJustOnce = true ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,10 +102,10 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
 
         }
 
-        //start Timer .
+        //start Timer Config .
          Timerservices = new Intent(this, TimerServices.class);
         Timerservices.putExtra("TableName",TableName.replace(FirebaseAuth.getInstance().getCurrentUser().getUid(),"").substring(1));
-        startService(Timerservices);
+
 
         SQlHelper helper = new SQlHelper(this);
         db = helper.getWritableDatabase();
@@ -207,6 +207,12 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         buttonD.setText(answerFour);
         this.ID_Qestion = ID_Qestion ;
 
+
+        //best place To open Timer Here .
+        if(OpenJustOnce){
+            startService(Timerservices);
+            OpenJustOnce = false ;
+        }
     }
 
     @Override

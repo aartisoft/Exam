@@ -21,14 +21,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by microprocess on 2018-10-17.
- */
+
 
 public class TimerServices extends Service {
     CountDownTimer TimerCounter ;
     String TableName;
-
+    DatabaseReference reference;
 
     @Override
     public void onCreate() {
@@ -39,10 +37,13 @@ public class TimerServices extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+
         TableName =  intent.getStringExtra("TableName");
 
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef())
+        reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef())
                 .child(TableName).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -52,7 +53,6 @@ public class TimerServices extends Service {
                     String EndTime   = time_pojo.getEndTime();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                     String CurrentTime = sdf.format(new Date());
-
 
                     StartThread(ConvertRemiderTimeToMilliSecond(CurrentTime,EndTime));
 
@@ -83,7 +83,8 @@ public class TimerServices extends Service {
         if(TimerCounter != null){
 
             TimerCounter.cancel();
-        }
+
+          }
 
         super.onDestroy();
     }
