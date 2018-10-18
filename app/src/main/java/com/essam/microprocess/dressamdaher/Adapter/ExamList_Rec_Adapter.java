@@ -92,9 +92,9 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
             @Override
             public void onClick(View view) {
                 dialog.ShowDialog();
-
+                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference reference =FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef())
-                        .child(model.getExamID()).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        .child(model.getExamID()+uid);
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

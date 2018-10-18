@@ -62,7 +62,7 @@ public class ResultModel implements ResultContract.model {
                              String finalDegree, String total, ArrayList<WorngQestion> wrongQestions) {
 
         DatabaseReference reference = FirebaseDatabase
-                .getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(examID).child(uid);
+                .getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(examID+uid);
         Result_Pojo result_pojo = new Result_Pojo(examID,uid,examDate,examName,finalDegree,total,wrongQestions);
 
         reference.setValue(result_pojo).addOnSuccessListener(new OnSuccessListener<Void>() {
