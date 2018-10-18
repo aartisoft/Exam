@@ -103,8 +103,11 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         }
 
         //start Timer Config .
-         Timerservices = new Intent(this, TimerServices.class);
-        Timerservices.putExtra("TableName",TableName.replace(FirebaseAuth.getInstance().getCurrentUser().getUid(),"").substring(1));
+        Timerservices = new Intent(this, TimerServices.class);
+        Timerservices.putExtra("TableID",TableName.replace(FirebaseAuth.getInstance().getCurrentUser().getUid(),"").substring(1));
+        Timerservices.putExtra("final_degree",final_degree);
+        Timerservices.putExtra("Examname",Examname);
+        Timerservices.putExtra("ExamDate",ExamDate);
 
 
         SQlHelper helper = new SQlHelper(this);

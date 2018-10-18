@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.ExamStartTime_Pojo;
+import com.essam.microprocess.dressamdaher.Views.Result;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +26,7 @@ import java.util.Date;
 
 public class TimerServices extends Service {
     CountDownTimer TimerCounter ;
-    String TableName;
+    String TableID ,final_degree , Examname,ExamDate, TableSqlname ;
     DatabaseReference reference;
 
     @Override
@@ -38,10 +39,14 @@ public class TimerServices extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 
-        TableName =  intent.getStringExtra("TableName");
+        TableID =  intent.getStringExtra("TableID");
+        final_degree = intent.getStringExtra("final_degree");
+        Examname = intent.getStringExtra("Examname");
+        ExamDate = intent.getStringExtra("ExamDate");
+        TableSqlname = "T"+TableID+FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef())
-                .child(TableName).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                .child(TableID).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -134,12 +139,23 @@ public class TimerServices extends Service {
 
                 sendBroadcast(local);
 
+
+
             }
 
             @Override
             public void onFinish() {
 
+                Intent intent = new Intent(getApplicationContext(),Result.class);
+                intent.putExtra("SqlTableName",TableSqlname);
+                intent.putExtra("Message","انتهى الوقت .");
+                intent.putExtra("final_degree",final_degree);
+                intent.putExtra("Examname",Examname);
+                intent.putExtra("ExamDate",ExamDate);
+                startActivity(intent);
 
+                //close Services .
+                stopSelf();
             }
         }.start();
 

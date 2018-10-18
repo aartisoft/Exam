@@ -1,5 +1,6 @@
 package com.essam.microprocess.dressamdaher.Views;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,7 +42,7 @@ public class Result extends AppCompatActivity implements ResultContract.view {
 
     String total;
     private String Examname;
-    private String ExamDate;
+    private String ExamDate , Message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +55,26 @@ public class Result extends AppCompatActivity implements ResultContract.view {
             finalDegree    = bundle.getString("final_degree");
             Examname = bundle.getString("Examname");
             ExamDate = bundle.getString("ExamDate");
-
-
-
+            Message  = bundle.getString("Message");
             presenter.CountDegree(db,TableName);
         }
 
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+            home.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
+
+                      Intent intent = new Intent(Result.this,ControlPanel.class);
+                      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                      startActivity(intent);
+                      finish();
+
+                 }
+             });
+
+
+            // just show message .
+            AlertDialog alertDialog = new AlertDialog(this,Message);
+            alertDialog.show();
 
     }
 
@@ -112,5 +121,15 @@ public class Result extends AppCompatActivity implements ResultContract.view {
         dialog.Close_Dialog();
         AlertDialog alertDialog = new AlertDialog(this,s);
         alertDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        //To avoid Back To Exam again . (if Time Finished Only ) .
+        Intent intent = new Intent(Result.this,ControlPanel.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }
