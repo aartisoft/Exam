@@ -12,6 +12,8 @@ public interface MyResultContract {
     interface view {
 
         void ConfigRecycler(List<Result_Pojo> result);
+
+        void Problem(String s);
     }
     interface presenter {
 

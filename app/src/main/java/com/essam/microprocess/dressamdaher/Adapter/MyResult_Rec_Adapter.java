@@ -1,21 +1,15 @@
 package com.essam.microprocess.dressamdaher.Adapter;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.essam.microprocess.dressamdaher.JsonModel.AddExam_pojo;
 import com.essam.microprocess.dressamdaher.JsonModel.Result_Pojo;
-import com.essam.microprocess.dressamdaher.JsonModel.WorngQestion;
 import com.essam.microprocess.dressamdaher.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.Query;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -44,6 +38,25 @@ public class MyResult_Rec_Adapter extends RecyclerView.Adapter<MyResult_Rec_Adap
         holder.txExamName.setText(Result.get(position).getExamName());
         holder.txDegree.setText(Result.get(position).getTotal());
         holder.txFinalDegree.setText(Result.get(position).getFinalDegree());
+
+
+        if (position % 2 == 0) {
+//                holder.card.setScaleX(.9f);
+//                holder.card.setScaleY(.9f);
+//                holder.card.animate().alpha(1).scaleX(1f).scaleY(1f).setDuration(500);
+            holder.Cardview.setX(-1000);
+            holder.Cardview.animate().translationXBy(1000).setDuration(800);
+        }
+        else
+        {
+
+            holder.Cardview.setX(1000);
+            holder.Cardview.animate().translationXBy(-1000).setDuration(800);
+
+        }
+
+
+
     }
 
     @Override
@@ -58,6 +71,8 @@ public class MyResult_Rec_Adapter extends RecyclerView.Adapter<MyResult_Rec_Adap
         TextView txDegree;
         @BindView(R.id.txFinalDegree)
         TextView txFinalDegree;
+        @BindView(R.id.Cardview)
+        CardView Cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);

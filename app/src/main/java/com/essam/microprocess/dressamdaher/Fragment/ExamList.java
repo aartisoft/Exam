@@ -65,7 +65,7 @@ public class ExamList extends Fragment implements ExamListContract.view{
 
          ButterKnife.bind(this,v);
          ControlPanel.Title.setText(R.string.examList);
-
+        ControlPanel.progressBar.setVisibility(View.VISIBLE);
 
         //Get Time From Server Then run Recycler .
         presenter = new ExamListPresenter(this);
@@ -94,10 +94,13 @@ public class ExamList extends Fragment implements ExamListContract.view{
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
+                    ControlPanel.progressBar.setVisibility(View.GONE);
                     background.setVisibility(View.GONE);
+
                 }
                 else {
                     background.setVisibility(View.VISIBLE);
+                    ControlPanel.progressBar.setVisibility(View.GONE);
                 }
             }
 

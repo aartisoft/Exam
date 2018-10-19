@@ -37,7 +37,7 @@ public class MyResultModel implements MyResultContract.model {
         Query query = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).orderByChild("uid")
                 .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        query.addValueEventListener(new ValueEventListener() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists()){

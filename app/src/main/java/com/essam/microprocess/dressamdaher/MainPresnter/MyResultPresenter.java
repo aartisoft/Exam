@@ -25,7 +25,7 @@ public class MyResultPresenter implements MyResultContract.presenter {
 
     @Override
     public void Problem(String s) {
-
+        view.Problem(s);
     }
 
     @Override

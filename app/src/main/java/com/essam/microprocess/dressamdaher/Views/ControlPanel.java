@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +50,7 @@ public class ControlPanel extends AppCompatActivity
     AnimatedDialog animatedDialog;
     CircleImageView circleImageView;
     TextView UserName;
-
+    public static ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +105,7 @@ public class ControlPanel extends AppCompatActivity
         navigation = findViewById(R.id.navigation);
         Title      = toolbar.findViewById(R.id.toolbar_title);
         auth       = FirebaseAuth.getInstance();
+        progressBar = findViewById(R.id.progressBar);
         animatedDialog = new AnimatedDialog(this);
         View headerLayout = navigation.getHeaderView(0);
         circleImageView = headerLayout.findViewById(R.id.myprofile);
