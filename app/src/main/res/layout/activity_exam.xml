@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradiantcolor"
-    tools:context="com.essam.microprocess.dressamdaher.Views.Exam">
+    tools:context="com.essam.microprocess.dressamdaher.Views.Exam"
+    android:keepScreenOn="true"
+    >
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"

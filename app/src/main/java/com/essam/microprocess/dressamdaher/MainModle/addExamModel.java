@@ -9,6 +9,7 @@ import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.AddExam_pojo;
 import com.essam.microprocess.dressamdaher.JsonModel.All_Country_Details;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
+import com.essam.microprocess.dressamdaher.JsonModel.Results_References;
 import com.essam.microprocess.dressamdaher.JsonModel.Zone;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -130,13 +131,23 @@ public class addExamModel implements addExamContract.model {
 
 
     @Override
-    public void storeExaminDatabase(int hour, int minute, int second, String oneQestionDegree, String NumberofQestion, String final_degree, List<Questions_Form> questions, String ExamName, String currentDateandTime, String questions_size, Integer timestamp) {
+    public void storeExaminDatabase(int hour, int minute, int second, String oneQestionDegree, String NumberofQestion, String final_degree, List<Questions_Form> questions, final String ExamName, final String currentDateandTime, String questions_size, final Integer timestamp) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef()).child(String.valueOf(timestamp));
         AddExam_pojo Exam = new AddExam_pojo(hour,minute,second,String.valueOf(timestamp),oneQestionDegree,NumberofQestion,final_degree,questions,ExamName,currentDateandTime,questions_size);
         reference.setValue(Exam).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                presenter.Successful_Storing();
+                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.ResultsRef.getRef()).child(String.valueOf(timestamp));
+                Results_References pojo = new Results_References(String.valueOf(timestamp),ExamName,currentDateandTime);
+                reference1.setValue(pojo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                        presenter.Successful_Storing();
+
+                    }
+                });
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

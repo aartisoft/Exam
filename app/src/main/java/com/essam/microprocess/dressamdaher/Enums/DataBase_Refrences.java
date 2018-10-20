@@ -5,7 +5,7 @@ public enum DataBase_Refrences {
 
     USERREF("Users"),BLOCKUSER("Blocked_User"),BANKQUESTIONS("Banck_Questions"),CHOSENQUESTIONID("Chosen_questions_ID")
     ,EXAMS("Exams"),ADMIN("Admins"),TimeApiKey("KXG6INZZU6EO"),Format("json"),STARTEDEXAM("ExamStarted"),CountryNum("335")
-    ,RESULT("Result");
+    ,RESULT("Result"),ResultsRef("Results_References");
 
 
 

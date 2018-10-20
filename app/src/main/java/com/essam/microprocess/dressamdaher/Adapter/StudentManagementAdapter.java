@@ -75,19 +75,24 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
             holder.phone.setText(items.get(position).getPhone());
             holder.email.setText(items.get(position).getEmail());
 
-            //photos changer .
-            if (photosCounter == 0 ) {
-                holder.circleImageView.setBackgroundResource(R.drawable.ic_student_1);
-                photosCounter ++ ;
-            }
-            else if (photosCounter == 1) {
-                holder.circleImageView.setBackgroundResource(R.drawable.ic_student_2);
-                photosCounter ++ ;
-            }
-            else {
-                holder.circleImageView.setBackgroundResource(R.drawable.ic_student_3);
-                photosCounter = 0;
-            }
+                //photos changer .
+                if (photosCounter == 0 ) {
+                    holder.circleImageView.setBackgroundResource(R.drawable.ic_student_1);
+                    photosCounter ++ ;
+                }
+                else if (photosCounter == 1) {
+                    holder.circleImageView.setBackgroundResource(R.drawable.ic_student_2);
+                    photosCounter ++ ;
+                }
+                else if( photosCounter == 2 )
+                {
+                    holder.circleImageView.setBackgroundResource(R.drawable.ic_student_3);
+                    photosCounter ++ ;
+                }
+                else {
+                    holder.circleImageView.setBackgroundResource(R.drawable.ic_student_4);
+                    photosCounter = 0;
+                }
 
 
             //animation

@@ -51,7 +51,7 @@ public class MyResults extends Fragment implements MyResultContract.view {
     @Override
     public void ConfigRecycler(List<Result_Pojo> result) {
         //Stop progress .
-        ControlPanel.progressBar.setVisibility(View.GONE);
+        ControlPanel.progressBar.setVisibility(View.INVISIBLE);
 
         MyResult_Rec_Adapter adapter = new MyResult_Rec_Adapter(result);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -61,7 +61,7 @@ public class MyResults extends Fragment implements MyResultContract.view {
     @Override
     public void Problem(String s) {
         //Stop progress .
-        ControlPanel.progressBar.setVisibility(View.GONE);
+        ControlPanel.progressBar.setVisibility(View.INVISIBLE);
         backgroundground.setVisibility(View.VISIBLE);
 
 

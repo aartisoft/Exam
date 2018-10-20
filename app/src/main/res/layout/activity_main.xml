@@ -8,9 +8,10 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradiantcolor"
     android:layoutDirection="ltr"
-    tools:context=".Views.MainActivity">
+    tools:context=".Views.MainActivity"
+    android:keepScreenOn="true"
+    >
 
 
 
-</FrameLayout
->
+</FrameLayout>

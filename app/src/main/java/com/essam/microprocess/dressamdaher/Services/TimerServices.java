@@ -152,6 +152,7 @@ public class TimerServices extends Service {
                 intent.putExtra("final_degree",final_degree);
                 intent.putExtra("Examname",Examname);
                 intent.putExtra("ExamDate",ExamDate);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
                 //close Services .

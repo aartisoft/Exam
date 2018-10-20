@@ -24,6 +24,7 @@ import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Fragment.AboutProgrammer;
 import com.essam.microprocess.dressamdaher.Fragment.AddQ_frag;
 import com.essam.microprocess.dressamdaher.Fragment.ExamList;
+import com.essam.microprocess.dressamdaher.Fragment.ExamsResults;
 import com.essam.microprocess.dressamdaher.Fragment.MyResults;
 import com.essam.microprocess.dressamdaher.Fragment.Question_Bank_Frag;
 import com.essam.microprocess.dressamdaher.Fragment.StudentManagement;
@@ -301,6 +302,17 @@ public class ControlPanel extends AppCompatActivity
                         .commit();
 
 
+                break;
+
+            case R.id.results :
+
+                getSupportFragmentManager().popBackStack();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                        .replace(R.id.Exam_Frame,new ExamsResults())
+                        .addToBackStack(null)
+                        .commit();
                 break;
 
             case R.id.addExam :

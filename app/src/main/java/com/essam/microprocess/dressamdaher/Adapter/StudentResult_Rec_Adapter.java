@@ -1,0 +1,105 @@
+package com.essam.microprocess.dressamdaher.Adapter;
+
+import android.support.annotation.NonNull;
+
+import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
+import com.essam.microprocess.dressamdaher.JsonModel.Resister_form;
+import com.essam.microprocess.dressamdaher.JsonModel.Result_Pojo;
+import com.essam.microprocess.dressamdaher.R;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+/**
+ * Created by microprocess on 2018-10-20.
+ */
+
+public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_Pojo,ViewHolder3> {
+    /**
+     * @param modelClass      Firebase will marshall the data at a location into
+     *                        an instance of a class that you provide
+     * @param modelLayout     This is the layout used to represent a single item in the list.
+     *                        You will be responsible for populating an instance of the corresponding
+     *                        view with the data from an instance of modelClass.
+     * @param viewHolderClass The class that hold references to all sub-views in an instance modelLayout.
+     * @param ref             The Firebase location to watch for data changes. Can also be a slice of a location,
+     *                        using some combination of {@code limit()}, {@code startAt()}, and {@code endAt()}.
+     */
+    int photosCounter = 0 ;
+    public StudentResult_Rec_Adapter(Class<Result_Pojo> modelClass, int modelLayout, Class<ViewHolder3> viewHolderClass, Query ref) {
+        super(modelClass, modelLayout, viewHolderClass, ref);
+    }
+
+    @Override
+    protected void populateViewHolder(final ViewHolder3 holder, final Result_Pojo model, int position) {
+
+        //photos changer .
+        if (photosCounter == 0 ) {
+            holder.circleImageView.setBackgroundResource(R.drawable.ic_student_1);
+            photosCounter ++ ;
+        }
+        else if (photosCounter == 1) {
+            holder.circleImageView.setBackgroundResource(R.drawable.ic_student_2);
+            photosCounter ++ ;
+        }
+        else if( photosCounter == 2 )
+        {
+            holder.circleImageView.setBackgroundResource(R.drawable.ic_student_3);
+            photosCounter ++ ;
+        }
+        else {
+            holder.circleImageView.setBackgroundResource(R.drawable.ic_student_4);
+            photosCounter = 0;
+        }
+
+
+
+        holder.txDegree.setText(model.getTotal());
+        holder.txFinalDegree.setText(model.getFinalDegree());
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.USERREF.getRef())
+                .child(model.getUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    //Get Student Name .
+                    Resister_form form = dataSnapshot.getValue(Resister_form.class);
+                    holder.txName.setText(form.getNameStudent()+"");
+
+                }
+                else {
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        if (position % 2 == 0) {
+
+            holder.cardView.setX(-1000);
+            holder.cardView.animate().translationXBy(1000).setDuration(800);
+        }
+        else
+        {
+
+            holder.cardView.setX(1000);
+            holder.cardView.animate().translationXBy(-1000).setDuration(800);
+
+        }
+
+
+
+
+    }
+}

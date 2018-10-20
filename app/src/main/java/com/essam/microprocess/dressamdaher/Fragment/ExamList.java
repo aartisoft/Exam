@@ -94,13 +94,13 @@ public class ExamList extends Fragment implements ExamListContract.view{
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    ControlPanel.progressBar.setVisibility(View.GONE);
+                    ControlPanel.progressBar.setVisibility(View.INVISIBLE);
                     background.setVisibility(View.GONE);
 
                 }
                 else {
                     background.setVisibility(View.VISIBLE);
-                    ControlPanel.progressBar.setVisibility(View.GONE);
+                    ControlPanel.progressBar.setVisibility(View.INVISIBLE);
                 }
             }
 

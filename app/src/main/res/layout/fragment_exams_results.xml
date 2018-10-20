@@ -2,19 +2,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color3"
-    tools:context="com.essam.microprocess.dressamdaher.Fragment.MyResults">
+    tools:context="com.essam.microprocess.dressamdaher.Fragment.ExamsResults">
 
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/MyResult_rec"
-    android:background="@color/color3"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/Exam_Result_rec"
+        android:background="@color/color3"
+        >
+
+
+    </android.support.v7.widget.RecyclerView>
 
     <ImageView
-        android:id="@+id/backgroundground"
+        android:id="@+id/background"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:src="@drawable/ic_noresult"
