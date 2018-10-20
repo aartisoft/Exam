@@ -40,10 +40,11 @@ public class StudentResult extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-         // Inflate the layout for this fragment
-         View v = inflater.inflate(R.layout.fragment_student_result, container, false);
-         ButterKnife.bind(this,v);
-         ControlPanel.progressBar.setVisibility(View.VISIBLE);
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_student_result, container, false);
+        ButterKnife.bind(this, v);
+        ControlPanel.progressBar.setVisibility(View.VISIBLE);
+        ControlPanel.Title.setText(R.string.results);
          if (getArguments() != null) {
             ExamID = getArguments().getString("ExamID");
          }
@@ -52,7 +53,7 @@ public class StudentResult extends Fragment {
                 .orderByChild("examID").equalTo(ExamID);
 
          StudentResult_Rec_Adapter adapter = new StudentResult_Rec_Adapter(Result_Pojo.class,
-                R.layout.student_result_rec_layout,ViewHolder3.class,query);
+                R.layout.student_result_rec_layout,ViewHolder3.class,query,getActivity().getSupportFragmentManager());
 
          recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

@@ -70,7 +70,7 @@
     <string name="PleaseMakesure"> يرجي التأكد من البريد الالكتروني والرقم السري </string>
     <string name="banned">حظر الطالب</string>
     <string name="Rating"> تقييم الطالب </string>
-    <string name="results">نتائج الاختبارات</string>
+    <string name="results">نتائج الطلاب</string>
     <string name="questions">بنك الاسئلة </string>
     <string name="exit">خروج</string>
     <string name="Search">البحث</string>
@@ -126,7 +126,9 @@
     <string name="Result">نتيجة الاختبار</string>
     <string name="Home">الرئيسية</string>
     <string name="result">النتائج</string>
-
+    <string name="hisAnswer">أجاب : </string>
+    <string name="correctAnswer">الإجابة الصحيحة :</string>
+    <string name="studentsWrongs">اخطاء الطالب</string>
 
 
 </resources>

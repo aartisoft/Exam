@@ -1,8 +1,14 @@
 package com.essam.microprocess.dressamdaher.Adapter;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.view.View;
+import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
+import com.essam.microprocess.dressamdaher.Fragment.StudentResult;
+import com.essam.microprocess.dressamdaher.Fragment.StudentsWrongs;
 import com.essam.microprocess.dressamdaher.JsonModel.Resister_form;
 import com.essam.microprocess.dressamdaher.JsonModel.Result_Pojo;
 import com.essam.microprocess.dressamdaher.R;
@@ -13,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * Created by microprocess on 2018-10-20.
@@ -30,8 +38,10 @@ public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_P
      *                        using some combination of {@code limit()}, {@code startAt()}, and {@code endAt()}.
      */
     int photosCounter = 0 ;
-    public StudentResult_Rec_Adapter(Class<Result_Pojo> modelClass, int modelLayout, Class<ViewHolder3> viewHolderClass, Query ref) {
+    FragmentManager fragmentManager;
+    public StudentResult_Rec_Adapter(Class<Result_Pojo> modelClass, int modelLayout, Class<ViewHolder3> viewHolderClass, Query ref,FragmentManager fragmentManager) {
         super(modelClass, modelLayout, viewHolderClass, ref);
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -97,6 +107,32 @@ public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_P
             holder.cardView.animate().translationXBy(-1000).setDuration(800);
 
         }
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("Name", holder.txName.getText().toString() );
+                bundle.putString("FinalDegree", model.getFinalDegree());
+                bundle.putString("Total",model.getTotal());
+
+                bundle.putParcelableArrayList("WrongQuestions",model.getWrongQuestions());
+
+                // set MyFragment Arguments
+                StudentsWrongs StudentsWrongs = new StudentsWrongs();
+                StudentsWrongs.setArguments(bundle);
+                if(model.getWrongQuestions().size() > 0 ) {
+                    fragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                            .replace(R.id.Exam_Frame, StudentsWrongs)
+                            .addToBackStack(null)
+                            .commit();
+                }
+
+            }
+        });
 
 
 

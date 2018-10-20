@@ -57,7 +57,7 @@ public class ExamsResults_Rec_Adapter  extends FirebaseRecyclerAdapter<Results_R
                 Bundle bundle = new Bundle();
                 bundle.putString("ExamID", model.getExamID());
 
-               // set MyFragment Arguments
+                // set MyFragment Arguments
                 StudentResult StudentResult = new StudentResult();
                 StudentResult.setArguments(bundle);
 
