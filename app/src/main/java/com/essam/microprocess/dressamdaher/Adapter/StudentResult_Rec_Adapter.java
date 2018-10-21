@@ -1,8 +1,10 @@
 package com.essam.microprocess.dressamdaher.Adapter;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.widget.Toast;
 
@@ -47,22 +49,27 @@ public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_P
     @Override
     protected void populateViewHolder(final ViewHolder3 holder, final Result_Pojo model, int position) {
 
+        ViewCompat.setTransitionName(holder.circleImageView, "Image");
         //photos changer .
         if (photosCounter == 0 ) {
             holder.circleImageView.setBackgroundResource(R.drawable.ic_student_1);
+            holder.circleImageView.setTag(R.drawable.ic_student_1);
             photosCounter ++ ;
         }
         else if (photosCounter == 1) {
             holder.circleImageView.setBackgroundResource(R.drawable.ic_student_2);
+            holder.circleImageView.setTag(R.drawable.ic_student_2);
             photosCounter ++ ;
         }
         else if( photosCounter == 2 )
         {
             holder.circleImageView.setBackgroundResource(R.drawable.ic_student_3);
+            holder.circleImageView.setTag(R.drawable.ic_student_3);
             photosCounter ++ ;
         }
         else {
             holder.circleImageView.setBackgroundResource(R.drawable.ic_student_4);
+            holder.circleImageView.setTag(R.drawable.ic_student_4);
             photosCounter = 0;
         }
 
@@ -118,14 +125,15 @@ public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_P
                 bundle.putString("Total",model.getTotal());
 
                 bundle.putParcelableArrayList("WrongQuestions",model.getWrongQuestions());
-
+                //to pass image to next fragment.
+                bundle.putInt("Image", (Integer) holder.circleImageView.getTag());
                 // set MyFragment Arguments
                 StudentsWrongs StudentsWrongs = new StudentsWrongs();
                 StudentsWrongs.setArguments(bundle);
                 if(model.getWrongQuestions().size() > 0 ) {
                     fragmentManager
                             .beginTransaction()
-                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                            .addSharedElement(holder.circleImageView, holder.circleImageView.getTransitionName())
                             .replace(R.id.Exam_Frame, StudentsWrongs)
                             .addToBackStack(null)
                             .commit();

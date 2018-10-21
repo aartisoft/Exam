@@ -1,12 +1,15 @@
 package com.essam.microprocess.dressamdaher.Fragment;
 
 
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,17 +44,28 @@ public class StudentsWrongs extends Fragment {
     @BindView(R.id.Wrongs_rec)
     RecyclerView Wrongs_rec;
 
+
+
     ArrayList<WorngQestion> WorngQestion ;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        postponeEnterTransition();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setSharedElementEnterTransition(TransitionInflater.from(getContext())
+                    .inflateTransition(android.R.transition.move));
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
         ControlPanel.Title.setText(R.string.studentsWrongs);
 
         // Inflate the layout for this fragment
@@ -62,17 +76,20 @@ public class StudentsWrongs extends Fragment {
             String name = getArguments().getString("Name");
             String total= getArguments().getString("Total");
             String FinalDegree= getArguments().getString("FinalDegree");
+            int source = getArguments().getInt("Image");
+            circleimage.setBackgroundResource(source);
             WorngQestion = getArguments().getParcelableArrayList("WrongQuestions");
-
             txDegree.setText(total);
             txFinalDegree.setText(FinalDegree);
             txName.setText(name);
+
 
         }
 
         StudentsWrongs_Rec_Adapter adapter = new StudentsWrongs_Rec_Adapter(WorngQestion);
         Wrongs_rec.setLayoutManager(new LinearLayoutManager(getActivity()));
         Wrongs_rec.setAdapter(adapter);
+
 
 
         return v;
@@ -88,5 +105,7 @@ public class StudentsWrongs extends Fragment {
         super.onStop();
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
+
+
 
 }

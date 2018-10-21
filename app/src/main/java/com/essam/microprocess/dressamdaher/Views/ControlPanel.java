@@ -34,6 +34,8 @@ import com.essam.microprocess.dressamdaher.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Random;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ControlPanel extends AppCompatActivity
@@ -74,7 +76,24 @@ public class ControlPanel extends AppCompatActivity
                 .replace(R.id.Exam_Frame,new ExamList())
                 .commit();
 
+        //image profile back ground .
+        Random r = new Random();
+        int n = r.nextInt(3);
+        if(n == 0 ){
+         circleImageView.setBackgroundResource(R.drawable.ic_student_1);
 
+        }
+        else if(n == 1){
+            circleImageView.setBackgroundResource(R.drawable.ic_student_2);
+        }
+        else if(n == 2){
+            circleImageView.setBackgroundResource(R.drawable.ic_student_3);
+        }
+        else {
+            circleImageView.setBackgroundResource(R.drawable.ic_student_4);
+        }
+
+        ///////////
         controlpanelPresnter.CheckifAdmin(auth.getCurrentUser().getUid());
         controlpanelPresnter.getuserName(auth.getCurrentUser().getUid());
 

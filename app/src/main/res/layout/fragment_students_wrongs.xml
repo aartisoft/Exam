@@ -80,7 +80,7 @@
             android:background="@drawable/ic_student_4"
             app:civ_border_color="#80ffffff"
             app:civ_border_width="10dp"
-
+            android:transitionName="Image"
             />
 
         <TextView

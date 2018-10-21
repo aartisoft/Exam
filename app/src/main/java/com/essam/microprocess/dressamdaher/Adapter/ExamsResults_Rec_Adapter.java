@@ -61,6 +61,7 @@ public class ExamsResults_Rec_Adapter  extends FirebaseRecyclerAdapter<Results_R
                 StudentResult StudentResult = new StudentResult();
                 StudentResult.setArguments(bundle);
 
+
                         fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
