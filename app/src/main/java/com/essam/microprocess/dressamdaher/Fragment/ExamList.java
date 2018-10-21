@@ -84,9 +84,15 @@ public class ExamList extends Fragment implements ExamListContract.view{
 
         Query reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef());
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //**// reverse Recycler view .
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        //**\\
         ExamList_Rec_Adapter adapter = new ExamList_Rec_Adapter(AddExam_pojo.class,R.layout.examlist_rec_layout,
                ViewHolder.class,reference,date,getActivity());
+
         recyclerView.setAdapter(adapter);
 
         //BACKGROUND

@@ -19,8 +19,8 @@ public class MyResultPresenter implements MyResultContract.presenter {
     }
 
     @Override
-    public void getMyResults() {
-        model.getMyResults();
+    public void getMyResults(String uid) {
+        model.getMyResults(uid);
     }
 
     @Override

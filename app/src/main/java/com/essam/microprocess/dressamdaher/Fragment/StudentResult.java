@@ -55,7 +55,13 @@ public class StudentResult extends Fragment {
          StudentResult_Rec_Adapter adapter = new StudentResult_Rec_Adapter(Result_Pojo.class,
                 R.layout.student_result_rec_layout,ViewHolder3.class,query,getActivity().getSupportFragmentManager());
 
-         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //**// reverse Recycler view .
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        //**\\
 
          recyclerView.setAdapter(adapter);
 

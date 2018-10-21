@@ -44,6 +44,8 @@ public class ExamsResults_Rec_Adapter  extends FirebaseRecyclerAdapter<Results_R
     @Override
     protected void populateViewHolder(final ViewHolder2 holder, final Results_References model, int position) {
 
+        holder.ExamID = model.getExamID();
+
         holder.Cardview.setScaleX(.9f);
         holder.Cardview.setScaleY(.9f);
         holder.Cardview.animate().scaleX(1f).scaleY(1f).setDuration(500);

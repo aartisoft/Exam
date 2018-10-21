@@ -50,7 +50,15 @@ public class ExamsResults extends Fragment {
         ExamsResults_Rec_Adapter adapter = new ExamsResults_Rec_Adapter(Results_References.class,R.layout.examresult_rec_layout,
                 ViewHolder2.class,query,getActivity().getSupportFragmentManager());
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        //**// reverse Recycler view .
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        //**\\
+
         recyclerView.setAdapter(adapter);
 
         query.addValueEventListener(new ValueEventListener() {

@@ -49,7 +49,7 @@ public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_P
     @Override
     protected void populateViewHolder(final ViewHolder3 holder, final Result_Pojo model, int position) {
 
-        ViewCompat.setTransitionName(holder.circleImageView, "Image");
+
         //photos changer .
         if (photosCounter == 0 ) {
             holder.circleImageView.setBackgroundResource(R.drawable.ic_student_1);
@@ -130,7 +130,10 @@ public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_P
                 // set MyFragment Arguments
                 StudentsWrongs StudentsWrongs = new StudentsWrongs();
                 StudentsWrongs.setArguments(bundle);
+
+                if(model.getWrongQuestions() != null)
                 if(model.getWrongQuestions().size() > 0 ) {
+                    ViewCompat.setTransitionName(holder.circleImageView, "Image");
                     fragmentManager
                             .beginTransaction()
                             .addSharedElement(holder.circleImageView, holder.circleImageView.getTransitionName())

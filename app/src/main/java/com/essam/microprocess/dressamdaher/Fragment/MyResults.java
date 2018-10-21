@@ -16,6 +16,7 @@ import com.essam.microprocess.dressamdaher.JsonModel.Result_Pojo;
 import com.essam.microprocess.dressamdaher.MainPresnter.MyResultPresenter;
 import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.Views.ControlPanel;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -43,7 +44,17 @@ public class MyResults extends Fragment implements MyResultContract.view {
         //initialize Presenter .
         presenter = new MyResultPresenter(this);
 
-        presenter.getMyResults();
+        if(getArguments() != null) {
+
+            String uid = getArguments().getString("uid");
+            presenter.getMyResults(uid);
+
+        }
+        else {
+
+            presenter.getMyResults(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        }
 
         return v;
     }
@@ -54,7 +65,14 @@ public class MyResults extends Fragment implements MyResultContract.view {
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
 
         MyResult_Rec_Adapter adapter = new MyResult_Rec_Adapter(result);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        //**// reverse Recycler view .
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        //**\\
         recyclerView.setAdapter(adapter);
     }
 

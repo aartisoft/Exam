@@ -32,10 +32,10 @@ public class MyResultModel implements MyResultContract.model {
     }
 
     @Override
-    public void getMyResults() {
+    public void getMyResults(String uid) {
 
         Query query = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).orderByChild("uid")
-                .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                .equalTo(uid);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

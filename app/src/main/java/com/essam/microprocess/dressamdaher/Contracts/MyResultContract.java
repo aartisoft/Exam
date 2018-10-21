@@ -17,7 +17,7 @@ public interface MyResultContract {
     }
     interface presenter {
 
-        void getMyResults();
+        void getMyResults(String uid);
 
         void Problem(String s);
 
@@ -25,6 +25,6 @@ public interface MyResultContract {
     }
     interface model {
 
-        void getMyResults();
+        void getMyResults(String uid);
     }
 }

@@ -1,7 +1,9 @@
 package com.essam.microprocess.dressamdaher.Adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,15 +14,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.essam.microprocess.dressamdaher.Contracts.MainActivityContract;
-import com.essam.microprocess.dressamdaher.Contracts.StudentManagementContract;
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
+import com.essam.microprocess.dressamdaher.Fragment.MyResults;
 import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
-import com.essam.microprocess.dressamdaher.MainPresnter.StudentMangementPresenter;
 import com.essam.microprocess.dressamdaher.Permissions.Call_permission;
 import com.essam.microprocess.dressamdaher.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,17 +29,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by microprocess on 2018-10-01.
- */
 
 public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManagementAdapter.ViewHolder> {
     List<FullRegisterForm> items ;
@@ -49,12 +42,13 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
     FirebaseAuth auth;
     int photosCounter = 0 ;
     Context context;
-
-    public  StudentManagementAdapter (Context context, List<FullRegisterForm> items ){
+    FragmentManager fragmentManager;
+    public  StudentManagementAdapter (Context context, List<FullRegisterForm> items  , FragmentManager fragmentManager){
 
         this.items = items ;
         this.context = context;
         auth = FirebaseAuth.getInstance();
+        this.fragmentManager = fragmentManager ;
     }
 
 
@@ -140,10 +134,23 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
             });
 
             //rating Users .
-            holder.rating_linear.setOnClickListener(new View.OnClickListener() {
+            holder.MYResult_linear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
+
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("uid", items.get(position).getuID() );
+                    // set MyFragment Arguments
+                    MyResults MyResults = new MyResults();
+                    MyResults.setArguments(bundle);
+
+                    fragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                            .replace(R.id.Exam_Frame,MyResults).addToBackStack(null)
+                            .commit();
 
                 }
             });
@@ -199,8 +206,8 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
         @BindView(R.id.ban_linear)
         LinearLayout ban_linear;
 
-        @BindView(R.id.rating_linear)
-        LinearLayout rating_linear;
+        @BindView(R.id.MYResult_linear)
+        LinearLayout MYResult_linear;
 
         @BindView(R.id.Press_on_CardView)
         CardView Press_on_CardView;

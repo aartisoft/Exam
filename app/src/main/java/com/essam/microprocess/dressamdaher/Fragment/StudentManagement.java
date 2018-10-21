@@ -85,7 +85,7 @@ public class StudentManagement extends Fragment implements StudentManagementCont
     @Override
     public void RecyclerConfig(List<FullRegisterForm> Result) {
 
-        adapter = new StudentManagementAdapter(getActivity(),Result);
+        adapter = new StudentManagementAdapter(getActivity(),Result,getActivity().getSupportFragmentManager());
         recyclerView.setAdapter(adapter);
         //close
         dialog.Close_Dialog();

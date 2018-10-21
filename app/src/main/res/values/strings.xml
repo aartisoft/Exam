@@ -129,6 +129,8 @@
     <string name="hisAnswer">أجاب : </string>
     <string name="correctAnswer">الإجابة الصحيحة :</string>
     <string name="studentsWrongs">اخطاء الطالب</string>
+    <string name="StudentResult">نتائج الطالب  \n في جميع الاختبارات </string>
+    <string name="delete_results">حذف النتائج</string>
 
 
 </resources>
