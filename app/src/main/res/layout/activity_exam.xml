@@ -7,6 +7,7 @@
     android:background="@drawable/gradiantcolor"
     tools:context="com.essam.microprocess.dressamdaher.Views.Exam"
     android:keepScreenOn="true"
+    android:layoutDirection="ltr"
     >
     <ScrollView
         android:id="@+id/scrollView"
