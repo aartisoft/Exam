@@ -40,6 +40,7 @@ public class ExamsResults extends Fragment {
 
 
         ControlPanel.Title.setText(R.string.results);
+        ControlPanel.SetNavChecked(4);
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
         // Inflate the layout for this fragment .
          View v =inflater.inflate(R.layout.fragment_exams_results, container, false);

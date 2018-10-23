@@ -123,7 +123,7 @@ public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_P
                 bundle.putString("Name", holder.txName.getText().toString() );
                 bundle.putString("FinalDegree", model.getFinalDegree());
                 bundle.putString("Total",model.getTotal());
-
+                bundle.putString("examID",model.getExamID());
                 bundle.putParcelableArrayList("WrongQuestions",model.getWrongQuestions());
                 //to pass image to next fragment.
                 bundle.putInt("Image", (Integer) holder.circleImageView.getTag());

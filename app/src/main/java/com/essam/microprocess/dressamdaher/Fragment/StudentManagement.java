@@ -43,6 +43,7 @@ public class StudentManagement extends Fragment implements StudentManagementCont
          View v = inflater.inflate(R.layout.student_mangment, container, false);
         ButterKnife.bind(this,v);
         ControlPanel.Title.setText(R.string.mangeStudent);
+        ControlPanel.SetNavChecked(5);
 
         searchview = v.findViewById(R.id.search);
 

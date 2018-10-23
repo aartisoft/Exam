@@ -40,6 +40,7 @@ public class MyResults extends Fragment implements MyResultContract.view {
          View v = inflater.inflate(R.layout.fragment_my_results, container, false);
         ButterKnife.bind(this , v);
         ControlPanel.Title.setText(R.string.MyResult);
+        ControlPanel.SetNavChecked(1);
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
         //initialize Presenter .
         presenter = new MyResultPresenter(this);

@@ -13,14 +13,22 @@ import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.Adapter.StudentResult_Rec_Adapter;
 import com.essam.microprocess.dressamdaher.Adapter.StudentsWrongs_Rec_Adapter;
+import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
+import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
+import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
 import com.essam.microprocess.dressamdaher.JsonModel.WorngQestion;
 import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.Views.ControlPanel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -44,11 +52,13 @@ public class StudentsWrongs extends Fragment {
     @BindView(R.id.Wrongs_rec)
     RecyclerView Wrongs_rec;
 
+    @BindView(R.id.delete)
+    ImageView delete ;
 
 
     ArrayList<WorngQestion> WorngQestion ;
-
-
+    String examID;
+    AnimatedDialog dialog;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,10 +82,12 @@ public class StudentsWrongs extends Fragment {
          View v =inflater.inflate(R.layout.fragment_students_wrongs, container, false);
         ButterKnife.bind(this,v);
         WorngQestion = new ArrayList<>();
+        dialog = new AnimatedDialog(getActivity());
         if (getArguments() != null) {
             String name = getArguments().getString("Name");
             String total= getArguments().getString("Total");
             String FinalDegree= getArguments().getString("FinalDegree");
+            examID = getArguments().getString("examID");
             int source = getArguments().getInt("Image");
             circleimage.setBackgroundResource(source);
             WorngQestion = getArguments().getParcelableArrayList("WrongQuestions");
@@ -90,7 +102,22 @@ public class StudentsWrongs extends Fragment {
         Wrongs_rec.setLayoutManager(new LinearLayoutManager(getActivity()));
         Wrongs_rec.setAdapter(adapter);
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog alertDialog = new AlertDialog(getActivity(),"تحذير" , "يرجي العلم انه في حالة حذف الطالب . سوف يتمكن الطالب من دخول الاختبار مرة اخري وذلك في حالة وجود الاختبار في قائمة الاختبارات , متأكد ؟");
+                alertDialog.show();
+                alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Delete();
+                        dialog.ShowDialog();
+                        alertDialog.dismiss();
+                    }
+                });
 
+            }
+        });
 
         return v;
     }
@@ -106,6 +133,25 @@ public class StudentsWrongs extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 
+  void  Delete(){
+      final DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef())
+              .child(examID+ FirebaseAuth.getInstance().getCurrentUser().getUid());
+      reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+          @Override
+          public void onSuccess(Void aVoid) {
+              DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef())
+                      .child(examID).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+              reference1.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                  @Override
+                  public void onSuccess(Void aVoid) {
+                      dialog.Close_Dialog();
+                      getActivity().onBackPressed();
 
+                  }
+              });
+          }
+      });
+
+  }
 
 }

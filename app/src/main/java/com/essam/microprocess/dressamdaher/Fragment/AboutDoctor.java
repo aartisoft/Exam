@@ -15,8 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import com.essam.microprocess.dressamdaher.R;
+import com.essam.microprocess.dressamdaher.Views.ControlPanel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,7 +71,11 @@ public class AboutDoctor extends Fragment {
 
     @BindView(R.id.facebook)
     ImageView facebook;
+    @BindView(R.id.twiiter)
+    ImageView twiiter;
 
+    @BindView(R.id.scroll)
+    ScrollView scroll;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,7 +133,7 @@ public class AboutDoctor extends Fragment {
                     dropdown.setImageResource(R.drawable.ic_dropup);
                     openAnimation(Details_layout);
                 }
-
+                focusOnView(cardView);
 
             }
         });
@@ -145,7 +151,7 @@ public class AboutDoctor extends Fragment {
                     dropdown2.setImageResource(R.drawable.ic_dropup);
                     openAnimation(Details_layout2);
                 }
-
+                focusOnView(cardView2);
 
             }
         });
@@ -163,7 +169,7 @@ public class AboutDoctor extends Fragment {
                     dropdown3.setImageResource(R.drawable.ic_dropup);
                     openAnimation(Details_layout3);
                 }
-
+                focusOnView(cardView3);
 
             }
         });
@@ -181,7 +187,7 @@ public class AboutDoctor extends Fragment {
                     dropdown4.setImageResource(R.drawable.ic_dropup);
                     openAnimation(Details_layout4);
                 }
-
+                focusOnView(cardView4);
 
             }
         });
@@ -199,7 +205,7 @@ public class AboutDoctor extends Fragment {
                     dropdown5.setImageResource(R.drawable.ic_dropup);
                     openAnimation(Details_layout5);
                 }
-
+                focusOnView(cardView5);
 
             }
         });
@@ -218,6 +224,7 @@ public class AboutDoctor extends Fragment {
                     openAnimation(Details_layout6);
                 }
 
+                focusOnView(cardView6);
 
             }
         });
@@ -232,6 +239,16 @@ public class AboutDoctor extends Fragment {
             }
         });
 
+        twiiter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + "EssamDaher")));
+                }catch (Exception e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + "EssamDaher")));
+                }
+            }
+        });
         return v ;
     }
 
@@ -263,5 +280,13 @@ public class AboutDoctor extends Fragment {
         } catch (PackageManager.NameNotFoundException e) {
             return FACEBOOK_URL; //normal web url
         }
+    }
+    private final void focusOnView(final CardView cardView){
+        scroll.post(new Runnable() {
+            @Override
+            public void run() {
+                scroll.smoothScrollTo(0, cardView.getTop());
+            }
+        });
     }
 }

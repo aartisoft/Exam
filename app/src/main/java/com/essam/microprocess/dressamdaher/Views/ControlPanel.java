@@ -47,7 +47,7 @@ public class ControlPanel extends AppCompatActivity
     private Toolbar toolbar;
     private ImageView open_nav;
     private DrawerLayout drawer;
-    private NavigationView navigation;
+    private static NavigationView navigation;
     public static TextView Title ;
     private FirebaseAuth auth;
     ControlpanelPresnter controlpanelPresnter;
@@ -348,8 +348,8 @@ public class ControlPanel extends AppCompatActivity
                 break;
 
             case R.id.aboutDoctor :
-
-                getSupportFragmentManager().popBackStack();
+                SetNavUnChecked();
+                //getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
@@ -360,8 +360,8 @@ public class ControlPanel extends AppCompatActivity
 
                 break;
             case R.id.aboutProgrammer :
-
-                getSupportFragmentManager().popBackStack();
+                SetNavUnChecked();
+                //getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
@@ -413,5 +413,15 @@ public class ControlPanel extends AppCompatActivity
     public void SetUsername(String nameStudent) {
         UserName.setText( " مرحبا , " + nameStudent );
     }
+    public static void SetNavChecked(int position){
 
+        navigation.getMenu().getItem(position).setChecked(true);
+
+    }
+    public static void SetNavUnChecked(){
+        for (int position = 0 ; position < navigation.getMenu().size(); position++  ) {
+            navigation.getMenu().getItem(position).setChecked(false);
+        }
+
+    }
 }

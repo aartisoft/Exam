@@ -75,6 +75,7 @@ public class Question_Bank_Frag extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.question_bank_layout,container,false);
         ControlPanel.Title.setText(R.string.questions);
+        ControlPanel.SetNavChecked(3);
         show_addQ_frag = v.findViewById(R.id.show_addQ_frag);
         recyclerView   = v.findViewById(R.id.rec);
         presenter      = new Question_BankPresenter(this);

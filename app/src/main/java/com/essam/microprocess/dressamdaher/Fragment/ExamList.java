@@ -66,6 +66,7 @@ public class ExamList extends Fragment implements ExamListContract.view{
          ButterKnife.bind(this,v);
          ControlPanel.Title.setText(R.string.examList);
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
+        ControlPanel.SetNavChecked(0);
 
         //Get Time From Server Then run Recycler .
         presenter = new ExamListPresenter(this);

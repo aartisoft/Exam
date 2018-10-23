@@ -105,7 +105,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ControlPanel.Title.setText(R.string.addExam);
-
+        ControlPanel.SetNavChecked(2);
     }
 
     @Override

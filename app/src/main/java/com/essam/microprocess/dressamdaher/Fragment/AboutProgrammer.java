@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.essam.microprocess.dressamdaher.R;
+import com.essam.microprocess.dressamdaher.Views.ControlPanel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,7 +54,6 @@ public class AboutProgrammer extends Fragment {
         // Inflate the layout for this fragment
        View view = inflater.inflate(R.layout.fragment_about_programmer, container, false);
         ButterKnife.bind(this,view);
-
         textView.setAlpha(0);
         textView2.setAlpha(0);
         //Animation .
