@@ -74,7 +74,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
     }
 
     @Override
-    protected void populateViewHolder(ViewHolder holder, final AddExam_pojo model, int position) {
+    protected void populateViewHolder(final ViewHolder holder, final AddExam_pojo model, int position) {
         holder.ExamName.setText(model.getExamName());
         holder.Cardview.setScaleX(.9f);
         holder.Cardview.setScaleY(.9f);
@@ -91,6 +91,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
         holder.BtnStartExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holder.BtnStartExam.setEnabled(false);
                 dialog.ShowDialog();
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference reference =FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef())
@@ -99,7 +100,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
-
+                            holder.BtnStartExam.setEnabled(true);
                             dialog.Close_Dialog();
                             AlertDialog alertDialog = new AlertDialog(context,"انت بالفعل اكملت اختبارك .");
                             alertDialog.show();
@@ -110,12 +111,16 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                             //getDateAndTime(model);
                             //withoutServer
                             realtimehere(model);
+                            holder.BtnStartExam.setEnabled(true);
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        holder.BtnStartExam.setEnabled(true);
+                        dialog.Close_Dialog();
+                        AlertDialog alertDialog = new AlertDialog(context,databaseError.getMessage());
+                        alertDialog.show();
                     }
                 });
 

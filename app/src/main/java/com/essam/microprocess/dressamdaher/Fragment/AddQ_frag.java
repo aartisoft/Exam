@@ -14,13 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpResponse;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.essam.microprocess.dressamdaher.Contracts.AddQuestionContract;
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
@@ -34,12 +28,7 @@ import com.essam.microprocess.dressamdaher.Views.ControlPanel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -49,7 +38,7 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import static com.android.volley.VolleyLog.TAG;
+
 
 /**
  * Created by microprocess on 2018-10-03.
