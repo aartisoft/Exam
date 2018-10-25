@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,16 +126,21 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
 
                 if (Email.getText().toString().isEmpty()){
                     Email.setError(getResources().getString(R.string.empty_field));
+
+
                 }
                 if (!Email.getText().toString().isEmpty() && !isEmailValid(Email.getText().toString().trim())){
                     Email.setError(getResources().getString(R.string.notLookedLikeYahoo));
+
                 }
                 if (Password.getText().toString().isEmpty()){
                     Password.setError(getResources().getString(R.string.enterPass),null);
+
                 }
-                if (!Password.getText().toString().isEmpty() && Password.getText().toString().length()<8){
+                if (!Password.getText().toString().isEmpty() && Password.getText().toString().length()<3){
                     Password.setError(getResources().getString(R.string.less12char),null);
                     Password.requestFocus(); // edit by alaa .
+
                 }
                 if (makeSureFromPass.getText().toString().isEmpty()){
                     makeSureFromPass.setError(getResources().getString(R.string.should_like_pass),null);
@@ -145,6 +151,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
 
                     makeSureFromPass.setError( getResources().getString(R.string.should_like_pass),null);
                     makeSureFromPass.requestFocus(); // edit by alaa .
+
                 }
                 ViewsEmpty.isEmpty(phoneme,getResources().getString(R.string.enter_phone));
                 if (selectedCountry.equals("")){
@@ -155,7 +162,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
 
                 // if all things are true //
             if (!NameStudent.getText().toString().isEmpty()&& !Email.getText().toString().isEmpty()
-                    && !Password.getText().toString().isEmpty()&&Password.getText().toString().length()>8
+                    && !Password.getText().toString().isEmpty()&&Password.getText().toString().length()>3
                     && !makeSureFromPass.getText().toString().isEmpty()
                     && isEmailValid(Email.getText().toString().trim())
                     && makeSureFromPass.getText().toString().equals(Password.getText().toString())

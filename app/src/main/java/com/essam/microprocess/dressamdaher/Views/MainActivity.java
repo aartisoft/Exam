@@ -9,23 +9,32 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.crashlytics.android.Crashlytics;
 import com.essam.microprocess.dressamdaher.Contracts.MainActivityContract;
 import com.essam.microprocess.dressamdaher.Fragment.First_Fragment;
 import com.essam.microprocess.dressamdaher.Fragment.Register_Fragment;
 import com.essam.microprocess.dressamdaher.Fragment.Signin_Fragment;
 import com.essam.microprocess.dressamdaher.R;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
+
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements MainActivityContract.View{
 
 
     FirebaseAuth auth;
-
+    private FirebaseAnalytics mFirebaseAnalytics;
     @Override
     protected void onStart() {
         super.onStart();
+
+        //Enable collection for selected users by initializing Crashlytics from one of your app's activities
+        Fabric.with(this, new Crashlytics());
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         if (auth.getCurrentUser()!=null){
 
+            Crashlytics.setUserIdentifier(auth.getUid());
             startActivity(new Intent(this,ControlPanel.class));
             finish();
 

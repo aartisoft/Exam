@@ -1,19 +1,19 @@
 <resources>
     <string name="app_name">د.عصام ضاهر</string>
     <string name="Sign_in">تسجيل الدخول</string>
-    <string name="Sign_up">الإشتراك</string>
+    <string name="Sign_up">الاشتراك</string>
     <string name="s_in_up">
         يرجي تسجيل الدخول
-      \n  او الإشتراك
+      \n  او الاشتراك
       \n  اذا لم يكن لديك حساب
 </string>
 
     <string name="register"> التسجيل </string>
-    <string name="register1">يرجي ملئ جميع البيانات </string>
+    <string name="register1">يرجي تعبئة جميع البيانات </string>
     <string name="third_name"> الاسم الثلاثي </string>
     <string name="email">البريد الالكتروني</string>
     <string name="pass"> الرقم السري </string>
-    <string name="Make_sure_From_Pass"> تاكيد الرقم السري </string>
+    <string name="Make_sure_From_Pass"> تأكيد الرقم السري </string>
     <string name="phone"> رقم الهاتف </string>
     <string name="ihaveacount"> لديك حساب بالفعل ؟ </string>
     <string name="login"> تسجيل الدخول </string>
@@ -22,10 +22,10 @@
     <string name="write_email_in_correct_way">الرجاء كتابة البريد الإلكتروني بطريقة صحيحة</string>
 
     // registration //
-    <string name="empty_field"> قم بملئ الحقل من فضلك</string>
+    <string name="empty_field"> قم تعبئة الحقل من فضلك</string>
     <string name="notLookedLikeYahoo"> لابد ان يكون علي الشكل  email@example.com   </string>
     <string name="enterPass">قم بادخال الرقم السري من فضلك</string>
-    <string name="less12char">لابد ان يكون اكثر من 8 حرف للامان</string>
+    <string name="less12char">لابد ان يكون اكثر من 3 حرف للامان</string>
     <string name="should_like_pass"> الرقم السري لابد ان يكون مشابها للذي ادخلته</string>
     <string name="edit1_notLoke_edit2">قم بالتاكد من صحه الرقم السري الذي ادخلته</string>
     <string name="enter_phone">من فضلك قم بادخال رقم الهاتف الخاص بك</string>

@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 
+import com.crashlytics.android.Crashlytics;
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
 import com.essam.microprocess.dressamdaher.Dialog.AnimatedDialog;
 import com.essam.microprocess.dressamdaher.Enums.DataBase_Refrences;
@@ -121,12 +122,14 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                         dialog.Close_Dialog();
                         AlertDialog alertDialog = new AlertDialog(context,databaseError.getMessage());
                         alertDialog.show();
+
                     }
                 });
 
 
             }
         });
+
 
     }
 
