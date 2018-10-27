@@ -1,5 +1,6 @@
 package com.essam.microprocess.dressamdaher.Views;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -173,26 +174,30 @@ public class ControlPanel extends AppCompatActivity
 
         if(Result.equals("Successful")) {
 
-            AlertDialog alertDialog = new AlertDialog(ControlPanel.this
-                    , getString(R.string.YouareBanned));
-            alertDialog.setCancelable(false);
-            alertDialog.show();
-            alertDialog.btnNo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            if(!ControlPanel.this.isFinishing())
+            {
+                AlertDialog alertDialog = new AlertDialog(ControlPanel.this
+                        , getString(R.string.YouareBanned));
+                alertDialog.setCancelable(false);
+                alertDialog.show();
+                alertDialog.btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
 
-                    Intent intent = new Intent(ControlPanel.this , MainActivity.class);
-                    startActivity(intent);
+                        Intent intent = new Intent(ControlPanel.this , MainActivity.class);
+                        startActivity(intent);
 
-                    finish();
+                        finish();
 
 
 
-                    //لو عاوز المحظور ميعرش يعمل اي اكونت تاني علي البرنامج يبقه الغي السطر الجي
-                    auth.signOut();
-                }
-            });
+                        //لو عاوز المحظور ميعرش يعمل اي اكونت تاني علي البرنامج يبقه الغي السطر الجي
+                        auth.signOut();
+                    }
+                });
+            }
+
 
         }
 

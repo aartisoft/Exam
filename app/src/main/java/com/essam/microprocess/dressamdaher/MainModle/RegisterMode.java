@@ -62,6 +62,7 @@ public class RegisterMode implements RegisterFragContracts.ModelRegister {
             public void onFailure(@NonNull Exception e) {
 
                 presnterRegister.authProblem(e.toString());
+
             }
         });
 

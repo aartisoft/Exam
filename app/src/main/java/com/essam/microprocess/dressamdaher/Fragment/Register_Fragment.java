@@ -118,7 +118,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
 
         }
 
-        if (view==registeringToData){
+        if (view == registeringToData){
 
 
 
@@ -137,7 +137,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
                     Password.setError(getResources().getString(R.string.enterPass),null);
 
                 }
-                if (!Password.getText().toString().isEmpty() && Password.getText().toString().length()<3){
+                if (!Password.getText().toString().isEmpty() && Password.getText().toString().length()<9){
                     Password.setError(getResources().getString(R.string.less12char),null);
                     Password.requestFocus(); // edit by alaa .
 
@@ -162,19 +162,18 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
 
                 // if all things are true //
             if (!NameStudent.getText().toString().isEmpty()&& !Email.getText().toString().isEmpty()
-                    && !Password.getText().toString().isEmpty()&&Password.getText().toString().length()>3
+                    && !Password.getText().toString().isEmpty()&&Password.getText().toString().length()>8
                     && !makeSureFromPass.getText().toString().isEmpty()
                     && isEmailValid(Email.getText().toString().trim())
                     && makeSureFromPass.getText().toString().equals(Password.getText().toString())
                     && !phoneme.getText().toString().isEmpty() && !selectedCountry.equals("")){
-                registeringToData.setEnabled(false);
+
                 animatedDialog.ShowDialog();
                 Resister_form resister_form = new Resister_form(NameStudent.getText().toString(),Email.getText().toString(),phoneme.getText().toString(),selectedCountry);
                 RegisterPresnter registerPresnter = new RegisterPresnter(Register_Fragment.this);
                 registerPresnter.detailsForuserFromUI(editor,Email.getText().toString(),Password.getText().toString(),reference,resister_form);
 
-
-
+                registeringToData.setEnabled(false);
             }
 
         }

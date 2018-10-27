@@ -1,5 +1,8 @@
 package com.essam.microprocess.dressamdaher.ApiRetrofit;
 
+import android.support.v7.widget.RecyclerView;
+
+import com.essam.microprocess.dressamdaher.Adapter.ViewHolder;
 import com.essam.microprocess.dressamdaher.JsonModel.All_Country_Details;
 
 import java.util.Map;
