@@ -101,23 +101,7 @@ public class ControlPanel extends AppCompatActivity
 
     }
 
-    @Override
-    public void updatefragToTime(int hour, int minite) {
-        addExam exam = new addExam();
-        Bundle b = new Bundle();
-        b.putInt("hour", hour);
-        b.putInt("min",minite);
-        exam.setArguments(b);
-        Title.setText(R.string.addExam);
-        getSupportFragmentManager().popBackStack();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                .replace(R.id.Exam_Frame,new addExam())
-                .addToBackStack(null)
-                .commit();
 
-    }
 
     @Override
     public void initializeViews() {
@@ -139,22 +123,7 @@ public class ControlPanel extends AppCompatActivity
 
     }
 
-    @Override
-    public void emailandpasstrueexit() {
 
-        animatedDialog.Close_Dialog();
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-        finish();
-
-    }
-
-    @Override
-    public void emailandpassnottrue(String E) {
-
-        //  هنا بقا لسه حنشةف المشكله بتاعه لو الباسورد اتمسح من الداتا بيز ....
-
-    }
 
     @Override
     public void whenClickFAB_showFrag() {
@@ -176,6 +145,7 @@ public class ControlPanel extends AppCompatActivity
 
             if(!ControlPanel.this.isFinishing())
             {
+
                 AlertDialog alertDialog = new AlertDialog(ControlPanel.this
                         , getString(R.string.YouareBanned));
                 alertDialog.setCancelable(false);

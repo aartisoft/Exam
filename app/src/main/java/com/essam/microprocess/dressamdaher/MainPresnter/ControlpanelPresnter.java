@@ -19,20 +19,8 @@ public class ControlpanelPresnter implements ControlPanelContract.ControlPresnte
         view.initializeViews();
     }
 
-    @Override
-    public void checkModel(FirebaseAuth auth,String email , String password) {
-        controlPanelModel.checking(this,auth,email,password);
-    }
 
-    @Override
-    public void datatrue() {
-        view.emailandpasstrueexit();
-    }
 
-    @Override
-    public void datanotTrue(String E) {
-        view.emailandpassnottrue(E);
-    }
 
     @Override
     public void CheckifUserBanned(String Uid) {

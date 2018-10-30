@@ -109,25 +109,28 @@ public class ViewHolder extends RecyclerView.ViewHolder  {
   }
 
   private void CheckifAdmin() {
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.ADMIN.getRef()).child(auth.getCurrentUser().getUid());
-    reference.addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override
-      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        if(dataSnapshot.exists()){
 
-          linear.setEnabled(true);
+    if(auth.getCurrentUser() != null) {
+
+      DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.ADMIN.getRef()).child(auth.getCurrentUser().getUid());
+      reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+          if (dataSnapshot.exists()) {
+
+            linear.setEnabled(true);
+
+          }
 
         }
 
-      }
-
-      @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
 
 
-
-      }
-    });
+        }
+      });
+    }
   }
 
   private void applyFontToMenuItem(MenuItem mi) {

@@ -111,16 +111,20 @@ public class Result extends AppCompatActivity implements ResultContract.view {
 
     @Override
     public void UploadSuccessFull(String s) {
-        dialog.Close_Dialog();
-                    AlertDialog alertDialog = new AlertDialog(this,s);
-                     alertDialog.show();
+        if(!isFinishing()) {
+            dialog.Close_Dialog();
+            AlertDialog alertDialog = new AlertDialog(this, s);
+            alertDialog.show();
+        }
     }
 
     @Override
     public void ResultUploadFaild(String s) {
+        if(!isFinishing()) {
         dialog.Close_Dialog();
         AlertDialog alertDialog = new AlertDialog(this,s);
         alertDialog.show();
+        }
     }
 
     @Override

@@ -136,6 +136,10 @@ public class ExamList extends Fragment implements ExamListContract.view{
 
     @Override
     public void ShowAdminTools() {
-        actionButton.setVisibility(View.VISIBLE);
+
+        if(getActivity() != null)
+            if(!getActivity().isFinishing())
+                actionButton.setVisibility(View.VISIBLE);
+
     }
 }

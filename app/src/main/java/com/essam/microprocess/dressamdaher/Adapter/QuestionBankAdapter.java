@@ -36,7 +36,7 @@ import java.util.Locale;
 
 
 public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapter.ViewHolder> {
-    public static List<Questions_Form> qestions ;
+    public  List<Questions_Form> qestions ;
     private List<Questions_Form>listnew;
     Context context;
 
@@ -59,6 +59,8 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final QuestionBankAdapter.ViewHolder holder, final int position) {
+
+        final int pos = position;
         holder.Question.setText(qestions.get(position).getQuestion());
         //animation
         holder.Cardview.setScaleX(.9f);
@@ -83,12 +85,12 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
                         if (item.getItemId() == R.id.edit){
 
-                            listinParent.updateFragbyValuesTogoEditFrag(qestions.get(position).getQuestionID());
+                            listinParent.updateFragbyValuesTogoEditFrag(qestions.get(pos).getQuestionID());
 
                         }
                         if (item.getItemId() == R.id.delete){
 
-                              listinParent.removingQuestion(qestions.get(position).getQuestionID(),position);
+                              listinParent.removingQuestion(qestions.get(pos).getQuestionID(),pos);
                         }
                         return true;
                     }

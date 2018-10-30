@@ -56,7 +56,7 @@ public class Question_Bank_Frag extends Fragment
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
     AnimatedDialog dialog;
-
+            List<Questions_Form> qestions ;
             QuestionBankAdapter adapter;
             TextView view;
     @Override
@@ -65,7 +65,7 @@ public class Question_Bank_Frag extends Fragment
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference        = firebaseDatabase.getReference(DataBase_Refrences.BANKQUESTIONS.getRef());
-
+        qestions = new ArrayList<>();
 
     }
 
@@ -194,7 +194,8 @@ public class Question_Bank_Frag extends Fragment
 
                  view    = viewHolder.itemView.findViewById(R.id.tx);
 
-                presenter.addQuestionToAddTestRecycler(QuestionBankAdapter.qestions.get(position).getQuestionID());
+                presenter.addQuestionToAddTestRecycler(qestions
+                        .get(viewHolder.getAdapterPosition()).getQuestionID());
 
 
              }
@@ -224,42 +225,49 @@ public class Question_Bank_Frag extends Fragment
             public void removingQuestion(final String questionID, final int position) {
 
                  final Question_BankPresenter presenter = new Question_BankPresenter(this);
+                    if(getActivity()!= null) {
 
-                final AlertDialog alertDialog = new AlertDialog(getActivity(),"تحذير"," متأكد من حذف هذا السؤال ؟");
-                alertDialog.show();
-                alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                        final AlertDialog alertDialog = new AlertDialog(getActivity(), "تحذير", " متأكد من حذف هذا السؤال ؟");
+                        alertDialog.show();
+                        alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 
-                        //delete
-                        presenter.tellModletoDeleteQuestion(reference,questionID,position);
-                        alertDialog.dismiss();
+                                //delete
+                                presenter.tellModletoDeleteQuestion(reference, questionID, position);
+                                alertDialog.dismiss();
 
-                        dialog.ShowDialog();
+                                dialog.ShowDialog();
+
+                            }
+                        });
 
                     }
-                });
+                }
 
 
 
-
-            }
 
             @Override
             public void Q_Removed_InUI(int position) {
                 dialog.Close_Dialog();
-                Toast.makeText(getActivity(), "لقد تم حذف السؤال بنجاح", Toast.LENGTH_SHORT).show();
-                if (adapter!=null){
+                if(getActivity() != null) {
 
-                    adapter.remove(position);
+                    Toast.makeText(getActivity(), "لقد تم حذف السؤال بنجاح .", Toast.LENGTH_SHORT).show();
+                    if (adapter != null) {
 
+                        adapter.remove(position);
+
+                    }
                 }
             }
 
             @Override
             public void Q_notRemoved_InUI() {
                 dialog.Close_Dialog();
-                Toast.makeText(getActivity(), "فيه مشكله راجع تاني ", Toast.LENGTH_SHORT).show();
+                if(getActivity() != null) {
+                    Toast.makeText(getActivity(), "يوجد مشكلة . ", Toast.LENGTH_SHORT).show();
+                }
             }
 
         }

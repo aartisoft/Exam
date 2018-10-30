@@ -25,29 +25,6 @@ public class ControlPanelModel implements ControlPanelContract.ControlModelUI {
         this.presnterUI = presnterUI;
     }
 
-    @Override
-    public void checking(final ControlPanelContract.ControlPresnterUI controlPresnterUI, FirebaseAuth auth, String email, String password) {
-
-
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-
-                    // successful
-                    controlPresnterUI.datatrue();
-
-                }
-                else {
-
-                    controlPresnterUI.datanotTrue("Error");
-                }
-
-            }
-        });
-
-    }
 
     @Override
     public void CheckifUserBanned(String Uid) {
@@ -114,7 +91,7 @@ public class ControlPanelModel implements ControlPanelContract.ControlModelUI {
 
                 if (dataSnapshot.exists()){
                     Resister_form form = dataSnapshot.getValue(Resister_form.class);
-                    presnterUI.SetUsername(form.getNameStudent());
+                    presnterUI.SetUsername(form.getNameStudent()+"");
                 }
             }
 

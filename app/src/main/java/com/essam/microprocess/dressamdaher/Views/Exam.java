@@ -220,8 +220,12 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
 
     @Override
     public void Problem(String s) {
-        AlertDialog alertDialog = new AlertDialog(this,s);
-        alertDialog.show();
+            if(!isFinishing()) {
+
+                AlertDialog alertDialog = new AlertDialog(this, s);
+                alertDialog.show();
+
+            }
     }
 
     @Override
