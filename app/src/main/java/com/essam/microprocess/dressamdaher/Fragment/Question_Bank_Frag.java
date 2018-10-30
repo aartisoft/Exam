@@ -47,7 +47,7 @@ public class Question_Bank_Frag extends Fragment
                                 implements View.OnClickListener
                                          , QuestionsBankContract.view
                                          ,RecyclerItemTouchHelper.RecyclerItemTouchHelperListener
-        {
+{
 
     private FloatingActionButton show_addQ_frag;
     private RecyclerView recyclerView;
@@ -171,7 +171,7 @@ public class Question_Bank_Frag extends Fragment
                     adapter.notifyDataSetChanged();
                     recyclerView.setAdapter(adapter);
                     dialog.Close_Dialog();
-
+                    qestions = Result ;
 
 
 
