@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -56,7 +57,7 @@ public class Question_Bank_Frag extends Fragment
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
     AnimatedDialog dialog;
-            List<Questions_Form> qestions ;
+        //   public static List<Questions_Form> qestions ;
             QuestionBankAdapter adapter;
             TextView view;
     @Override
@@ -65,7 +66,7 @@ public class Question_Bank_Frag extends Fragment
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference        = firebaseDatabase.getReference(DataBase_Refrences.BANKQUESTIONS.getRef());
-        qestions = new ArrayList<>();
+       // qestions = new ArrayList<>();
 
     }
 
@@ -106,7 +107,10 @@ public class Question_Bank_Frag extends Fragment
                 }
                 return false;
             }
+
+
         });
+
 
 
         return  v;
@@ -135,6 +139,9 @@ public class Question_Bank_Frag extends Fragment
 
                 super.onCreateOptionsMenu(menu, inflater);
                 inflater.inflate(R.menu.search, menu);
+
+
+
             }
             @Override
             public boolean onOptionsItemSelected(MenuItem item) {
@@ -146,8 +153,10 @@ public class Question_Bank_Frag extends Fragment
 
                         if (searchaboutquestion.isShown()){
                             searchaboutquestion.setVisibility(View.GONE);
+
                         }else {
                             searchaboutquestion.setVisibility(View.VISIBLE);
+
                         }
 
                         // Do Fragment menu item stuff here
@@ -171,7 +180,7 @@ public class Question_Bank_Frag extends Fragment
                     adapter.notifyDataSetChanged();
                     recyclerView.setAdapter(adapter);
                     dialog.Close_Dialog();
-                    qestions = Result ;
+                  //  qestions = Result ;
 
 
 
@@ -192,18 +201,19 @@ public class Question_Bank_Frag extends Fragment
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
 
 
-                 view    = viewHolder.itemView.findViewById(R.id.tx);
 
-                presenter.addQuestionToAddTestRecycler(qestions
+                 view    = viewHolder.itemView.findViewById(R.id.tx);
+                 presenter.addQuestionToAddTestRecycler(QuestionBankAdapter.qestions
                         .get(viewHolder.getAdapterPosition()).getQuestionID());
 
 
-             }
+            }
 
             @Override
             public void sentSuccessfully(String Result) {
 
-                 view.setText("تم الإرسال");
+
+                view.setText("تم الإرسال");
 
             }
 
@@ -269,5 +279,6 @@ public class Question_Bank_Frag extends Fragment
                     Toast.makeText(getActivity(), "يوجد مشكلة . ", Toast.LENGTH_SHORT).show();
                 }
             }
+
 
         }

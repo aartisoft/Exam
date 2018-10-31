@@ -3,16 +3,12 @@ package com.essam.microprocess.dressamdaher.Adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,22 +17,16 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
 import com.essam.microprocess.dressamdaher.Dialog.CustomTypeFaceSpan;
-import com.essam.microprocess.dressamdaher.JsonModel.FullRegisterForm;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
 import com.essam.microprocess.dressamdaher.MainPresnter.Question_BankPresenter;
 import com.essam.microprocess.dressamdaher.R;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
 
 public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapter.ViewHolder> {
-    public  List<Questions_Form> qestions ;
+    public static List<Questions_Form> qestions ;
     private List<Questions_Form>listnew;
     Context context;
 
@@ -58,7 +48,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final QuestionBankAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final QuestionBankAdapter.ViewHolder holder, int position) {
 
         final int pos = position;
         holder.Question.setText(qestions.get(position).getQuestion());
@@ -90,18 +80,22 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
                         }
                         if (item.getItemId() == R.id.delete){
 
-                              listinParent.removingQuestion(qestions.get(pos).getQuestionID(),pos);
+                            listinParent.removingQuestion(qestions.get(pos).getQuestionID(),pos);
+
                         }
+
                         return true;
+
                     }
                 });
 
 
                     Menu menu = popup.getMenu();
                     for (int i = 0; i < menu.size(); i++) {
-                        MenuItem mi = menu.getItem(i);
 
+                        MenuItem mi = menu.getItem(i);
                         applyFontToMenuItem(mi);
+
                     }
 
 
@@ -115,18 +109,12 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
     public void remove(int position){
 
-        qestions.remove(position);
-        // notify the item removed by position
-        // to perform recycler view delete animations
-        // NOTE: don't call notifyDataSetChanged()
+        qestions.remove(position); //هتعمل كراش وهتبوظ كل حاجة تحت بعد الحذف .
+        // notify the item removed by position .
+        // to perform recycler view delete animations .
+        // notifyDataSetChanged();
+
         notifyItemRemoved(position);
-
-
-        for (int i=0  ; i<qestions.size() ; i++){
-
-            Log.d("message",qestions.get(i).getQuestion());
-
-        }
 
     }
 
@@ -145,7 +133,8 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     }
 
 
-   static public class ViewHolder extends RecyclerView.ViewHolder {
+
+    static public class ViewHolder extends RecyclerView.ViewHolder {
         CardView Cardview;
         LinearLayout background;
         TextView tx;
