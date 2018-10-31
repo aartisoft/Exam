@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
 import com.essam.microprocess.dressamdaher.Dialog.CustomTypeFaceSpan;
 import com.essam.microprocess.dressamdaher.JsonModel.Questions_Form;
@@ -29,7 +31,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     public static List<Questions_Form> qestions ;
     private List<Questions_Form>listnew;
     Context context;
-
+    int minus = 0 ;
     QuestionsBankContract.view listinParent;
     QuestionsBankContract.presenter presenter;
     public QuestionBankAdapter(List <Questions_Form> qestions, Context context, QuestionsBankContract.view view){
@@ -48,7 +50,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final QuestionBankAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final QuestionBankAdapter.ViewHolder holder, final int position) {
 
         final int pos = position;
         holder.Question.setText(qestions.get(position).getQuestion());
@@ -64,7 +66,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
         holder.Cardview.setOnClickListener(new View.OnClickListener() {    // when click to edit question
             @Override
             public void onClick(final View view) {
-
+                Toast.makeText(context, "pos = "+pos , Toast.LENGTH_SHORT).show();
                 PopupMenu popup = new PopupMenu(context, holder.Cardview);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater().inflate(R.menu.edit_q_menu, popup.getMenu());
@@ -105,6 +107,8 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
             }
         });
 
+
+
     }
 
     public void remove(int position){
@@ -115,7 +119,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
         // notifyDataSetChanged() ;
 
         notifyItemRemoved(position);
-
+        minus++;
     }
 
 
@@ -127,7 +131,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
         if (qestions!=null){
 
-            return qestions.size();
+            return qestions.size()-minus;
         }
        return 0;
     }
