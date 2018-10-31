@@ -266,7 +266,16 @@ public class Question_Bank_Frag extends Fragment
                     Toast.makeText(getActivity(), "لقد تم حذف السؤال بنجاح .", Toast.LENGTH_SHORT).show();
                     if (adapter != null) {
 
-                        adapter.remove(position);
+                        //adapter.remove(position);
+
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                                .replace(R.id.Exam_Frame,new Question_Bank_Frag())
+                                .addToBackStack(null)
+                                .commit();
+
 
                     }
                 }
@@ -277,6 +286,15 @@ public class Question_Bank_Frag extends Fragment
                 dialog.Close_Dialog();
                 if(getActivity() != null) {
                     Toast.makeText(getActivity(), "يوجد مشكلة . ", Toast.LENGTH_SHORT).show();
+
+                    getActivity().getSupportFragmentManager().popBackStack();
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                            .replace(R.id.Exam_Frame,new Question_Bank_Frag())
+                            .addToBackStack(null)
+                            .commit();
+
                 }
             }
 

@@ -66,7 +66,7 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
         holder.Cardview.setOnClickListener(new View.OnClickListener() {    // when click to edit question
             @Override
             public void onClick(final View view) {
-                Toast.makeText(context, "pos = "+pos , Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context, "pos = "+pos , Toast.LENGTH_SHORT).show();
                 PopupMenu popup = new PopupMenu(context, holder.Cardview);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater().inflate(R.menu.edit_q_menu, popup.getMenu());
