@@ -109,10 +109,10 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
     public void remove(int position){
 
-        qestions.remove(position); //هتعمل كراش وهتبوظ كل حاجة تحت بعد الحذف .
-        // notify the item removed by position .
-        // to perform recycler view delete animations .
-        // notifyDataSetChanged();
+        // qestions.remove(position) ; //هتعمل كراش وهتبوظ كل حاجة تحت بعد الحذف .
+        // notify the item removed by position ;
+        // to perform recycler view delete animations ;
+        // notifyDataSetChanged() ;
 
         notifyItemRemoved(position);
 
