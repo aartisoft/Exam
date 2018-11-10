@@ -41,13 +41,15 @@ public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_P
      */
     int photosCounter = 0 ;
     FragmentManager fragmentManager;
+
     public StudentResult_Rec_Adapter(Class<Result_Pojo> modelClass, int modelLayout, Class<ViewHolder3> viewHolderClass, Query ref,FragmentManager fragmentManager) {
         super(modelClass, modelLayout, viewHolderClass, ref);
         this.fragmentManager = fragmentManager;
+
     }
 
     @Override
-    protected void populateViewHolder(final ViewHolder3 holder, final Result_Pojo model, int position) {
+    protected void populateViewHolder(final ViewHolder3 holder, final Result_Pojo model, final int position) {
 
 
         //photos changer .
@@ -88,6 +90,7 @@ public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_P
                     Resister_form form = dataSnapshot.getValue(Resister_form.class);
                     holder.txName.setText(form.getNameStudent()+"");
 
+
                 }
                 else {
 
@@ -127,6 +130,8 @@ public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_P
                 bundle.putParcelableArrayList("WrongQuestions",model.getWrongQuestions());
                 //to pass image to next fragment.
                 bundle.putInt("Image", (Integer) holder.circleImageView.getTag());
+                bundle.putString("UserUid",model.getUid());
+
                 // set MyFragment Arguments
                 StudentsWrongs StudentsWrongs = new StudentsWrongs();
                 StudentsWrongs.setArguments(bundle);
