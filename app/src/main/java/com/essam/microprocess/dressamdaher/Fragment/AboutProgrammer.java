@@ -1,6 +1,10 @@
 package com.essam.microprocess.dressamdaher.Fragment;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +44,11 @@ public class AboutProgrammer extends Fragment {
 
     @BindView(R.id.Scrollview)
     ScrollView Scrollview;
+    @BindView(R.id.facebookm)
+    ImageView facebookm;
 
+    @BindView(R.id.facebooka)
+    ImageView facebooka;
     int MohamedX ;
 
     @Override
@@ -64,6 +73,8 @@ public class AboutProgrammer extends Fragment {
                 MohamedX = (int) Mohamed.getX();
                 Alaa.animate().translationXBy(MohamedX).rotation(360).setDuration(1000);
                 Mohamed.animate().translationXBy(-MohamedX).rotation(360).setDuration(1000);
+                facebookm.animate().translationXBy(MohamedX).rotation(360).setDuration(1000);
+                facebooka.animate().translationXBy(-MohamedX).rotation(360).setDuration(1000);
                 textView.animate().alpha(1).setDuration(3000);
                 textView2.animate().alpha(1).setDuration(3000);
             }
@@ -73,7 +84,31 @@ public class AboutProgrammer extends Fragment {
         Scrollview.setAnimation(downtoup);
 
 
+        facebookm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+                String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/alaadaherdubai");
+                facebookIntent.setData(Uri.parse(facebookUrl));
+                startActivity(facebookIntent);
+
+            }
+        });
+
+
+
+        facebooka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+                String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/mohamed.raslan.908");
+                facebookIntent.setData(Uri.parse(facebookUrl));
+                startActivity(facebookIntent);
+
+            }
+        });
 
 
 
@@ -91,6 +126,19 @@ public class AboutProgrammer extends Fragment {
     public void onStop() {
         super.onStop();
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
+    public String getFacebookPageURL(Context context , String FACEBOOK_URL ) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) { //newer versions of fb app
+                return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+            } else { //older versions of fb app
+                return "fb://page/" + FACEBOOK_URL;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return FACEBOOK_URL; //normal web url
+        }
     }
 
 }

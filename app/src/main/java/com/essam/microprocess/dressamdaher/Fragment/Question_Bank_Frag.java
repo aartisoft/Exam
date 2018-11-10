@@ -1,12 +1,9 @@
 package com.essam.microprocess.dressamdaher.Fragment;
-
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -19,10 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.essam.microprocess.dressamdaher.Adapter.QuestionBankAdapter;
 import com.essam.microprocess.dressamdaher.Adapter.RecyclerItemTouchHelper;
-import com.essam.microprocess.dressamdaher.Adapter.ViewHolder;
 import com.essam.microprocess.dressamdaher.Contracts.ControlPanelContract;
 import com.essam.microprocess.dressamdaher.Contracts.QuestionsBankContract;
 import com.essam.microprocess.dressamdaher.Dialog.AlertDialog;
@@ -34,15 +29,8 @@ import com.essam.microprocess.dressamdaher.R;
 import com.essam.microprocess.dressamdaher.Views.ControlPanel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import static android.view.View.X;
-
-/**
- * Created by microprocess on 2018-10-03.
- */
 
 public class Question_Bank_Frag extends Fragment
                                 implements View.OnClickListener
